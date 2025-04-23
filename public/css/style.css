@@ -1,0 +1,702 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700;800&display=swap');
+
+:root{
+    --primary: #1092FE;
+    --primaryOpacity: #1093fe33;
+    --primary2: #0063dc;
+    --bg: #FAFCFF
+    --bright: #F6F8FE;
+    --grey: #95AADD;
+    --dark: #54617B;
+    --green: #62ff72;
+    --subtle :#e1eeff;
+    --subtle2 :#c6ddfa;
+    --darkt: #324c64;
+
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+::-webkit-scrollbar-track{
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--subtle2);
+  /* border-radius: 5px; */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+p{
+  margin: 0px !important;
+}
+
+.card{
+
+  /* box-shadow: rgba(3, 101, 214, 0.154) 0px 0px 0px 3px; */
+  border: none !important;
+  border-radius: 15px !important;
+  /* box-shadow: rgba(149, 157, 165, 0.055) 0px 8px 24px; */
+  /* border-radius: 0 !important;     */
+}
+
+.card-header{
+  border: none !important;
+  border-radius: 15px 15px 0 0 !important;
+  padding: 1rem 0.6rem !important;
+}
+
+.card-body{
+  border: none !important;
+}
+
+.btn-primary{
+  box-shadow: #0063dc5b 0px 5px 7px;
+  background-color: var(--primary) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  outline: red !important;
+}
+
+.btn-outline-primary{
+  border-radius: 25px !important;
+
+}
+
+.btn-primary:hover{
+  background-color: #0078da !important;
+  transition: 0.2s ease;
+}
+
+
+.btn-danger{
+  box-shadow: #dc00002e 0px 5px 7px;
+  border: none !important;
+  border-radius: 25px !important;
+}
+
+.btn-secondary{
+  border: none !important;
+  border-radius: 25px !important;
+}
+
+.btn-outline-secondary{
+  border-radius: 25px !important;
+}
+
+
+.bg-primarys {
+  background-color: var(--primary) !important;
+}
+
+.text-primarys{
+  color: var(--primary) !important;
+}
+
+.scroll{
+  height: 238px;
+  overflow-y: scroll;
+  box-shadow: rgba(149, 157, 165, 0.132) 0px 8px 31px;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
+
+/* <!-- ======================= LOGIN-NO ======================= --> */
+.login-no{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.login-no .card-header{
+    display: flex;
+    background-color: #ffffff;
+    color: #0063dc;
+    padding-top: 1.7rem;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-no .card-header h2{
+    font-weight: 800;
+    background: linear-gradient(45deg, #0063dc 0%, rgba(252,70,107,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.login-no .card .card-body .top-no .buttons-bot{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+
+}
+
+.login-no .card .card-body .top-no .buttons-bot a{
+    border-radius: 25px;
+    padding: 0.4rem 1rem;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  height: 2.8rem;
+  width: 100%;
+  min-width: 200px;
+  max-width: 250px;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+}
+
+.input-container input {
+  height: 100%;
+  width: 100%;
+  margin: 0 !important;
+  border-radius: 25px;
+  border: 1px solid  rgb(212, 218, 221);
+  background-color: transparent;
+  padding: 0.625rem 70px 0.625rem 0.75rem;
+  font-size: 0.65rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  color: rgb(69 90 100);
+  outline: none;
+  /* transition: all .15s cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+.input-container input:focus {
+  border: 1px solid rgb(236 72 153 );
+}
+
+.invite-btn {
+  position: absolute;
+  width: 37px;
+
+  /* height: 65px; */
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  z-index: 10;
+  border-radius: 50%;
+  background-color: rgb(236 72 153 );
+  color: #fff;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  transition: .6s ease;
+}
+
+.invite-btn:hover {
+  right: 2px;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 8px;
+}
+
+.input-container input:placeholder-shown ~ .invite-btn {
+  pointer-events: none;
+  background-color: var(--primary);
+  /* opacity: 0.5; */
+  border-radius: 50%;
+}
+
+
+
+
+/* <!-- ======================= LOGIN-NO ======================= --> */
+
+/* <!-- ======================= DASHBOARD ======================= --> */
+
+/* NAVIGATION DESKTOP */
+.dash .nav-dash{
+  padding: 1.6rem;
+  /* height: 100vh; */
+
+}
+
+
+
+.dash .nav-dash .nav-2{
+  background-color: var(--primary);
+  width: 108%;
+  box-shadow: #0063dc25 0px 5px 15px;
+  padding: 0.26rem 0;
+  align-self: center;
+  border-radius: 20px;
+}
+
+.dash .nav-dash .nav-3{
+  background-color: var(--subtle2);
+  width: 108%;
+  box-shadow: #0063dc25 0px 5px 15px;
+  padding: 0.26rem 0;
+  align-self: center;
+  border-radius: 25px;
+}
+
+.dash .nav-dash a{
+  padding: 0.5rem;
+  border-radius: 4px 15px 4px 15px;
+  color: #95AADD;
+  font-weight: 600;
+}
+
+.dash .nav-dash i{
+    background-color: var(--primary);
+    padding: 0.6rem;
+    border-radius: 50%;
+    color: white;
+  }
+
+.dash .nav-dash a:hover{
+    background-color: var(--primary);
+    border-radius: 4px 15px 4px 15px;
+    padding: 0.5rem;
+    transform: scale(1.02);
+    /* box-shadow: rgba(46, 172, 240, 0.186) -2px 2px, rgba(46, 166, 240, 0.089) -5px 5px, rgba(46, 208, 240, 0.2) -7px 7px; */
+    color: white;
+    transition: 0.3s;
+
+}
+
+.dash .card-nav{
+  border-radius: 15px;
+  box-shadow: rgba(149, 157, 165, 0.128) 0px 8px 31px;
+
+}
+
+.dash .nav-dash .nav-2 a{
+  margin-left: 0.57rem;
+}
+
+
+
+/* NAVIGATION HP */
+.nav-bottom{
+  height: 72px;
+  background-color:var(--primary);
+  color:white;
+  visibility: hidden;
+  box-shadow: rgba(0, 0, 0, 0.93) 16px 5px 15px;
+  text-decoration: none !important;
+}
+
+.nav-bottom a{
+text-decoration: none;
+}
+
+.nav-bottom i:hover{
+color: #4d9dff !important;
+}
+
+
+
+
+/* ALERT DASHBOARD */
+.dash .alert-name h2{
+    font-weight: 800;
+    color: var(--darkt);
+    text-align: center;
+
+  }
+
+  .dash .alert-name p{
+    font-weight: 700 !important;
+    margin-top: 0.7rem !important;
+    font-size: 0.79rem !important;
+
+  }
+
+  .dash .alert-name{
+    background-color: var(--primary) !important;
+    border-radius: 15px;
+    box-shadow: #0063dc8c 0px 10px 25px;
+  }
+
+  .dash .header{
+    background-color: white!important;
+    border-radius: 15px;
+    box-shadow: #e4e4e48c 0px 10px 25px;
+  }
+
+
+
+/* BELUM ADA TUGAS NIH!! */
+.dash .card-nothings{
+  background-color: transparent !important;
+  /* box-shadow: rgba(149, 157, 165, 0.17) 0px 8px 31px; */
+  border-radius: 15px;
+}
+
+
+
+
+/* ABSENSI HARIAN */
+.card-absen{
+  box-shadow: #0063dc25 0px 5px 15px;
+
+}
+.inset-padding{
+  background-color: var(--subtle);
+  box-shadow: #0063dc25 0px 5px 15px;
+  padding: 1rem;
+  border-radius: 15px;
+  min-height: 10px;
+
+}
+
+/* TUGAS KELAS */
+.card-tugas{
+  box-shadow: #0063dc25 0px 5px 15px;
+
+}
+
+.tugas-desc{
+  line-height: 1.1rem;
+}
+.tugas-desc h6{
+  font-weight: 700;
+  font-size: 0.84rem;
+
+
+}
+
+.tugas-desc p{
+  font-size: 0.6rem;
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.body-tugas:hover{
+  border-radius: 25px;
+}
+
+.body-tugas:hover{
+  background-color: var(--subtle2) !important;
+  box-shadow: #0063dc25 0px 5px 15px;
+  border-radius: 25px;
+  margin-left: 10px ;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+
+
+
+/* UPLOAD FOTO */
+.foto-upload{
+  max-width: 400px;
+  max-height: 500px;
+}
+
+.gambar-placing{
+  background-color: #acacac3b !important;
+  height: 300px;
+  width: 300px;
+}
+
+.upload-button{
+  width: 200px;
+  height: 170px;
+  box-shadow: #0063dc25 0px 5px 15px;
+  background-color: var(--darkt) ;
+  border-radius: 20px;
+  cursor: pointer;
+position: absolute;
+  opacity: 70%;
+}
+
+.upload-button:hover{
+  background-color: var(--dark);
+  transition: 0.1s linear;
+}
+
+.upload-button p{
+ font-size: 1rem;
+ text-align: center;
+ color: white;
+ font-weight: 800;
+}
+
+
+.upload-button i{
+  font-size: 4rem;
+  text-align: center;
+  color: white;
+ }
+
+
+
+
+
+
+
+
+
+
+ /* <!-- ======================= PROFILE ======================= --> */
+.card-profile{
+  box-shadow: #0063dc25 0px 5px 15px !important;
+  border-radius: 15px !important;
+}
+
+.profile-picture{
+  box-shadow: #0063dc25 0px 5px 15px !important;
+}
+
+.profile-detail{
+  box-shadow: #0063dc25 0px 5px 15px !important;
+}
+
+.profile-pics img{
+  width: 130px;
+  height: 130px;
+  padding: 0.3rem;
+  background-color: white;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+
+.profile-pics-pilih button{
+  width: 100%;
+  /* border-radius: 25px !important; */
+}
+
+.card-header-profile-pics{
+  border-radius: 15px 0 25px 0 !important;
+}
+
+.form-control{
+  background-color: #f3f8ff !important;
+  border: 0 !important;
+}
+
+.bio-desc{
+  color: var(--darkt);
+  /* background-color: var(--subtle2); */
+  border-radius: 15px;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.118);
+  margin-bottom: 1rem;
+  border-color: var(--subtle2);
+}
+
+input{
+  color: var(--dark) !important;
+}
+
+textarea{
+  color: var(--dark) !important;
+}
+
+label{
+  color: var(--darkt) !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+/* ID ID ID ID ID ID ID ID */
+#tanggal-hadir{
+  font-weight: 800;
+  color: var(--darkt);
+}
+
+#count-data{
+  background-color: white;
+  color: var(--primary);
+  max-width: 100px !important;
+  /* padding: 0.25rem; */
+  margin-left: 0.3rem;
+  border-radius: 50%;
+}
+
+#counts{
+  font-size: 0.7rem;
+  width: 27px;
+  height: 27px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255) !important;
+  color: var(--darkt);
+  font-weight: 800;
+  border-radius: 50%;
+}
+
+
+
+
+
+
+ /* <!-- ======================= PROFILE ======================= --> */
+
+
+
+
+
+
+/* <!-- ======================= DASHBOARD ======================= --> */
+
+
+  /* <!-- ======================= RESPONSITO ======================= --> */
+ @media (max-width: 767.98px) {
+/* <!-- ======================= LOGIN ======================= --> */
+    .login-no .card .card-body{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .row-log{
+        flex-direction: column-reverse;
+    }
+
+
+    .login-no .card .card-body .top-no .buttons-bot {
+        width: 110%;
+
+    }
+    .login-no .card .card-body .top-no .buttons-bot {
+        margin-left: -0.5rem;
+    }
+/* <!-- ======================= LOGIN ======================= --> */
+
+/* <!-- ======================= DASHBOARD ======================= --> */
+    .dash .card-nav{
+        display: none;
+    }
+
+  .dash .card-alert .alert-name{
+    flex-direction: column-reverse;
+
+  }
+  .dash .card-alert .alert-name h2{
+    margin-top: 2rem;
+
+  }
+
+  .tanggal-hadir{
+    text-align: center;
+  }
+  .absen-masuk{
+    text-align: center;
+
+  }
+  .absen-pulang{
+    text-align: center;
+  }
+
+  .nav-bottom{
+    visibility: visible;
+    border-radius: 18px 18px 0 0px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  .nav-bottom a{
+    visibility: visible;
+  }
+  .presensi{
+    margin-top: 1.5rem !important;
+  }
+
+/* <!-- ======================= DASHBOARD ======================= --> */
+
+  }
+
+
+  @media (max-width: 991.98px) {
+    .nav-bottom{
+      display: flex;
+      visibility: visible;
+      border-radius: 18px 18px 0 0px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+    .navbar a{
+      font-size: 1.07rem !important;
+    }
+
+
+    .nav-bottom a{
+      visibility: visible;
+    }
+
+    .dash .card-nav{
+      display: none;
+  }
+
+    .container{
+      flex-wrap: wrap;
+    }
+
+    .presensi{
+      margin-top: 1.5rem !important;
+    }
+
+    .nav-item a{
+      font-size: 1rem !important;
+      border-radius: 25px;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-item a:hover{
+      background-color: rgba(0, 58, 91, 0.72);
+
+      border-radius: 25px;
+
+    }
+
+    .navbar .dropdown{
+      display: none !important;
+    }
+
+    .profile{
+      flex-direction: column-reverse;
+    }
+
+
+    .profile-detail{
+      margin-top: 2rem;
+    }
+
+
+
+}
