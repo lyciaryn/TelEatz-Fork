@@ -14,6 +14,34 @@
                     <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
                     <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Keranjang</h2>
                     <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum Belanja apapun</small>
+                    <button class="btn btn-primary mt-4">Tambah</button>
+                    <table class="table table-striped mt-5">
+                        <tr>
+                            <td>No</td>
+                            <td>Makanan</td>
+                            <td>Kategori</td>
+                        </tr>
+                        <tr>
+                            <td>1.</td>
+                            <td>Babi</td>
+                            <td>Maakanan</td>
+                        </tr>
+                        <tr>
+                            <td>1.</td>
+                            <td>Babi</td>
+                            <td>Maakanan</td>
+                        </tr>
+                        <tr>
+                            <td>1.</td>
+                            <td>Babi</td>
+                            <td>Maakanan</td>
+                        </tr>
+                        <tr>
+                            <td>1.</td>
+                            <td>Babi</td>
+                            <td>Maakanan</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

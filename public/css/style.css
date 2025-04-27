@@ -277,13 +277,13 @@ p{
   }
 
 .dash .nav-dash a:hover{
-    background-color: var(--primary);
+    background-color: var(--subtle);
     border-radius: 4px 15px 4px 15px;
     padding: 0.5rem;
     transform: scale(1.02);
     /* box-shadow: rgba(46, 172, 240, 0.186) -2px 2px, rgba(46, 166, 240, 0.089) -5px 5px, rgba(46, 208, 240, 0.2) -7px 7px; */
-    color: white;
-    transition: 0.3s;
+    /* color: white; */
+    transition: 0.1s;
 
 }
 
@@ -296,6 +296,7 @@ p{
 .dash .nav-dash .nav-2 a{
   margin-left: 0.57rem;
 }
+
 
 
 
@@ -564,7 +565,9 @@ label{
 
 
 
-
+#username-sidebar {
+    font-size: 16px !important;
+}
 
 
  /* <!-- ======================= PROFILE ======================= --> */
@@ -636,7 +639,9 @@ label{
   .presensi{
     margin-top: 1.5rem !important;
   }
-
+  #username-sidebar {
+    font-size: 2px !important;
+}
 /* <!-- ======================= DASHBOARD ======================= --> */
 
   }
@@ -697,6 +702,8 @@ label{
       margin-top: 2rem;
     }
 
-
+    #username-sidebar {
+        font-size: 10px !important;
+    }
 
 }
