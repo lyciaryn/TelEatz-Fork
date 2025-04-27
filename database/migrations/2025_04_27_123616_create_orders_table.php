@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('buyer_id')->constrained('users');
-            $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('buyer_id')->references('id')->on('users');
+            $table->foreignId('seller_id')->references('id')->on('users');
             $table->integer('total_harga');
             $table->enum('status', ['pending', 'diproses', 'selesai', 'dibatalkan']);
             $table->enum('dine_option', ['dine-in', 'takeaway']);

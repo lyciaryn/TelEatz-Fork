@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('seller_id')->nullable()->references('id')->on('users')->constrained('users');
             $table->string('nama_product');
             $table->integer('harga')->unsigned();
             $table->text('deskripsi');
             $table->boolean('is_available')->default(true);
-            $table->foreignId('kategori_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignId('categories_id')->nullable()->references('id')->on('categories')->nullOnDelete();
             $table->string('img')->nullable();
             $table->timestamps();
             $table->softDeletes();

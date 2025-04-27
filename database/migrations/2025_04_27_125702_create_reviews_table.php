@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('buyer_id')->constrained('users');
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('buyer_id')->references('id')->on('users');
+            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->text('comment');
             $table->timestamps();
         });
