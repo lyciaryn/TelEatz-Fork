@@ -31,12 +31,12 @@
                 <div class="responsive-nav-drop d-lg-none mb-3 " style="border-radius: 25px; width: 80%;">
                     <li class="nav-item text-center border-2 text-light "
                         style=" padding: 1rem; border: 1px solid rgba(0, 0, 0, 0.09); background-color: var(--primary); border-radius: 25px; margin-top: 1rem;">
-                        <a class="nav-link px-0 text-light " href="#">Home</a>
-                        <a class="nav-link px-0 text-light " href="#">Daftar Menu</a>
-                        <a class="nav-link px-0 text-light " href="#">Pesanan</a>
-                        <a class="nav-link px-0 text-light " href="#">Keranjang</a>
-                        <a class="nav-link px-0 text-light " href="#">Histori Pesanan</a>
-                        <a class="nav-link px-0 text-light " href="#">Profil Saya</a>
+                        <a class="nav-link px-0 text-light " href="/dashboard">Home</a>
+                        <a class="nav-link px-0 text-light " href="/daftarmenu">Daftar Menu</a>
+                        <a class="nav-link px-0 text-light " href="/pesanan">Pesanan</a>
+                        <a class="nav-link px-0 text-light " href="/keranjang">Keranjang</a>
+                        <a class="nav-link px-0 text-light " href="/historipesanan">Histori Pesanan</a>
+                        <a class="nav-link px-0 text-light " href="/profil">Profil Saya</a>
                         <a class="nav-link px-0 bg-white text-primarys fw-bold" href="login-no.html"><i
                                 class='bx bx-log-out-circle'></i>
                             Keluar</a>

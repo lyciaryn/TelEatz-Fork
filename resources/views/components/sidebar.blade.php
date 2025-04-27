@@ -4,8 +4,8 @@
             <img class="rounded-circle img-thumbnail shadow-lg" src="img/sekolah.jpg" alt="" width="50"
                 srcset="">
             <div class="nav-link ms-3" href="">
-                <p style="font-size: 17px;" class="fw-bold text-light">Vio Salman</p>
-                <p style="font-size: 13px;" class="text-light">Pembeli</p>
+                <p id="username-sidebar" style="font-size: 17px;" class="fw-bold text-light">Vio Salman</p>
+                <p style="font-size: 13px;" class="text-light">Pembeli <i class='bx bxs-check-shield p-0 m-0'></i></p>
             </div>
 
         </div>
