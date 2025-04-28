@@ -21,20 +21,27 @@
                             <h5 class="card-title"><b>{{ $product->nama_product }}</b></h5>
                             <p class="card-text">{{ $product->deskripsi }}</p>
                             <p class="card-text fw-bold">Rp {{ number_format($product->harga, 0, ',', '.') }}</p>
-                            <a href="{{ route('buyer.daftarmenudetail', $product->id) }}" class="btn btn-primary mt-3">Lihat Detail</a>
-                            <a href="" class="btn btn-warning mt-3 ms-3">Add to Cart</a>
+
+                            <div class="d-flex align-items-center justify-content-between">
+                                <!-- Lihat Detail Button -->
+                                <a href="{{ route('buyer.daftarmenudetail', $product->id) }}" class="btn btn-primary">View</a>
+                                <!-- Add to Cart Button -->
+                                <form action="{{ route('keranjang.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <div class="addtocart d-flex gap-3">
+                                        <button type="submit" class="btn btn-danger flex-shrink-0">Add to Cart</button>
+                                        <input type="number" name="quantity" value="1" min="1" class="form-control" style="width: 65px;">
+
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 @endforeach
             </div>
-            <!-- <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
-                <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
-                    <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
-                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Daftar Menu</h2>
-                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum Belanja apapun</small>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>

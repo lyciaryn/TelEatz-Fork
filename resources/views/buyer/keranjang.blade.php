@@ -8,27 +8,27 @@
             <x-sidebar />
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
-            <x-header title="Daftar Menu" />
+            <x-header title="Keranjang Saya" />
 
-            <div class="row">
-                <h1>Cart Saya</h1>
-
-                @if($cart)
-                <ul>
-                    @foreach($cart->items as $item)
-                    <li>
-                        Nama Produk: {{ $item->product->nama_product}} <br>
-                        Jumlah: {{ $item->quantity }} <br>
-                        Harga per pcs: Rp {{ number_format($item->product->harga, 0, ',', '.') }} <br>
-                    </li>
-                    <hr>
+            @foreach($groupedCartItems as $sellerId => $items)
+            <div class="card mb-4">
+                <div class="card-header">
+                    Penjual: {{ $items->first()->product->user->name ?? 'Unknown Seller' }}
+                </div>
+                <div class="card-body">
+                    @foreach($items as $item)
+                    <div class="mb-3">
+                        <h5><b>{{ $item->product->nama_product }}</b></h5>
+                        <p>Harga/product: Rp {{ number_format($item->product->harga, 0, ',', '.') }}</p>
+                        <p>Quantity: {{ $item->quantity }}</p>
+                        <p><b>Subtotal: Rp {{ number_format($item->product->harga * $item->quantity, 0, ',', '.') }}</b></p>
+                    </div>
                     @endforeach
-                </ul>
-                @else
-                <p>Belum ada cart.</p>
-                @endif
-
+                </div>
             </div>
+            @endforeach
+
+
             <!-- <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                     <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">

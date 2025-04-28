@@ -24,7 +24,7 @@ Route::get('/daftarmenudetail/{id}', [ProductController::class, 'show'])->name('
 
 
 Route::get('/keranjang', [CartController::class, 'index'])->name('buyer.keranjang');
-
+Route::post('/keranjang/store', [CartController::class, 'store'])->name('keranjang.store');
 
 
 Route::get('/pesanan', function () {
