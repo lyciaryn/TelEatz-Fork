@@ -1,8 +1,9 @@
 <div class="card-nav card mb-3 animate_animated animate_fadeInUp">
     <div class="card-body nav-dash d-flex flex-column text-decoration-none gap-3 ">
         <div class=" nav-2 sidebar-profile d-flex justify-content-start align-items-center py-3  px-3">
-            <img class="rounded-circle img-thumbnail shadow-lg" src="img/sekolah.jpg" alt="" width="50"
-                srcset="">
+            <img class="rounded-circle img-thumbnail shadow-lg"
+                src="{{ asset('img/sekolah.jpg') }}"
+                alt="Profil" width="50">
             <div class="nav-link ms-3" href="">
                 <p id="username-sidebar" style="font-size: 17px;" class="fw-bold text-light">Vio Salman</p>
                 <p style="font-size: 13px;" class="text-light">Pembeli <i class='bx bxs-check-shield p-0 m-0'></i></p>

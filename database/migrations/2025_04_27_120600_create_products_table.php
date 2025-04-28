@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('harga')->unsigned();
             $table->text('deskripsi');
             $table->boolean('is_available')->default(true);
-            $table->foreignId('categories_id')->nullable()->references('id')->on('categories')->nullOnDelete();
+            $table->foreignId('category_id')->nullable()->references('id')->on('categories')->nullOnDelete();
             $table->string('img')->nullable();
             $table->timestamps();
             $table->softDeletes();

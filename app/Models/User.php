@@ -20,7 +20,11 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'role',
+        'is_open',
+        'open_time',
+        'close_time',
+
     ];
 
     /**
@@ -44,5 +48,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    // 1 Seller dapat memiliki banyak product
+    public function products()
+    {
+        return $this->hasMany(Product::class);
     }
 }

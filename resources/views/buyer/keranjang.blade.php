@@ -8,42 +8,34 @@
             <x-sidebar />
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
-            <x-header title="Keranjang" />
-            <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
+            <x-header title="Daftar Menu" />
+
+            <div class="row">
+                <h1>Cart Saya</h1>
+
+                @if($cart)
+                <ul>
+                    @foreach($cart->items as $item)
+                    <li>
+                        Nama Produk: {{ $item->product->nama_product}} <br>
+                        Jumlah: {{ $item->quantity }} <br>
+                        Harga per pcs: Rp {{ number_format($item->product->harga, 0, ',', '.') }} <br>
+                    </li>
+                    <hr>
+                    @endforeach
+                </ul>
+                @else
+                <p>Belum ada cart.</p>
+                @endif
+
+            </div>
+            <!-- <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                     <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
-                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Keranjang</h2>
+                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Daftar Menu</h2>
                     <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum Belanja apapun</small>
-                    <button class="btn btn-primary mt-4">Tambah</button>
-                    <table class="table table-striped mt-5">
-                        <tr>
-                            <td>No</td>
-                            <td>Makanan</td>
-                            <td>Kategori</td>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>Babi</td>
-                            <td>Maakanan</td>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>Babi</td>
-                            <td>Maakanan</td>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>Babi</td>
-                            <td>Maakanan</td>
-                        </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>Babi</td>
-                            <td>Maakanan</td>
-                        </tr>
-                    </table>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
