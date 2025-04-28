@@ -1,11 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('login');
 });
 
+
+Route::get('/login', function () {
+    return view('login');
+});
 
 
 Route::get('/dashboard', function () {
@@ -13,20 +19,18 @@ Route::get('/dashboard', function () {
 });
 
 
+Route::get('/daftarmenu', [ProductController::class, 'index'])->name('buyer.daftarmenu');
+Route::get('/daftarmenudetail/{id}', [ProductController::class, 'show'])->name('buyer.daftarmenudetail');
 
-Route::get('/daftarmenu', function () {
-    return view('buyer.daftarmenu');
-});
+
+Route::get('/keranjang', [CartController::class, 'index'])->name('buyer.keranjang');
+Route::post('/keranjang/store', [CartController::class, 'store'])->name('keranjang.store');
 
 
 Route::get('/pesanan', function () {
     return view('buyer.pesanan');
 });
 
-
-Route::get('/keranjang', function () {
-    return view('buyer.keranjang');
-});
 
 
 Route::get('/historipesanan', function () {

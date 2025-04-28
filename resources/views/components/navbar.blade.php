@@ -43,8 +43,11 @@
                     </li>
                 </div>
                 <li class="nav-item dropdown d-flex justify-content-center align-items-center m-0">
-                    <a class="nav-link px-0" href="#"><img class="rounded-circle img-thumbnail shadow-lg"
-                            src="img/sekolah.jpg" alt="" width="70" srcset=""></a>
+                    <a class="nav-link px-0" href="#">
+                        <img class="rounded-circle img-thumbnail shadow-lg"
+                            src="{{ asset('img/sekolah.jpg') }}"
+                            alt="Profil" width="75">
+                    </a>
                     <a id="name" class="nav-link dropdown-toggle fs-5" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         @yanvios

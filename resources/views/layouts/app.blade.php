@@ -17,6 +17,19 @@
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            title: "Berhasil!",
+            text: "Kamu berhasil menambah produk ke keranjang",
+            icon: "success"
+        });
+    </script>
+    @endif
+
+    });
 </body>
 
 </html>
