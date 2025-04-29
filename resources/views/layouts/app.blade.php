@@ -30,6 +30,77 @@
     @endif
 
     });
+    @if(session('deletesuccess'))
+    <script>
+        Swal.fire({
+            title: "Berhasil!",
+            text: "Makanan Berhasil Terhapus",  // Menampilkan pesan dari session success1
+            icon: "success",
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
+
+
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: '{{ session('error') }}',
+        });
+    </script>
+    @endif
+    
+    
+    <script>
+        function confirmDelete() {
+            Swal.fire({
+                title: "Yakin ingin menghapus?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+                reverseButtons: false,
+
+                // Gunakan class Bootstrap
+                customClass: {
+                    confirmButton: 'btn btn-danger me-4',
+                    cancelButton: 'btn btn-primary'
+                },
+                buttonsStyling: false // Wajib agar class di atas dipakai
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').submit();
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function previewImage() {
+            const input = document.getElementById('img');
+            const preview = document.getElementById('imagePreview');
+
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+
+
 </body>
 
 </html>
