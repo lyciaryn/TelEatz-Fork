@@ -29,30 +29,28 @@
     </script>
     @endif
 
-    });
     @if(session('deletesuccess'))
     <script>
         Swal.fire({
             title: "Berhasil!",
-            text: "Makanan Berhasil Terhapus",  // Menampilkan pesan dari session success1
+            text: "Makanan Berhasil Terhapus", // Menampilkan pesan dari session success1
             icon: "success",
             confirmButtonText: 'OK'
         });
     </script>
     @endif
 
-
     @if(session('error'))
     <script>
         Swal.fire({
             icon: 'error',
             title: 'Gagal!',
-            text: '{{ session('error') }}',
+            text: '{{ session("error") }}',
         });
     </script>
     @endif
-    
-    
+
+
     <script>
         function confirmDelete() {
             Swal.fire({
@@ -99,7 +97,6 @@
             }
         }
     </script>
-
 
 </body>
 
