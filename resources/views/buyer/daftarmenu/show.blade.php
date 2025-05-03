@@ -9,7 +9,11 @@
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Daftar Menu Detail" />
-
+            <x-breadcrumbs :links="[
+                ['label' => 'Dashboard', 'url' => route('buyer.dashboard')],
+                ['label' => 'Daftar Menu', 'url' => route('buyer.daftarmenu.index')],
+                ['label' => 'Detail'] {{-- label terakhir manual, bebas mau 'Detail', 'Data', dst --}}
+            ]" />
             <h1 class="mb-4">{{ $product->nama }}</h1>
 
             @if($product->gambar)
@@ -21,7 +25,7 @@
             <p>Kategori: {{ $product->category->nama_kategori ?? '-' }}</p>
             <p>Penjual: {{ $product->user?->name ?? '-' }} </p>
 
-            <a href="{{ route('buyer.daftarmenu') }}" class="btn btn-secondary mt-3">Kembali ke daftar makanan</a>
+            <a href="{{ route('buyer.daftarmenu.index') }}" class="btn btn-secondary mt-3">Kembali ke daftar makanan</a>
 
 
         </div>

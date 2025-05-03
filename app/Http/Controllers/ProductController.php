@@ -11,13 +11,13 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('user', 'category')->get();
-        return view('buyer.daftarmenu', compact('products'));
+        return view('buyer.daftarmenu.index', compact('products'), ['title' => 'Daftar Menu']);
     }
 
     // Menampilkan detail produk
     public function show($id)
     {
         $product = Product::with('user', 'category')->findOrFail($id);
-        return view('buyer.daftarmenudetail', compact('product'));
-    } 
+        return view('buyer.daftarmenu.show', compact('product'), ['title' => 'Daftar Menu : Detail']);
+    }
 }

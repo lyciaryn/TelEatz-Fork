@@ -9,7 +9,10 @@
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Daftar Menu" />
-
+            <x-breadcrumbs :links="[
+                ['label' => 'Dashboard', 'url' => route('buyer.dashboard')],
+                ['label' => 'Daftar Menu']
+            ]" />
             <div class="row">
                 @foreach($products as $product)
                 <div class="col-md-4 mb-4">
@@ -24,9 +27,9 @@
 
                             <div class="d-flex align-items-center justify-content-between">
                                 <!-- Lihat Detail Button -->
-                                <a href="{{ route('buyer.daftarmenudetail', $product->id) }}" class="btn btn-primary">View</a>
+                                <a href="{{ route('buyer.daftarmenu.show', $product->id) }}" class="btn btn-primary">View</a>
                                 <!-- Add to Cart Button -->
-                                <form action="{{ route('keranjang.store') }}" method="POST">
+                                <form action="{{ route('buyer.keranjang.store') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <div class="addtocart d-flex gap-3">

@@ -27,7 +27,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('kelolamakanan.store') }}" method="POST" enctype="multipart/form-data">  
+                <form action="{{ route('kelolamakanan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label style="text-align: left;">Nama Makanan</label>

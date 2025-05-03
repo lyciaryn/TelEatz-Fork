@@ -9,7 +9,10 @@
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Keranjang Saya" />
-
+            <x-breadcrumbs :links="[
+                ['label' => 'Dashboard', 'url' => route('buyer.dashboard')],
+                ['label' => 'Keranjang'],
+            ]" />
             @foreach($groupedCartItems as $sellerId => $items)
             <div class="card mb-4">
                 <div class="card-header">
@@ -29,13 +32,6 @@
             @endforeach
 
 
-            <!-- <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
-                <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
-                    <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
-                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Daftar Menu</h2>
-                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum Belanja apapun</small>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>

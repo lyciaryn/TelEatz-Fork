@@ -9,7 +9,7 @@
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Kelola Makanan" />
-            <div><a href="/kelolamakanan/create" class="btn btn-primary w-100">Tambah Makanan</a></div>
+            <div><a href="{{ route('kelolamakanan.create') }}" class="btn btn-primary w-100">Tambah Makanan</a></div>
 
             <!-- Check jika ada data makanan -->
             @if($makanan->isEmpty())

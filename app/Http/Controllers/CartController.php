@@ -33,9 +33,10 @@ class CartController extends Controller
             return $item->product->user->id ?? null;
         });
 
-        return view('buyer.keranjang', [
+        return view('buyer.keranjang.index', [
             'groupedCartItems' => $grouped,
             'total' => $total, // Kirimkan total ke view
+            'title' => 'keranjang'
         ]);
     }
 

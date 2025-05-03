@@ -9,6 +9,9 @@
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Dashboard" />
+            <x-breadcrumbs :links="[
+                ['label' => 'Dashboard'] {{-- label terakhir manual, bebas mau 'Detail', 'Data', dst --}}
+            ]" />
             <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                     <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">

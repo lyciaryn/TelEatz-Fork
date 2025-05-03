@@ -46,6 +46,8 @@ body{
     background-color: #f0f0f0;
 }
 
+
+
 .canvas-log{
     display: flex;
     justify-content: center;
@@ -95,17 +97,18 @@ body{
 .input-data{
     display: flex;
     justify-content: center;
-    gap: 8rem;
+    gap: 10rem;
+    margin-top: 2rem;
 }
 
 .input-container{
     position: relative;
     display: flex;
     height: 2.8rem;
-    width: 100%;
-    margin: 1rem;
+    width: 340px;
+    margin: 1rem 0rem 1rem 0rem;
     min-width: 200px;
-    max-width: 250px;
+    max-width: 290px;
     background-color: #fff;
     border-radius: 25px;
     box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
@@ -113,13 +116,13 @@ body{
 
 .input-container input{
     /* height: 100%; */
-    width: 200px;
+    width: 100%;
     margin: 0 !important;
     border-radius: 25px;
     border: 1px solid #fff;
     background-color: transparent;
     padding: 0.625rem 70px 0.625rem 0.75rem;
-    font-size: 0.68rem;
+    font-size: 13px;
     line-height: 1.25rem;
     font-weight: 700;
     color: #949494;
@@ -156,13 +159,6 @@ body{
     border: none;
     transition: .6s ease;
 }
-
-.invite-btn:hover {
-    right: 2px;
-    top: 2px;
-    bottom: 2px;
-    border-radius: 8px;
-  }
 
 
 

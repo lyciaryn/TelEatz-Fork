@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
 <head>
     <meta charset="UTF-8">
@@ -15,8 +14,9 @@
 
     <script src="https://kit.fontawesome.com/e51a3b91d6.js" crossorigin="anonymous"></script>
 </head>
+@section('content')
+    <!-- form login -->
 
-<body>
     <div class="canvas-log animate__animated animate__fadeIn">
         <div class="left-sec">
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
@@ -26,30 +26,31 @@
                 class="animate__animated animate__fadeInUp"></dotlottie-player>
         </div>
         <div class="right-sec">
-            <h1 class="animate__animated animate__fadeInUp">Welcome</h1>
+            <h1 class="animate__animated animate__fadeInUp"><b>Login</b></h1>
             <p class="animate__animated animate__fadeInUp"><span style=" color: var(--fbluet); font-weight: bold;"
                     class="">Login</span> untuk masuk ke TelEats!
             </p>
             <div class="input-data">
-                <form action="cv.html" method="get">
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
                     <div class="input-container text-center animate__animated animate__fadeInLeft">
-                        <input type="text" placeholder="Masukkan Username">
-                        <button class="invite-btn" type="button">
+                        <input type="email" name="email"  placeholder="Masukkan Email" required>
+                        <button class="invite-btn" type="button" tabindex="-1">
                             <i class="fa-solid fa-user"></i>
                         </button>
                     </div>
                     <div class="input-container text-center animate__animated animate__fadeInRight">
-                        <input type="password" placeholder="Masukkan Password">
-                        <button class="invite-btn" type="button">
+                        <input type="password" name="password" placeholder="Masukkan Password" required>
+                        <button class="invite-btn" type="button" tabindex="-1">
                             <i class="fa-solid fa-key"></i>
                         </button>
                     </div>
-
-                    <div class="button text-center animate__animated animate__fadeInUp">
-                        <button class="submit text-light" type="submit"><a style="text-decoration: none; color:white;" href="/dashboard">Login</a></button>
-                        <button class="reset" type=""><a style="text-decoration: none; color:var(--bgsec);" href="">Register</a></button>
-
+                    <div class="button text-center animate__animated animate__fadeInUp mt-5">
+                        <button class="submit text-light w-100 mb-5" type="submit">
+                            Login
+                        </button>
                     </div>
+                    <p class="text-secondary text-center">Don't have an account? <a href="{{ route('register') }}">Sign Up</a></p>
                 </form>
             </div>
 
@@ -57,11 +58,10 @@
 
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
-</body>
+@endsection
 
-</html>

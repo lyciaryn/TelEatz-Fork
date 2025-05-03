@@ -10,10 +10,10 @@
             </div>
 
         </div>
-        <a class="nav-link d-flex align-items-center gap-2" href="/dashboardseller"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('seller.dashboard') }}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Home</p>
         </a>
-        <a class="nav-link d-flex align-items-center gap-2" href="/kelolamakanan"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('kelolamakanan') }}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Kelola Menu</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="/pesananseller"><i class='bx bx-home-alt me-2'></i>
@@ -33,8 +33,13 @@
         </a>
         <div class="border-top"></div>
         <a class="nav-link d-flex align-items-center gap-2 mt-1" href=""><i
-                class='bx bx-home-alt me-2'></i>
-            <p style="font-size: 14px;">Logout</p>
-        </a>
+            class='bx bx-home-alt me-2'></i>
+        <!-- Form logout tersembunyi -->
+        <form id="logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <!-- Tombol logout -->
+        <button type="button" onclick="event.preventDefault(); confirmLogout()">Logout</button>
+    </a>
     </div>
 </div>

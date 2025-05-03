@@ -10,16 +10,16 @@
             </div>
 
         </div>
-        <a class="nav-link d-flex align-items-center gap-2" href="/dashboard"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.dashboard') }}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Home</p>
         </a>
-        <a class="nav-link d-flex align-items-center gap-2" href="/daftarmenu"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.daftarmenu.index') }}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Daftar Menu</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="/pesanan"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Pesanan</p>
         </a>
-        <a class="nav-link d-flex align-items-center gap-2" href="/keranjang"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.keranjang.index') }}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Keranjang</p>
         </a>
         <div class="border-top"></div>
@@ -35,7 +35,12 @@
         <div class="border-top"></div>
         <a class="nav-link d-flex align-items-center gap-2 mt-1" href=""><i
                 class='bx bx-home-alt me-2'></i>
-            <p style="font-size: 14px;">Logout</p>
+            <!-- Form logout tersembunyi -->
+            <form id="logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            <!-- Tombol logout -->
+            <button type="button" onclick="event.preventDefault(); confirmLogout()">Logout</button>
         </a>
     </div>
 

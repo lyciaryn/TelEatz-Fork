@@ -19,15 +19,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+
     @if(session('success'))
     <script>
         Swal.fire({
             title: "Berhasil!",
-            text: "Kamu berhasil menambah produk ke keranjang",
-            icon: "success"
+            text: "{{ session('success') }}",
+            icon: "success",
+            confirmButtonText: 'OK', // Tambahkan teks tombol
+            customClass: {
+                confirmButton: 'btn btn-primary' // Menambahkan kelas Bootstrap untuk tombol biru
+            }
         });
     </script>
     @endif
+
+
+    {{-- @if(session('successlogin'))
+    <script>
+        Swal.fire({
+            title: "Berhasil!",
+            text: "Kamu berhasil login",
+            icon: "success"
+        });
+    </script>
+    @endif --}}
 
     @if(session('deletesuccess'))
     <script>
@@ -43,12 +60,18 @@
     @if(session('error'))
     <script>
         Swal.fire({
-            icon: 'error',
-            title: 'Gagal!',
-            text: '{{ session("error") }}',
+            title: "Gagal!",
+            text: "{{ session('error') }}",
+            icon: "error",
+            confirmButtonText: "OK",
+            customClass: {
+                confirmButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
         });
     </script>
     @endif
+
 
 
     <script>
@@ -76,6 +99,31 @@
         }
     </script>
 
+
+<script>
+    function confirmLogout() {
+        Swal.fire({
+            title: "Yakin ingin logout?",
+            text: "Sesi kamu akan berakhir.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+            reverseButtons: false,
+            customClass: {
+                confirmButton: 'btn btn-danger me-4',
+                cancelButton: 'btn btn-primary'
+            },
+            buttonsStyling: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout').submit();
+            }
+        });
+    }
+</script>
+
+
     <script>
         function previewImage() {
             const input = document.getElementById('img');
@@ -97,7 +145,7 @@
             }
         }
     </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
