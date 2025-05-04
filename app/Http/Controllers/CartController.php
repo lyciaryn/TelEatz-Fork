@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\CartItem;
+use Illuminate\Support\Facades\Auth;
+
 
 use Illuminate\Http\Request;
 
@@ -12,8 +14,7 @@ class CartController extends Controller
 {
     public function index()
     {
-
-        $userId = 1;
+        $userId = Auth::id(); // << otomatis pakai user yang login
 
         $cartItems = CartItem::with(['product.user']) // load product dan user (seller)
             ->whereHas('cart', function ($query) use ($userId) {
@@ -21,12 +22,10 @@ class CartController extends Controller
             })
             ->get();
 
-
         // Hitung total harga
         $total = $cartItems->sum(function ($cartItem) {
             return $cartItem->quantity * $cartItem->product->price;
         });
-
 
         // Group cartItems berdasarkan seller_id
         $grouped = $cartItems->groupBy(function ($item) {
@@ -35,12 +34,10 @@ class CartController extends Controller
 
         return view('buyer.keranjang.index', [
             'groupedCartItems' => $grouped,
-            'total' => $total, // Kirimkan total ke view
+            'total' => $total,
             'title' => 'keranjang'
         ]);
     }
-
-
 
 
     public function store(Request $request)
@@ -50,7 +47,7 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $userId = 1; // <<-- masih manual user_id sementara ya
+        $userId = Auth::id(); // << otomatis pakai user yang login
         $productId = $request->product_id;
         $quantity = $request->quantity;
 
@@ -77,6 +74,7 @@ class CartController extends Controller
                 'quantity' => $quantity,
             ]);
         }
+
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke cart!');
     }
 }

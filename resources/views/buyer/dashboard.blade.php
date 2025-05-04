@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+    use Illuminate\Support\Carbon;
+@endphp
 
 @section('content')
 <x-navbar />
@@ -7,18 +10,41 @@
         <div class="col-lg-3 pos">
             <x-sidebar />
         </div>
-        <div class="col-lg-9 d-flex flex-column gap-3">
-            <x-header title="Dashboard" />
-            <x-breadcrumbs :links="[
-                ['label' => 'Dashboard'] {{-- label terakhir manual, bebas mau 'Detail', 'Data', dst --}}
-            ]" />
-            <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
-                <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
-                    <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
-                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Dashboard</h2>
-                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum Belanja apapun</small>
+<div class="col-lg-9 d-flex flex-column gap-3">
+    <x-header title="Dashboard" />
+
+    <div class="row g-3">
+        <!-- Kolom 1: Alert -->
+        <div class="col-md-8">
+            <div class="card card-alert animate_animated animate_fadeInUp z-2">
+                <div class="card-body alert-name p-4 d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column">
+                        <p class="text-light text-center text-lg-start text-md-start mb-1">Halo, Selamat Datang</p>
+                        <h2 class="fs-2 text-white text-uppercase">{{ Auth::user()->name }}👋</h2>
+                        <p style="font-size: 12px !important" class="text-light fw-lighter">
+                            ⏰ Last  Login:
+                            {{ Auth::user()->last_logout_at
+                                ? Carbon::parse(Auth::user()->last_logout_at)->translatedFormat('l, d F Y') . ' · ' . Carbon::parse(Auth::user()->last_logout_at)->format('H:i')
+                                : '-' }}
+                        </p>
+                    </div>
+                    <img class="img-fluid" src="{{ asset('img/alert-nama.svg') }}" width="130" alt="">
                 </div>
             </div>
+        </div>
+
+        <!-- Kolom 2: Card tambahan -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Info Tambahan</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, maiores!.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </div>

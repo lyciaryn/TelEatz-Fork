@@ -11,9 +11,18 @@ class RoleMiddleware
     {
         $user = Auth::user();
 
-        //Cek jika user tidak login atau tidak memiliki role yang sesuai
         if (!$user || !in_array($user->role, $roles)) {
-            return redirect()->route('login')->with('error', 'Akses ditolak! Kamoe gak punya izin untuk mengakses halaman');
+            // Redirect ke halaman dashboard sesuai rolenya
+            if ($user->role === 'buyer') {
+                return redirect()->route('buyer.dashboard')->with('error', 'Kamu tidak punya akses ke halaman tersebut');
+            } elseif ($user->role === 'seller') {
+                return redirect()->route('seller.dashboard')->with('error', 'Kamu tidak punya akses ke halaman tersebut');
+            } elseif ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('error', 'Kamu tidak punya akses ke halaman tersebut');
+            }
+
+            // Fallback kalau role tidak dikenali
+            return redirect()->route('login')->with('error', 'Akses ditolak!');
         }
 
         return $next($request);

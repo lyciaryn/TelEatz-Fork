@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardBuyerController;
 use App\Http\Controllers\DashboardSellerController;
-
+use App\Http\Controllers\PesananController;
 
 // LOGIN
 Route::get('/', function () {
@@ -36,6 +36,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardBuyerController::class, 'index'])->name('buyer.dashboard');
+    // Pesanan
+    Route::get('/pesanan-saya', [PesananController::class, 'index'])->name('buyer.pesanan.index');
+
     // Daftar Menu
     Route::get('/daftarmenu', [ProductController::class, 'index'])->name('buyer.daftarmenu.index');
     Route::get('/daftarmenudetail/{id}', [ProductController::class, 'show'])->name('buyer.daftarmenu.show');

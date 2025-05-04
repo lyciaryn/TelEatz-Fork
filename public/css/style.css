@@ -42,6 +42,7 @@ body{
 
 p{
   margin: 0px !important;
+  font-size: 13px;
 }
 
 .card{
@@ -97,6 +98,30 @@ p{
   border-radius: 25px !important;
 }
 
+.btn-warning {
+  box-shadow: #dc00002e 0px 5px 7px;
+  border: none !important;
+  border-radius: 50% !important;
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.link-primary{
+    color: var(--darkt) !important;
+}
+
+.link-primary:hover{
+    color: var(--primary) !important;
+}
+
+
+
+
 
 .bg-primarys {
   background-color: var(--primary) !important;
@@ -119,6 +144,41 @@ p{
 
 
 
+    .custom-input {
+        background-color: #f0f7ff; /* biru muda */
+        border: 1px solid #d0e3ff;
+        padding-left: 2.5rem; /* untuk space icon search */
+        font-size: 14px !important;
+    }
+
+    .custom-select {
+        background-color: #f0f7ff;
+        border: 1px solid #d0e3ff;
+        font-size: 14px !important;
+    }
+
+    .input-icon {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        color: #007bff;
+        font-size: 1rem;
+    }
+
+    .form-icon-group {
+        position: relative;
+    }
+
+    .btn-search {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+
+    .btn-search:hover {
+        background-color: #0056b3;
+    }
 
 
 /* <!-- ======================= LOGIN-NO ======================= --> */

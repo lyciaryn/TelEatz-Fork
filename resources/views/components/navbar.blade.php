@@ -1,26 +1,49 @@
 <nav class="navbar navbar-expand-lg d-flex p-lg-0 p-sm-3 shadow-sm bg-body fixed-top mb-6">
     <div class="container d-flex">
-        <!-- ======================= NAVBAR TITLE ======================= -->
-        <div class="d-flex justify-content-center
-            align-items-center">
-            <a class="navbar-brand" href="#">
-                <a class="nav-link fw-bold me-2" href=""
-                    style="color: var(--darkt);  font-size: 1.8rem;">TelEatz</a>
-                <a class="nav-link text-secondary fw-semibold pt-1" href=""
-                    style="display: block; font-size: 1.35rem;">
-                    Telkom University</a>
-            </a>
-        </div>
+{{-- ======================= MOBILE NAVBAR ======================= --}}
+<div class="d-flex d-lg-none align-items-center justify-content-between px-3 py-2 w-100">
 
-        <div class="togglers d-flex justify-content-center align-items-center gap-2">
-            <a class="nav-link px-0 d-lg-none" href="#"><img class="rounded-circle img-thumbnail shadow-lg"
-                    src="img/sekolah.jpg" alt="" width="50" srcset=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
+    {{-- Profil Picture --}}
+    <a class="nav-link px-0" href="#">
+        @if(Auth::check() && Auth::user()->profile_picture)
+            <img class="rounded-circle img-thumbnail shadow-sm"
+                src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}"
+                alt="Profil" width="36" height="36" style="object-fit: cover;">
+        @else
+            <div class="rounded-circle img-thumbnail shadow-sm"
+                style="width: 36px; height: 36px; background-color: #369a74; display: flex; align-items: center; justify-content: center;">
+                <span class="text-white" style="font-size: 14px;">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}{{ strtoupper(substr(Auth::user()->name, strpos(Auth::user()->name, ' ') + 1, 1)) }}
+                </span>
+            </div>
+        @endif
+    </a>
+
+    {{-- Aplikasi Title --}}
+    <div class="text-center flex-grow-1 mx-2">
+        <div class="fw-bold" style="color: var(--darkt); font-size: 1.1rem;">TelEatz</div>
+    </div>
+
+    {{-- Hamburger Toggle --}}
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+{{-- ======================= DESKTOP NAVBAR ======================= --}}
+<div class="d-none d-lg-flex align-items-center justify-content-between px-4 py-2 w-100">
+
+    {{-- Title & Subjudul --}}
+    <div class="d-flex flex-column">
+        <span class="fw-bold fs-3" style="color: var(--darkt);">TelEatz <span  class="text-secondary fs-5">Telkom University</span></span>
+    </div>
+
+</div>
+
+
+
         <!-- ======================= NAVBAR TITLE ======================= -->
 
         <!-- ======================= NAVBAR DROPDOWN ======================= -->
@@ -44,19 +67,38 @@
                 </div>
                 <li class="nav-item dropdown d-flex justify-content-center align-items-center m-0">
                     <a class="nav-link px-0" href="#">
+                        @if(Auth::check() && Auth::user()->profile_picture)
                         <img class="rounded-circle img-thumbnail shadow-lg"
-                            src="{{ asset('img/sekolah.jpg') }}"
-                            alt="Profil" width="75">
+                            src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}"
+                            alt="Profil" width="50">
+                        @else
+                            <div class="rounded-circle img-thumbnail shadow-lg" style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; background-color: #369a74;">
+                                <span class="text-light" style="font-size: 18px;">
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}{{ strtoupper(substr(Auth::user()->name, strpos(Auth::user()->name, ' ') + 1, 1)) }}
+                                </span>
+                            </div>
+                         @endif
                     </a>
-                    <a id="name" class="nav-link dropdown-toggle fs-5" href="#" role="button"
+                    <a id="name" class="nav-link dropdown-toggle fs-6" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        @yanvios
+                        {{ Auth::user()->email }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
-                        <li><a class="dropdown-item fw-bold" href="login-no.html"><i
-                                    class="bi bi-box-arrow-left fw-bold"></i>
-                                Keluar</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Profil</a>
+                        </li>
+                        <li>
+                            <!-- Form logout tersembunyi -->
+                            <form id="logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+
+                            <!-- Tombol logout -->
+                            <a href="#" class="dropdown-item text-danger" onclick="event.preventDefault(); confirmLogout()"><b>Logout</b></a>
+                        </li>
+                    </ul>
+
+
 
                     </ul>
                 </li>

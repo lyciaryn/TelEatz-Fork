@@ -22,6 +22,7 @@ return new class extends Migration
             $table->time('open_time')->nullable();
             $table->time('close_time')->nullable();
             $table->rememberToken();
+            $table->timestamp('last_logout_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

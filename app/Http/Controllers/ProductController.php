@@ -3,16 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     // menampilkan semua produk
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('user', 'category')->get();
-        return view('buyer.daftarmenu.index', compact('products'), ['title' => 'Daftar Menu']);
+        $query = Product::with('user', 'category');
+
+        // Filter search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_product', 'like', "%$search%")
+                    ->orWhereHas('user', function ($q2) use ($search) {
+                        $q2->where('name', 'like', "%$search%");
+                    });
+            });
+        }
+
+        // Filter kategori
+        if ($request->filled('category')) {
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('nama_kategori', $request->category);
+            });
+        }
+
+        $products = $query->get();
+        $categories = Category::all(); // ambil semua kategori dari DB
+
+        return view('buyer.daftarmenu.index', compact('products', 'categories'));
     }
+
+
 
     // Menampilkan detail produk
     public function show($id)

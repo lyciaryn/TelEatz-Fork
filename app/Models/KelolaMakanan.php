@@ -18,6 +18,7 @@ class KelolaMakanan extends Model
         'harga',
         'deskripsi',
         'is_available',
+        'estimate',
         'category_id',
         'img',
     ];
@@ -26,5 +27,4 @@ class KelolaMakanan extends Model
     {
         return $this->belongsTo(Category::class); // Setiap makanan memiliki satu kategori
     }
-
 }
