@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('total_harga');
             $table->enum('status', ['pending', 'diproses', 'selesai', 'dibatalkan']);
             $table->enum('dine_option', ['dine-in', 'takeaway']);
-            $table->enum('payment', ['qrish', 'cash']);
+            $table->enum('payment', ['qris', 'cash']);
             $table->timestamps();
         });
     }

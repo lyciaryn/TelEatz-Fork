@@ -533,6 +533,7 @@ label{
   /* <!-- ======================= RESPONSITO ======================= --> */
  @media (max-width: 767.98px) {
 /* <!-- ======================= LOGIN ======================= --> */
+
     .login-no .card .card-body{
         display: flex;
         flex-direction: column-reverse;
@@ -592,6 +593,11 @@ label{
   #username-sidebar {
     font-size: 2px !important;
 }
+
+
+
+
+
 /* <!-- ======================= DASHBOARD ======================= --> */
 
   }

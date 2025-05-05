@@ -121,8 +121,9 @@ class KelolaMakananController extends Controller
 
     public function destroy($id)
     {
+
         $makanan = KelolaMakanan::findOrFail($id);
         $makanan->delete();
-        return redirect()->route('kelolamakanan.delete')->with('success', 'Menu makanan berhasil dihapus');
+        return redirect()->back()->with('justsuccess', 'Item berhasil dihapus dari daftar menu.');
     }
 }

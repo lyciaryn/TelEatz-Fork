@@ -54,19 +54,12 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardSellerController::class, 'index'])->name('seller.dashboard');
-
-
     Route::get('/kelolamakanan', [KelolaMakananController::class, 'index'])->name('kelolamakanan');
     Route::get('/kelolamakanan/create', [KelolaMakananController::class, 'fetchcategory'])->name('kelolamakanan.create');
-
-
     Route::get('/kelolamakanan/{id}/edit', [KelolaMakananController::class, 'edit'])->name('kelolamakanan.edit');
     Route::put('/kelolamakanan/{id}', [KelolaMakananController::class, 'update'])->name('kelolamakanan.update');
-
-
     route::get('/kelolamakanan/{id}/showdetail', [KelolaMakananController::class, 'showingdetail'])->name('kelolamakanan.showdetail');
     Route::post('/kelolamakanan', [KelolaMakananController::class, 'store'])->name('kelolamakanan.store');
-
     route::delete('/kelolamakanan/{id}', [KelolaMakananController::class, 'delete'])->name('kelolamakanan.softdelete');
 });
 

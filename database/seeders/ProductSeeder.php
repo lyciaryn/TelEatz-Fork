@@ -14,7 +14,7 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Product::create([
-            'seller_id' => 2,
+            'seller_id' => 1,
             'nama_product' => 'Nasi Goreng',
             'harga' => 15000,
             'deskripsi' => 'Makanan nasi goreng dengan bumbu rempah bawang-bawangan',
@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
         ]);
 
         Product::create([
-            'seller_id' => 2,
+            'seller_id' => 1,
             'nama_product' => 'Mie Ayam',
             'harga' => 13000,
             'deskripsi' => 'Makanan Mie Ayam dengan bumbu rempah bawang-bawangan',
@@ -38,6 +38,16 @@ class ProductSeeder extends Seeder
             'nama_product' => 'Es Buah',
             'harga' => 15000,
             'deskripsi' => 'Es buah yang sangat enak dengan buah buahan bergizi',
+            'is_available' => 1,
+            'category_id' => 2,
+            'img' => null,
+        ]);
+
+        Product::create([
+            'seller_id' => 2,
+            'nama_product' => 'Es Kocok',
+            'harga' => 15000,
+            'deskripsi' => 'Es Kocok dengan buah-buhanan yang sangat lezat dan bergizi',
             'is_available' => 1,
             'category_id' => 2,
             'img' => null,

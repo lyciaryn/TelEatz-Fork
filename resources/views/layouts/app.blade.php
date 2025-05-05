@@ -27,9 +27,9 @@
                 title: "Berhasil!",
                 text: "{{ session('success') }}",
                 icon: "success",
-                confirmButtonText: 'OK', // Tambahkan teks tombol
+                confirmButtonText: 'OK',
                 customClass: {
-                    confirmButton: 'btn btn-primary' // Menambahkan kelas Bootstrap untuk tombol biru
+                    confirmButton: 'btn btn-primary'
                 }
             });
         </script>
@@ -86,7 +86,7 @@
 
 
     <script>
-        function confirmDelete() {
+        function confirmDelete(id) {
             Swal.fire({
                 title: "Yakin ingin menghapus?",
                 text: "Data yang dihapus tidak dapat dikembalikan!",
@@ -95,16 +95,14 @@
                 confirmButtonText: 'Ya',
                 cancelButtonText: 'Tidak',
                 reverseButtons: false,
-
-                // Gunakan class Bootstrap
                 customClass: {
                     confirmButton: 'btn btn-danger me-4',
                     cancelButton: 'btn btn-primary'
                 },
-                buttonsStyling: false // Wajib agar class di atas dipakai
+                buttonsStyling: false
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('deleteForm').submit();
+                    document.getElementById('deleteForm' + id).submit();
                 }
             });
         }

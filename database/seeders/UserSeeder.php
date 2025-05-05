@@ -13,6 +13,24 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // SELLER ID 1
+        User::create([
+            'name' => 'Toko abc',
+            'email' => 'abc@gmail.com',
+            'password' => Hash::make('12345'),
+            'email_verified_at' => now(),
+            'role' => 'seller',
+        ]);
+
+        // SELLER ID 2
+        User::create([
+            'name' => 'Toko xyz',
+            'email' => 'xyz@gmail.com',
+            'password' => Hash::make('12345'),
+            'email_verified_at' => now(),
+            'role' => 'seller',
+        ]);
+
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
@@ -21,13 +39,6 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        User::create([
-            'name' => 'Toko ABC',
-            'email' => 'abc@gmail.com',
-            'password' => Hash::make('12345'),
-            'email_verified_at' => now(),
-            'role' => 'seller',
-        ]);
 
         User::create([
             'name' => 'vio salman',
