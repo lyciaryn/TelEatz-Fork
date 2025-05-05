@@ -77,4 +77,37 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke cart!');
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $request->validate([
+                'quantity' => 'required|integer|min:1',
+            ]);
+
+            // Ambil item berdasarkan ID dan pastikan milik buyer yang login
+            $item = CartItem::where('id', $id)
+                ->whereHas('cart', function ($query) {
+                    $query->where('buyer_id', auth()->id());
+                })
+                ->firstOrFail();
+
+            // Update quantity
+            $item->quantity = $request->quantity;
+            $item->save();
+
+            return redirect()->back()->with('justsuccess', 'Jumlah keranjang berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+
+    public function destroy($id)
+    {
+        $item = CartItem::findOrFail($id);
+        $item->delete();
+
+        return redirect()->back()->with('success', 'Item berhasil dihapus dari keranjang.');
+    }
 }

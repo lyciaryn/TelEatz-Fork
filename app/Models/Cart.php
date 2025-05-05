@@ -14,8 +14,8 @@ class Cart extends Model
         'buyer_id',
     ];
 
-    // Cart memiliki banyak itema
-    public function items()
+    // Cart memiliki banyak item
+    public function cart_items()
     {
         return $this->hasMany(CartItem::class);
     }

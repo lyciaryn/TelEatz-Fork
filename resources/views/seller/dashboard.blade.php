@@ -16,7 +16,7 @@
                 <div class="card-body alert-name p-4 d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-column">
                         <p class="text-light text-center text-lg-start text-md-start mb-1">Halo, Selamat Datang</p>
-                        <h2 class="fs-2 text-light text-uppercase">{{ Auth::user()->name }}👋</h2>
+                        <h2 class="fs-2 text-light text-uppercase">Juragan, {{ Auth::user()->name }}👋</h2>
                         <p style="font-size: 12px !important" class="text-light fw-lighter ">⏰ Terakhir Login: 20:202:20</p>
                     </div>
                     <img class="img-fluid" src="{{ asset('img/alert-nama.svg') }}" width="130" alt="">

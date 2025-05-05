@@ -46,9 +46,9 @@ class LoginController extends Controller
             // Redirect berdasarkan role
             $user = Auth::user();
             if ($user->role === 'buyer') {
-                return redirect()->route('buyer.dashboard')->with('success', 'Kamu berhasil login!');
+                return redirect()->route('buyer.dashboard')->with('justsuccess', 'Kamu berhasil login!');
             } else if ($user->role === 'seller') {
-                return redirect()->route('seller.dashboard')->with('success', 'Kamu berhasil login!');
+                return redirect()->route('seller.dashboard')->with('justsuccess', 'Kamu berhasil login!');
             }
         }
 
@@ -70,6 +70,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with('success', 'Anda telah berhasil logout!');
+        return redirect('/login')->with('justsuccess', 'Anda telah berhasil logout!');
     }
 }
