@@ -21,8 +21,7 @@
 
     <div class="canvas-log animate__animated animate__fadeIn">
         <div class="left-sec">
-            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
-                type="module"></script>
+            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
             <dotlottie-player src="https://lottie.host/f590e3bb-fa83-4f0a-9bcd-ea506a5b4a91/pEQ48RBjDJ.lottie"
                 background="transparent" speed="1" style="width: 500px; height: 500px" loop autoplay
                 class="animate__animated animate__fadeInUp"></dotlottie-player>
@@ -35,11 +34,31 @@
             <div class="input-data">
                 <form action="{{ route('register') }}" method="POST">
                     @csrf
+                    <div class="d-flex align-items-center w-100" style="gap: 10px;">
+                        <div class="logo-select" style="font-size: 35px; color: var(--fblue);">
+                            <i class='bx bxs-id-card'></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <select class="form-select text-secondary fw-bold border-0 w-100" name="role" id="role"
+                                style="font-size: 13px; padding: 13px 10px; border-radius: 20px; " required>
+                                <option disabled {{ old('role') ? '' : 'selected' }}>Daftar Sebagai...</option>
+                                <option value="buyer" {{ old('role') == 'buyer' ? 'selected' : '' }}>Buyer</option>
+                                <option value="seller" {{ old('role') == 'seller' ? 'selected' : '' }}>Seller</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    @error('role')
+                        <div class="text-danger small mt-1 ms-1" style="font-size: 11px">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+
 
                     {{-- Username --}}
                     <div class="input-container text-center ">
-                        <input type="text" name="name" placeholder="Masukkan Username"
-                            value="{{ old('name') }}"
+                        <input type="text" name="name" placeholder="Masukkan Username" value="{{ old('name') }}"
                             class="@error('name') is-invalid @enderror" required>
                         <button class="invite-btn" type="button" tabindex="-1">
                             <i class="fa-solid fa-user"></i>
@@ -51,8 +70,7 @@
 
                     {{-- Email --}}
                     <div class="input-container text-center ">
-                        <input type="email" name="email" placeholder="Masukkan Email"
-                            value="{{ old('email') }}"
+                        <input type="email" name="email" placeholder="name@example.cpm" value="{{ old('email') }}"
                             class="@error('email') is-invalid @enderror" required>
                         <button class="invite-btn" type="button" tabindex="-1">
                             <i class="fa-solid fa-user"></i>
@@ -103,7 +121,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
 @endsection
-

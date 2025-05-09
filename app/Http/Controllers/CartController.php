@@ -68,10 +68,13 @@ class CartController extends Controller
             $cartItem->save();
         } else {
             // Kalau belum ada, buat baru
+            $product = Product::findOrFail($productId);
+
             CartItem::create([
                 'cart_id' => $cart->id,
                 'product_id' => $productId,
                 'quantity' => $quantity,
+                'harga' => $product->harga, // tambahkan baris ini
             ]);
         }
 
@@ -92,8 +95,12 @@ class CartController extends Controller
                 })
                 ->firstOrFail();
 
-            // Update quantity
+            // Ambil harga per item dari relasi produk
+            $hargaPerItem = $item->product->harga ?? 0;
+
+            // Update quantity dan harga total
             $item->quantity = $request->quantity;
+            $item->harga = $hargaPerItem * $request->quantity;
             $item->save();
 
             return redirect()->back()->with('justsuccess', 'Jumlah keranjang berhasil diperbarui');
@@ -101,6 +108,7 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
 
 
     public function destroy($id)

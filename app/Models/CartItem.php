@@ -12,8 +12,8 @@ class CartItem extends Model
     protected $fillable = [
         'cart_id',
         'product_id',
-        'quantity'
-
+        'quantity',
+        'harga',
     ];
 
     // Cart Item milik cart
@@ -25,6 +25,6 @@ class CartItem extends Model
     // Cart Item milik Product
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }

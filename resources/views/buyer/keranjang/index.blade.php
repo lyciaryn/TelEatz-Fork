@@ -121,23 +121,23 @@
                                         {{ number_format($totalPrice, 0, ',', '.') }}</span>
                                 </div>
 
-                                <form action="" method="">
+                                <form action="{{ route('checkout') }}" method="POST">
                                     @csrf
                                     <div class="mb-2 d-flex flex-wrap justify-content-center gap-2 w-100">
                                         <div class="metode mb-2">
                                             <label for="paymentMethod" class="form-label small mb-1">Pembayaran</label>
-                                            <select name="payment_method" id="paymentMethod"
-                                                class="form-select form-select-sm" required>
-                                                <option value="">-- Pilih --</option>
+                                            <select name="payment" id="paymentMethod" class="form-select form-select-sm"
+                                                required>
+                                                <option disabled>-- Pilih --</option>
                                                 <option value="qris">QRIS</option>
                                                 <option value="cash">Cash</option>
                                             </select>
                                         </div>
                                         <div class="dine">
                                             <label for="orderType" class="form-label small mb-1">Dine/Takeaway</label>
-                                            <select name="order_type" id="orderType" class="form-select form-select-sm"
+                                            <select name="dine_option" id="orderType" class="form-select form-select-sm"
                                                 required>
-                                                <option value="">-- Pilih --</option>
+                                                <option disabled>-- Pilih --</option>
                                                 <option value="dine-in">Dine-in</option>
                                                 <option value="takeaway">Takeaway</option>
                                             </select>

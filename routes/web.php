@@ -10,8 +10,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardBuyerController;
 use App\Http\Controllers\DashboardSellerController;
-use App\Http\Controllers\PesananController;
-
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 // LOGIN
 Route::get('/', function () {
     return view('landing');
@@ -32,12 +33,18 @@ Route::post('/register', [RegisterController::class, 'register']);
 // LOGIN
 
 
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
+
+
 
 Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardBuyerController::class, 'index'])->name('buyer.dashboard');
-    // Pesanan
-    Route::get('/pesanan-saya', [PesananController::class, 'index'])->name('buyer.pesanan.index');
 
     // Daftar Menu
     Route::get('/daftarmenu', [ProductController::class, 'index'])->name('buyer.daftarmenu.index');
@@ -47,6 +54,11 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     Route::post('/keranjang/store', [CartController::class, 'store'])->name('buyer.keranjang.store');
     Route::put('/keranjang/update/{id}', [CartController::class, 'update'])->name('buyer.keranjang.update');
     Route::delete('/keranjang/remove/{id}', [CartController::class, 'destroy'])->name('buyer.keranjang.destroy');
+
+    // Pesanan
+    Route::get('/orders', [OrderController::class, 'index'])->name('buyer.pesanan.index');
+    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::delete('/pesanan/{id}', [OrderController::class, 'destroy'])->name('buyer.pesanan.destroy');
 });
 
 

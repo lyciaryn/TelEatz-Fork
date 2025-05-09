@@ -20,13 +20,15 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:5', 'confirmed'],
+            'role' => ['required', 'in:buyer,seller'], 
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'role' => 'buyer',
+            'role' => $validated['role'],
+            'email_verified_at' => $validated['role'] === 'buyer' ? now() : null,
         ]);
 
         return redirect('/login')->with('success', 'Registrasi berhasil, silakan login!');

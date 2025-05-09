@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,35 +25,35 @@
                 class="animate__animated animate__fadeInUp"></dotlottie-player>
         </div>
         <div class="right-sec">
-            <h1 class="animate__animated animate__fadeInUp"><b>Login</b></h1>
-            <p class="animate__animated animate__fadeInUp"><span style=" color: var(--fbluet); font-weight: bold;"
-                    class="">Login</span> untuk masuk ke TelEats!
-            </p>
+            <h1 class="animate__animated animate__fadeInUp"><b>Lupa Password</b></h1>
+            <p>Silahkan Masukkan Email Anda</p>
             <div class="input-data">
-                <form action="{{ route('login') }}" method="POST">
+                <form method="POST" action="{{ route('password.email') }}">
                     @csrf
-                    <div class="input-container text-center animate__animated animate__fadeInLeft">
+                    <div class="input-container
+                    text-center animate__animated animate__fadeInLeft">
                         <input type="email" name="email" placeholder="Masukkan Email" required>
                         <button class="invite-btn" type="button" tabindex="-1">
                             <i class="fa-solid fa-user"></i>
                         </button>
                     </div>
-                    <div class="input-container text-center animate__animated animate__fadeInRight">
-                        <input type="password" name="password" placeholder="Masukkan Password" required>
-                        <button class="invite-btn" type="button" tabindex="-1">
-                            <i class="fa-solid fa-key"></i>
+                    @error('email')
+                        <div class="text-danger small ms-1 mb-2" style="font-size: 11px">{{ $message }}</div>
+                    @enderror
+
+                    <div class="button text-center animate__animated animate__fadeInUp mt-2 mb-5">
+                        <button class="submit text-light w-100 " type="submit">
+                            Kirim Link Reset
                         </button>
                     </div>
-                    <div class="button text-center animate__animated animate__fadeInUp mt-5">
-                        <button class="submit text-light w-100 mb-5" type="submit">
-                            Login
-                        </button>
-                    </div>
-                    <p class="text-secondary text-center">Don't have an account? <a href="{{ route('register') }}">Sign
-                            Up</a></p>
-                    <p class="text-secondary text-center mt-3 "><a href="{{ route('password.request') }}">Forgot
-                            Password</a>
-                    </p>
+
+                    <a href="{{ route('login') }}"
+                        style="font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; margin-top: 2rem; color: var(--fblue); ">
+                        <i class='bx btn btn-primary bx-chevron-left me-3'
+                            style="font-size: 16px; margin-right: 4px; color: "></i>
+                        kembali ke login
+                    </a>
+
                 </form>
             </div>
 
@@ -62,6 +61,8 @@
 
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

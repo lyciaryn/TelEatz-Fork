@@ -132,6 +132,30 @@
         }
     </script>
 
+    <script>
+        function confirmCancel(orderId) {
+            Swal.fire({
+                title: "Yakin ingin membatalkan pesanan?",
+                text: "Tindakan ini tidak bisa dikembalikan.",
+                icon: "warning",
+                showCancelButton: true,
+                cancelButtonText: 'Tidak',
+                confirmButtonText: 'Batalkan',
+                reverseButtons: true,
+                customClass: {
+                    confirmButton: 'btn btn-danger me-2',
+                    cancelButton: 'btn btn-secondary'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('cancel-form-' + orderId).submit();
+                }
+            });
+        }
+    </script>
+
+
 
     <script>
         function previewImage() {

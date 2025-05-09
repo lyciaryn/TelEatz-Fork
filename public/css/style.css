@@ -54,6 +54,22 @@ p{
   /* border-radius: 0 !important;     */
 }
 
+
+.nav-pills .nav-link.active {
+    background-color: #1092FE !important;
+    color: white !important;
+}
+
+.nav-pills .nav-link {
+    color: #686868;
+
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #e5f1ff;
+}
+
+
 .card-header{
   border: none !important;
   border-radius: 15px 15px 0 0 !important;
@@ -593,7 +609,6 @@ label{
   #username-sidebar {
     font-size: 2px !important;
 }
-
 
 
 
