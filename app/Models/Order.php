@@ -17,9 +17,19 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'buyer_id');
     }
+    
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
+    }
 
-    public function order_items()
+    public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
+    }
+    
+    public function review()
+    {
+        return $this->hasOne(Review::class);
     }
 }
