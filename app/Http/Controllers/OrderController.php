@@ -8,23 +8,35 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Order::with(['order_items.product'])
-            ->where('buyer_id', Auth::id())
-            ->orderBy('created_at', 'desc');
+        $userId = Auth::id();
 
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
+        $statusFilter = $request->query('status');
 
-        $orders = $query->get();
+        $orders = Order::with(['order_items.product'])
+            ->where('buyer_id', $userId)
+            ->when($statusFilter, function ($query) use ($statusFilter) {
+                $query->where('status', $statusFilter);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('buyer.pesanan.index', compact('orders'));
+        // Hitung jumlah per status
+        $statusCounts = [
+            'all' => Order::where('buyer_id', $userId)->count(),
+            'pending' => Order::where('buyer_id', $userId)->where('status', 'pending')->count(),
+            'diproses' => Order::where('buyer_id', $userId)->where('status', 'diproses')->count(),
+            'selesai' => Order::where('buyer_id', $userId)->where('status', 'selesai')->count(),
+            'dibatalkan' => Order::where('buyer_id', $userId)->where('status', 'dibatalkan')->count(),
+        ];
+
+        return view('buyer.pesanan.index', compact('orders', 'statusCounts'));
     }
 
 
@@ -96,6 +108,41 @@ class OrderController extends Controller
         return redirect()->route('buyer.pesanan.index')->with('success', 'Pesanan berhasil dibuat!');
     }
 
+    public function cancelOrder($id)
+    {
+        $order = Order::where('id', $id)
+            ->where('buyer_id', auth()->id())
+            ->where('status', 'pending')
+            ->firstOrFail();
+
+        $order->update([
+            'status' => 'dibatalkan',
+        ]);
+
+        return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan!');
+    }
+
+
+
+
+
+    public function showFaktur(Order $order)
+    {
+        $order->load('order_items.product');
+
+        return view('buyer.pesanan.faktur', compact('order'));
+    }
+
+    public function downloadFaktur(Order $order)
+    {
+        $order->load('order_items.product');
+
+        $pdf = Pdf::loadView('buyer.pesanan.faktur', compact('order'));
+        return $pdf->download($order->buyer->name . '-faktur-pesanan-' . $order->id . '.pdf');
+    }
+
+
+
 
     public function destroy($id)
     {
@@ -104,12 +151,12 @@ class OrderController extends Controller
             ->firstOrFail();
 
         if ($order->status !== 'pending') {
-            return back()->with('error', 'Pesanan tidak bisa dibatalkan karena sudah diproses.');
+            return back()->with('error', 'Pesanan tidak bisa dihapu');
         }
 
-        $order->order_items()->delete(); // hapus item-nya dulu
-        $order->delete(); // hapus pesanan
+        $order->order_items()->delete();
+        $order->delete();
 
-        return back()->with('success', 'Pesanan berhasil dibatalkan.');
+        return back()->with('success', 'Data Pesanan Berhasil dihapus.');
     }
 }

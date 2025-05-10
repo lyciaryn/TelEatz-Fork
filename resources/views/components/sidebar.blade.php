@@ -41,9 +41,9 @@
 
 
 
-        <a class="nav-link d-flex align-items-center gap-2" href="/historipesanan"><i class='bx bx-home-alt me-2'></i>
+        {{-- <a class="nav-link d-flex align-items-center gap-2" href="/historipesanan"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Histori Pesanan</p>
-        </a>
+        </a> --}}
         <a class="nav-link d-flex align-items-center gap-2" href="/profil"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Profil Saya</p>
         </a>

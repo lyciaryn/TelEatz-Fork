@@ -98,7 +98,7 @@
                                         <h6 class="card-text fw-bold mt-1 mb-2 text-danger mt-2 mb-2">Rp
                                             {{ number_format($product->harga, 0, ',', '.') }}</h6>
 
-                                        <div class="d-flex align-items-center justify-content-end">
+                                        <div class=" cart-section d-flex align-items-center justify-content-end">
                                             <form action="{{ route('buyer.keranjang.store') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">

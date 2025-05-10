@@ -12,19 +12,28 @@
                 <x-header title="Pesanan Saya" />
                 <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('buyer.dashboard')], ['label' => 'Pesanan Saya']]" />
 
-                <div class="nav nav-pills mb-3" role="tablist">
+                <div class="nav nav-pills fw-bold mb-3 d-flex gap-3" role="tablist">
                     <a class="nav-link {{ request('status') === null ? 'active' : '' }}"
-                        href="{{ route('buyer.pesanan.index') }}">Semua</a>
+                        href="{{ route('buyer.pesanan.index') }}">
+                        Semua ({{ $statusCounts['all'] }})
+                    </a>
                     <a class="nav-link {{ request('status') === 'pending' ? 'active' : '' }}"
-                        href="{{ route('buyer.pesanan.index', ['status' => 'pending']) }}">Pending</a>
+                        href="{{ route('buyer.pesanan.index', ['status' => 'pending']) }}">
+                        Pending ({{ $statusCounts['pending'] }})
+                    </a>
                     <a class="nav-link {{ request('status') === 'diproses' ? 'active' : '' }}"
-                        href="{{ route('buyer.pesanan.index', ['status' => 'diproses']) }}">Diproses</a>
+                        href="{{ route('buyer.pesanan.index', ['status' => 'diproses']) }}">
+                        Diproses ({{ $statusCounts['diproses'] }})
+                    </a>
                     <a class="nav-link {{ request('status') === 'selesai' ? 'active' : '' }}"
-                        href="{{ route('buyer.pesanan.index', ['status' => 'selesai']) }}">Selesai</a>
-                    <a class="nav-link {{ request('status') === 'dibatalkan' ? 'active' : '' }}"
-                        href="{{ route('buyer.pesanan.index', ['status' => 'dibatalkan']) }}">Dibatalkan</a>
+                        href="{{ route('buyer.pesanan.index', ['status' => 'selesai']) }}">
+                        Selesai ({{ $statusCounts['selesai'] }})
+                    </a>
+                    <a class="nav-link nav-danger {{ request('status') === 'dibatalkan' ? 'active' : '' }}"
+                        href="{{ route('buyer.pesanan.index', ['status' => 'dibatalkan']) }}">
+                        Dibatalkan ({{ $statusCounts['dibatalkan'] }})
+                    </a>
                 </div>
-
 
                 {{-- ================== PESANAN LOOP ================== --}}
                 @forelse($orders as $order)
@@ -37,7 +46,8 @@
                                 <small class="text-muted"><b>No. Antrian: {{ $order->id }}</b></small><br>
                                 <small class="text-muted">Tanggal: {{ $order->created_at->format('d M Y, H:i') }}</small>
                             </div>
-                            <span class="fw-bold text-{{ $order->status === 'pending' ? 'warning' : 'success' }}">
+                            <span
+                                class="fw-bold text-{{ $order->status === 'dibatalkan' ? 'danger' : ($order->status === 'selesai' ? 'success' : 'warning') }}">
                                 {{ ucfirst($order->status) }}
                             </span>
                         </div>
@@ -138,13 +148,23 @@
 
                 {{-- ========== ESTIMASI & TOTAL ========== --}}
                 <div class="text-start mt-3">
-                    @if ($order->estimated_ready_at)
-                        <p class="alert alert-success fw-bold p-3 w-100"
-                            style="border: none; color: rgb(5, 151, 127); background-color:rgb(184, 245, 235)">
-                            Estimasi Siap pada {{ $order->estimated_ready_at->format('H:i') }}
-                        </p>
-                    @endif
+                    @if ($order->estimated_ready_at || $order->status === 'selesai' || $order->status === 'dibatalkan')
+                        <h6 class="alert fw-bold p-3 w-100"
+                            style=" border: none;  background-color: {{ $order->status === 'selesai'
+                                ? 'rgb(184, 245, 235)'
+                                : ($order->status === 'dibatalkan'
+                                    ? '#ffe5e5'
+                                    : 'rgb(184, 245, 235)') }}; color: {{ $order->status === 'dibatalkan' ? '#d8000c' : 'rgb(5, 151, 127)' }};">
 
+                            @if ($order->status === 'selesai')
+                                Pesanan siap diambil
+                            @elseif ($order->status === 'dibatalkan')
+                                Pesanan dibatalkan
+                            @else
+                                Estimasi Siap pada {{ $order->estimated_ready_at->format('H:i') }}
+                            @endif
+                        </h6>
+                    @endif
                 </div>
 
                 <div class="text-end mt-3 fw-bold d-flex justify-content-between">
@@ -156,11 +176,42 @@
                         </a>
 
                         <form id="cancel-form-{{ $order->id }}"
-                            action="{{ route('buyer.pesanan.destroy', $order->id) }}" method="POST"
+                            action="{{ route('buyer.pesanan.cancelOrder', $order->id) }}" method="POST"
                             style="display: none;">
                             @csrf
-                            @method('DELETE')
                         </form>
+                    @elseif ($order->status === 'selesai')
+                        <div class="buttons d-flex gap-3">
+
+                            <a href="{{ route('buyer.pesanan.downloadFaktur', $order->id) }}"
+                                class="btn btn-outline-success btn-sm d-flex gap-2 justify-content-center align-items-center"
+                                style="border-radius: 5px !important">
+                                <i class='bx bxs-file-pdf fs-5 mt-1'></i>
+                                <p class="mt-1 fw-bold">Download Faktur</p>
+                            </a>
+
+                            @php
+                                $productId = $order->order_items->first()->product_id;
+                                $hasReviewed = \App\Models\Review::where('buyer_id', auth()->id())
+                                    ->where('product_id', $productId)
+                                    ->where('order_id', $order->id)
+                                    ->exists();
+                            @endphp
+
+                            <a href="{{ $hasReviewed
+                                ? route('buyer.daftarmenu.show', $productId) // hanya productId saja
+                                : route('buyer.review.create', ['order' => $order->id, 'product' => $productId]) }}"
+                                class="btn btn-warning btn-sm d-flex gap-2 justify-content-center align-items-center">
+                                <i class='bx bxs-star'></i>
+                                <p class="mt-1 fw-bold">
+                                    {{ $hasReviewed ? 'Lihat Penilaian' : 'Berikan Ulasan' }}
+                                </p>
+                            </a>
+
+
+
+
+                        </div>
                     @else
                         <button class="btn btn-outline-secondary btn-sm rounded" disabled>
                             Batalkan Pesanan

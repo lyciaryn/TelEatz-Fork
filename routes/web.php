@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardBuyerController;
 use App\Http\Controllers\DashboardSellerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 // LOGIN
@@ -56,9 +57,20 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     Route::delete('/keranjang/remove/{id}', [CartController::class, 'destroy'])->name('buyer.keranjang.destroy');
 
     // Pesanan
-    Route::get('/orders', [OrderController::class, 'index'])->name('buyer.pesanan.index');
-    Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::get('/pesanan', [OrderController::class, 'index'])->name('buyer.pesanan.index');
+    Route::post('/pesanan/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/pesanan/batalkan/{id}', [OrderController::class, 'cancelOrder'])->name('buyer.pesanan.cancelOrder');
     Route::delete('/pesanan/{id}', [OrderController::class, 'destroy'])->name('buyer.pesanan.destroy');
+    // Faktur
+    Route::get('/pesanan/{order}/faktur', [OrderController::class, 'showFaktur'])->name('buyer.pesanan.faktur');
+    Route::get('/pesanan/{order}/faktur/download', [OrderController::class, 'downloadFaktur'])->name('buyer.pesanan.downloadFaktur');
+
+    // Tampilkan form ulasan
+    Route::get('/ulasan/{order}/{product}', [ReviewController::class, 'create'])->name('buyer.review.create');
+
+    // Simpan ulasan
+    Route::post('/ulasan/{order}/{product}', [ReviewController::class, 'store'])->name('buyer.review.store');
+    Route::delete('/ulasan/{id}', [ReviewController::class, 'destroy'])->name('buyer.review.destroy');
 });
 
 
