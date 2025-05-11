@@ -24,7 +24,7 @@
                             <br>
                             <br>
                                 <small class="text-muted"><b>Id Pesanan: {{ $order->id }}</b></small><br>
-                                <small class="text-muted">Tanggal: {{ $order->created_at->format('d M Y, H:i') }}</small>
+                                <small class="text-muted">Tanggal: {{ $order->created_at }}</small>
                             </div>
                             <span class="fw-bold text-{{ $order->status === 'pending' ? 'warning' : 'success' }}">
                                 {{ ucfirst($order->status) }}
