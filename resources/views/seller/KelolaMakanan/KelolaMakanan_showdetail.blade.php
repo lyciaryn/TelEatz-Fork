@@ -16,26 +16,32 @@
                         <div
                             class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                             <div class="d-flex align-items-center">
+                                @if ($makanan->img)
                                 <img src="{{ asset('images/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
                                     class="img-fluid me-4" style="max-width: 300px; height: auto; border-radius: 20px;">
-                                <div>
-                                    <h1 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Edit Menu Makanan</h1>
+                                @else
+                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" style="height: 135px; border-radius: 16px;">
+                                        {{ $makanan->nama_product }}
+                                    </div>
+                                @endif
+
+                                <div class="px-3">
                                     <div>
                                         <label style="text-align: left;">Nama Makanan</label>
                                         <input type="text" class="form-control" size="1000" name="nama_product"
                                             value="{{ $makanan->nama_product }}" required disabled>
                                     </div>
                                     <div>
-                                        <label style="text-align: left;">Harga</label>
+                                        <label class="mt-4" style="text-align: left;">Harga</label>
                                         <input type="text" class="form-control" size="1000" name="harga"
                                             value="{{ $makanan->harga }}" required disabled>
                                     </div>
                                     <div>
-                                        <label style="text-align: left;">Deskripsi</label>
+                                        <label class="mt-4" style="text-align: left;">Deskripsi</label>
                                         <textarea type="text" class="form-control" size="1000" name="deskripsi" required disabled>{{ $makanan->deskripsi }}</textarea>
                                     </div>
                                     <div>
-                                        <label for="is_avaialable">Tersedia?</label>
+                                        <label class="mt-4" for="is_avaialable">Tersedia?</label>
                                         <select name="is_available" class="form-select" aria-label="Pilih kategori" required
                                             disabled>
                                             <option selected disabled>Pilih Ketersediaan</option>

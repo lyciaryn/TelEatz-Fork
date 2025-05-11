@@ -42,4 +42,15 @@ class ReviewController extends Controller
 
         return back()->with('success', 'Ulasan berhasil dihapus.');
     }
+    
+    public function index()
+    {
+        $makanan = Product::where('seller_id', auth::id())->get();
+        return view('seller.Review.review', compact('makanan'));
+    }
+    public function showReview($id)
+    {
+        $product = Product::with('reviews')->findOrFail($id);
+        return view('seller.Review.reviewDetail', compact('product'));
+    }
 }

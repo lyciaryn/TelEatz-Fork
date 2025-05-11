@@ -20,7 +20,7 @@
             </div>
 
         </div>
-        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('seller.dashboard') }}"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.dashboard') }}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Home</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('kelolamakanan') }}"><i class='bx bx-home-alt me-2'></i>
@@ -33,11 +33,9 @@
 
 
 
-        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('seller.pesanan.history') }}"><i class='bx bx-home-alt me-2'></i>
-            <p style="font-size: 14px;">Histori Pesanan</p>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.transaction') }}"><i class='bx bx-home-alt me-2'></i>
+            <p style="font-size: 14px;">Semua Transaksi</p>
         </a>
-        <a class="nav-link d-flex align-items-center gap-2" href="{{route('seller.review')}}"><i class='bx bx-home-alt me-2'></i>
-            <p style="font-size: 14px;">Ulasan</p>
         <a class="nav-link d-flex align-items-center gap-2" href="{{route('seller.profile')}}"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Profil Saya</p>
         </a>

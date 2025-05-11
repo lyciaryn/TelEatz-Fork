@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->foreignId('buyer_id')->references('id')->on('users');
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('order_item_id')->constrained('order_items')->onDelete('cascade');
             $table->text('comment');
             $table->tinyInteger('rating');
             $table->timestamps();

@@ -9,7 +9,6 @@
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Kelola Makanan" />
-            <div><a href="/kelolamakanan/tambah" class="btn btn-primary">Tambah Makanan</a></div>
             <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-left flex-column">
                 @if(session('error'))
@@ -30,19 +29,19 @@
                 <form action="{{ route('kelolamakanan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <label style="text-align: left;">Nama Makanan</label>
+                        <label style="mt-4 text-align: left;">Nama Makanan</label>
                         <input type="text" class="form-control" size="1000" name="nama_product" required>
                     </div>
                     <div>
-                        <label class="text-start">Harga</label>
+                        <label class="mt-4 text-start">Harga</label>
                         <input type="text" class="form-control" name="harga" required>
                     </div>
                     <div>
-                        <label>Deskripsi</label>
+                        <label class="mt-4 text-start">Deskripsi</label>
                         <textarea name="deskripsi" class="form-control" required></textarea>
                     </div>
                     <div>
-                        <label for="is_avaialable">Tersedia?</label>
+                        <label class="mt-4 text-start" for="is_avaialable">Tersedia?</label>
                         <select name="is_available" class="form-select" aria-label="Pilih kategori" required>
                             <option selected disabled>Pilih Ketersediaan</option>
                             <option value="1">Tersedia</option>
@@ -50,7 +49,7 @@
                         </select>
                     </div>
                     <div>
-                        <label>Kategori</label>
+                        <label class="mt-4 text-start">Kategori</label>
                         <select name="category_id" class="form-select" aria-label="Pilih kategori" required>
                             <option selected disabled>Pilih Kategori</option>
                             @foreach($categories as $category)
@@ -58,7 +57,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+                    <div class="mt-4 text-start" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
                                 <label for="img">Gambar</label>
                                 <input type="file" name="img" id="img" class="form-control" onchange="previewImage()" style="max-width: 300px;">
                                 <br>
@@ -68,7 +67,7 @@
                             </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="reset" class="btn btn-danger">Batal</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
                     </div>
                 </form>
 
