@@ -27,6 +27,7 @@ class ReviewController extends Controller
         Review::create([
             'buyer_id'   => auth()->id(),
             'order_id'   => $order->id,
+            'order_item_id' => $order->orderItems->firstWhere('product_id', $product->id)->id,
             'product_id' => $product->id,
             'rating'     => $request->rating,
             'comment'    => $request->comment,
@@ -41,5 +42,16 @@ class ReviewController extends Controller
         $review->delete();
 
         return back()->with('success', 'Ulasan berhasil dihapus.');
+    }
+
+    public function index()
+    {
+        $makanan = Product::where('seller_id', auth::id())->get();
+        return view('seller.Review.review', compact('makanan'));
+    }
+    public function showReview($id)
+    {
+        $product = Product::with('reviews')->findOrFail($id);
+        return view('seller.Review.reviewDetail', compact('product'));
     }
 }

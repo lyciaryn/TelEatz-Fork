@@ -16,29 +16,36 @@
                 @method('PUT')
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                     <div class="d-flex align-items-center">
-                        <img src="{{ asset('images/'.$makanan->img) }}" alt="{{ $makanan->nama_product }}" class="img-fluid me-4" style="max-width: 300px; height: auto; border-radius: 50px;">
-                        <div>
+                        @if ($makanan->img)
+                            <img src="{{ asset('images/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
+                                class="img-fluid me-4" style="max-width: 300px; height: auto; border-radius: 20px;">
+                            @else
+                                <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" style="height: 135px; border-radius: 16px;">
+                                    {{ $makanan->nama_product }}
+                                </div>
+                        @endif
+                        <div class="px-3">
                             <h1 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Edit Menu Makanan</h1>
                             <div>
-                                <label style="text-align: left;">Nama Makanan</label>
+                                <label class="mt-3" style="text-align: left;">Nama Makanan</label>
                                 <input type="text" class="form-control" size="1000" name="nama_product" value="{{ $makanan->nama_product }}" required>
                             </div>
                             <div>
-                                <label style="text-align: left;">Harga</label>
+                                <label class="mt-3" style="text-align: left;">Harga</label>
                                 <input type="text" class="form-control" size="1000" name="harga" value="{{ $makanan->harga }}" required>
                             </div>
                             <div>
-                                <label style="text-align: left;">Deskripsi</label>
+                                <label class="mt-3" style="text-align: left;">Deskripsi</label>
                                 <textarea type="text" class="form-control" size="1000" name="deskripsi" required>{{ $makanan->deskripsi }}</textarea>
                             </div>
                             <div>
-                                <label for="is_avaialable">Tersedia?</label>
-                                <select name="is_available" class="form-select" aria-label="Pilih kategori" required>
+                                <label class="mt-3" for="is_avaialable">Tersedia?</label>
+                                <select name="is_available" class="form-select mt-3" aria-label="Pilih kategori" required>
                                     <option selected disabled>Pilih Ketersediaan</option>
                                     <option value="1" {{ $makanan->is_available == 1 ? 'selected' : '' }}>Tersedia</option>
                                     <option value="0" {{ $makanan->is_available == 0 ? 'selected' : '' }}>Tidak Tersedia</option>
                                 </select>
-                            <div style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+                            <div class="mt-3" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
                                 <label for="img">Gambar</label>
                                 <input type="file" name="img" id="img" class="form-control" onchange="previewImage()" style="max-width: 300px;">
                                 <br>

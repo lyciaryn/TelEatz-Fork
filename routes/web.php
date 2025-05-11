@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\KelolaMakananController;
 use App\Http\Controllers\MakananController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\reviewController;
+use App\Http\Controllers\Transaction;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -11,7 +16,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardBuyerController;
 use App\Http\Controllers\DashboardSellerController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 // LOGIN
@@ -78,6 +82,8 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardSellerController::class, 'index'])->name('seller.dashboard');
+
+    //Kelola Makanan
     Route::get('/kelolamakanan', [KelolaMakananController::class, 'index'])->name('kelolamakanan');
     Route::get('/kelolamakanan/create', [KelolaMakananController::class, 'fetchcategory'])->name('kelolamakanan.create');
     Route::get('/kelolamakanan/{id}/edit', [KelolaMakananController::class, 'edit'])->name('kelolamakanan.edit');
@@ -85,6 +91,33 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
     route::get('/kelolamakanan/{id}/showdetail', [KelolaMakananController::class, 'showingdetail'])->name('kelolamakanan.showdetail');
     Route::post('/kelolamakanan', [KelolaMakananController::class, 'store'])->name('kelolamakanan.store');
     route::delete('/kelolamakanan/{id}', [KelolaMakananController::class, 'delete'])->name('kelolamakanan.softdelete');
+
+    // Pesanan & History
+    Route::get('/pesanan', [PesananController::class, 'indexPesanan'])->name('seller.pesanan');
+    Route::get('/pesanan/{id}', [PesananController::class, 'show'])->name('seller.pesanan.show');
+    Route::put('/pesanan/{id}/status', [PesananController::class, 'statusHandler'])->name('seller.pesanan.status');
+    Route::get('/history', [PesananController::class, 'index'])->name('seller.pesanan.history');
+
+    // Review
+    Route::get('/review', [ReviewController::class, 'index'])->name('seller.review');
+    Route::get('/review/{id}', [ReviewController::class, 'showReview'])->name('seller.review.show');
+
+    // Profile
+    Route::get('/profilseller', [ProfileController::class, 'index'])->name('seller.profile');
+    Route::put('/profilseller/{id}', [ProfileController::class, 'update'])->name('seller.profile.update');
+    Route::get('/profilseller/gantiPassword', [ProfileController::class, 'changePasswordIndex'])->name('seller.profile.changePassword');
+    Route::put('/seller/profile/{id}', [ProfileController::class, 'changePassword'])->name('seller.profile.changePassword.update');
+    route::get('/profilseller/gantiEmail', [ProfileController::class, 'changeEmailIndex'])->name('seller.profile.changeEmail');
+    Route::put('/profilseller/gantiEmail/{id}', [ProfileController::class, 'changeEmail'])->name('seller.profile.changeEmail.update');
+
+});
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
+    // Transaksi
+    Route::get('/transaksi', [Transaction::class, 'index'])->name('admin.transaction');
 });
 
 

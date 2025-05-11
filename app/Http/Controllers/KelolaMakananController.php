@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\KelolaMakanan;
+use App\Models\Product;
 use App\Models\Makanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ class KelolaMakananController extends Controller
 {
     public function index()
     {
-        $makanan = KelolaMakanan::where('seller_id', 2)->get();
+        $makanan = Product::where('seller_id', auth::id())->get();
         return view('seller.KelolaMakanan.KelolaMakanan_seller', compact('makanan'));
     }
 
@@ -25,11 +25,11 @@ class KelolaMakananController extends Controller
                 'deskripsi' => 'required',
                 'is_available' => 'required|boolean',
                 'category_id' => 'required|exists:categories,id',
-                'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'img' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            $makanan = new KelolaMakanan();
-            $makanan->seller_id = 2;
+            $makanan = new Product();
+            $makanan->seller_id = auth::id();
             $makanan->nama_product = $request->nama_product;
             $makanan->harga = $request->harga;
             $makanan->deskripsi = $request->deskripsi;
@@ -64,13 +64,13 @@ class KelolaMakananController extends Controller
 
     public function showingdetail($id)
     {
-        $makanan = KelolaMakanan::findOrFail($id);
+        $makanan = Product::findOrFail($id);
         return view('seller.KelolaMakanan.KelolaMakanan_showdetail', compact('makanan'));
     }
 
     public function edit($id)
     {
-        $makanan = KelolaMakanan::find($id);
+        $makanan = Product::find($id);
         return view('seller.KelolaMakanan.KelolaMakanan_edit', compact('makanan'));
     }
 
@@ -88,7 +88,7 @@ class KelolaMakananController extends Controller
             ]);
 
             // Temukan data berdasarkan ID
-            $makanan = KelolaMakanan::findOrFail($id);
+            $makanan = Product::findOrFail($id);
 
             // Update data
             $makanan->nama_product = $request->nama_product;
@@ -114,7 +114,7 @@ class KelolaMakananController extends Controller
     }
     public function delete($id)
     {
-        $makanan = KelolaMakanan::findOrFail($id);
+        $makanan = Product::findOrFail($id);
         $makanan->delete();
         return redirect()->back()->with('deletesuccess', 'Menu makanan berhasil dihapus');
     }
@@ -122,7 +122,7 @@ class KelolaMakananController extends Controller
     public function destroy($id)
     {
 
-        $makanan = KelolaMakanan::findOrFail($id);
+        $makanan = Product::findOrFail($id);
         $makanan->delete();
         return redirect()->back()->with('justsuccess', 'Item berhasil dihapus dari daftar menu.');
     }
