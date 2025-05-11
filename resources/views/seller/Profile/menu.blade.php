@@ -40,8 +40,9 @@
                                     <button type="submit" class="btn btn-primary w-50 mx-2 rounded-pill">Simpan</button>
                                     <button type="reset" class="btn btn-danger w-50 mx-2 rounded-pill">Reset</button>
                                 </div>
-                                <div class="d-flex justify-content-center align-items-center my-3">
+                                <div class="text-center d-flex justify-content-between my-2 mx-5">
                                     <a href="{{ route('seller.profile.changePassword') }}" class="btn btn-secondary w-50 mx-2 rounded-pill">Ganti Password</a>
+                                    <a href="{{ route('seller.profile.changeEmail') }}" class="btn btn-secondary w-50 mx-2 rounded-pill">Ganti Email</a>
                                 </div>
                             </div>
                         </div>

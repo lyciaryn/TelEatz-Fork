@@ -34,7 +34,7 @@
                         {{-- ========== BODY PESANAN ========== --}}
                         <div class="card-body p-2">
                             @php
-                                $items = $order->orderItems;
+                                $items = $order->order_items;
                                 $collapseId = 'orderCollapse' . $order->id;
                             @endphp
 
@@ -140,7 +140,7 @@
                 <div class="d-flex mt-3">
                     {{-- TOMBOL BATAL --}}
                     <h6 class="fw-bold text-danger mt-1 ms-auto">
-                        Total: Rp {{ number_format($order->total_harga, 0, ',', '.') }}
+                        Total: Rp {{ number_format($order->total_price, 0, ',', '.') }}
                     </h6>
                 </div>
 

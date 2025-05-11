@@ -18,7 +18,7 @@ class PesananController extends Controller
     {
         $pesanan = auth()->user()->receivedOrders()
         ->whereIn('status', ['diproses', 'pending'])
-        ->with('orderItems.product') // Eager load the product for each orderItem
+        ->with('orderItems.product')
         ->get();
 
         return view('seller.Pesanan.Pesanan_seller', compact('pesanan'));
@@ -28,7 +28,7 @@ class PesananController extends Controller
     {
         $pesanan = auth()->user()->orders()
         ->where('id', $id)
-        ->with('orderItems.product') // Eager load the product for each orderItem
+        ->with('orderItems.product')
         ->firstOrFail();
 
         return view('buyer.Pesanan.Pesanan_detail', compact('pesanan'));

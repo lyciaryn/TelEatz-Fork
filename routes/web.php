@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\KelolaMakananController;
 use App\Http\Controllers\MakananController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\reviewController;
 use App\Http\Controllers\Transaction;
@@ -15,7 +16,6 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardBuyerController;
 use App\Http\Controllers\DashboardSellerController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 // LOGIN
@@ -106,7 +106,9 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
     Route::get('/profilseller', [ProfileController::class, 'index'])->name('seller.profile');
     Route::put('/profilseller/{id}', [ProfileController::class, 'update'])->name('seller.profile.update');
     Route::get('/profilseller/gantiPassword', [ProfileController::class, 'changePasswordIndex'])->name('seller.profile.changePassword');
-    Route::put('/seller/profile/{id}', [ProfileController::class, 'changePassword'])->name('seller.profile.update');
+    Route::put('/seller/profile/{id}', [ProfileController::class, 'changePassword'])->name('seller.profile.changePassword.update');
+    route::get('/profilseller/gantiEmail', [ProfileController::class, 'changeEmailIndex'])->name('seller.profile.changeEmail');
+    Route::put('/profilseller/gantiEmail/{id}', [ProfileController::class, 'changeEmail'])->name('seller.profile.changeEmail.update');
 
 });
 

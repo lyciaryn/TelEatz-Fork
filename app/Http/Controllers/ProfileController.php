@@ -6,8 +6,12 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Makanan;
 use App\Models\User;
+
+use Carbon\Carbon;
+
 use Exception;
 use Hash;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Testing\Fluent\Concerns\Has;
@@ -59,12 +63,20 @@ class ProfileController extends Controller
                 $file->move(public_path('images'), $filename);
                 $profile->img = $filename;
             }
+            
+            $waktu_sekarang = Carbon::now();
+            if ($waktu_sekarang->between($request->close_time, $request->open_time))
+            {
+                $profile->is_open = 1; // buka
+            } else {
+                $profile->is_open = 0; // tutup
+            }
 
             $profile->save();
 
             return redirect()->route('seller.profile', ['id' => $profile->id])->with('success', 'Profil berhasil diperbarui');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Terjadi Kesalahan: ' . $e->getMessage());
         }
     }
     public function changePasswordIndex()
@@ -111,5 +123,41 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
 
+    }
+
+    public function changeEmailIndex()
+    {
+        // Temukan data berdasarkan ID
+        $profile = User::where('id', auth::id())->first();
+        return view('seller.Profile.changeEmail', compact('profile'));
+    }
+
+    public function changeEmail(Request $request, $id)
+    {
+        $profile = User::findOrFail($id);
+        try {
+            // Validasi input
+            $request->validate([
+                'newEmail' => 'required|email|max:255',
+                'password' => 'required'
+            ]);
+
+            // Temukan data berdasarkan ID
+            $profile = User::findOrFail($id);
+
+            
+            if (!Hash::check($request->password, $profile->password)) {
+                return redirect()->route('seller.profile.changeEmail')->with('error', 'Password lama tidak sesuai');
+            }
+            
+            // Update email
+            $profile->email = $request->newEmail;
+            $profile->save();
+
+            return redirect()->route('seller.profile.changeEmail')->with('success', 'Email berhasil diperbarui');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi Kesalahan: ' . $e->getMessage());
+        }
     }
 }
