@@ -85,6 +85,26 @@
                                             <div class="fw-bold small text-danger">
                                                 Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
                                             </div>
+
+                                            @if ($order->status === 'selesai')
+                                                {{-- Tombol ulasan per produk --}}
+                                                @php
+                                                    $productId = $item->product_id;
+                                                    $hasReviewed = \App\Models\Review::where('buyer_id', auth()->id())
+                                                        ->where('product_id', $productId)
+                                                        ->where('order_id', $order->id)
+                                                        ->exists();
+                                                @endphp
+
+                                                <a href="{{ $hasReviewed
+                                                    ? route('buyer.daftarmenu.show', $productId)
+                                                    : route('buyer.review.create', ['order' => $order->id, 'product' => $productId]) }}"
+                                                    class="btn btn-warning btn-sm mt-2 fw-bold" style="border-radius: 5px;">
+                                                    <i class='bx bxs-star p-0 m-0'></i>
+                                                    {{ $hasReviewed ? 'Lihat Penilaian' : 'Berikan Ulasan' }}
+                                                </a>
+                                            @endif
+
                                         </div>
 
                                         <div class="text-end">
@@ -131,8 +151,27 @@
                                             <div class="fw-bold small text-danger">
                                                 Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
                                             </div>
-                                        </div>
 
+                                            @if ($order->status === 'selesai')
+                                                {{-- Tombol ulasan per produk --}}
+                                                @php
+                                                    $productId = $item->product_id;
+                                                    $hasReviewed = \App\Models\Review::where('buyer_id', auth()->id())
+                                                        ->where('product_id', $productId)
+                                                        ->where('order_id', $order->id)
+                                                        ->exists();
+                                                @endphp
+
+                                                <a href="{{ $hasReviewed
+                                                    ? route('buyer.daftarmenu.show', $productId)
+                                                    : route('buyer.review.create', ['order' => $order->id, 'product' => $productId]) }}"
+                                                    class="btn btn-warning btn-sm mt-2 fw-bold" style="border-radius: 5px;">
+                                                    <i class='bx bxs-star p-0 m-0'></i>
+                                                    {{ $hasReviewed ? 'Lihat Penilaian' : 'Berikan Ulasan' }}
+                                                </a>
+                                            @endif
+
+                                        </div>
                                         <div class="text-end">
                                             <span class="text-dark opacity-50">{{ ucfirst($order->payment) }}</span><br>
                                             <span
@@ -140,6 +179,8 @@
                                         </div>
                                     </div>
                                 @endif
+
+
 
                                 @if ($i === $items->count() - 1 && $i > 0)
                         </div> {{-- ========== COLLAPSE END ========== --}}
@@ -189,27 +230,6 @@
                                 <i class='bx bxs-file-pdf fs-5 mt-1'></i>
                                 <p class="mt-1 fw-bold">Download Faktur</p>
                             </a>
-
-                            @php
-                                $productId = $order->order_items->first()->product_id;
-                                $hasReviewed = \App\Models\Review::where('buyer_id', auth()->id())
-                                    ->where('product_id', $productId)
-                                    ->where('order_id', $order->id)
-                                    ->exists();
-                            @endphp
-
-                            <a href="{{ $hasReviewed
-                                ? route('buyer.daftarmenu.show', $productId) // hanya productId saja
-                                : route('buyer.review.create', ['order' => $order->id, 'product' => $productId]) }}"
-                                class="btn btn-warning btn-sm d-flex gap-2 justify-content-center align-items-center">
-                                <i class='bx bxs-star'></i>
-                                <p class="mt-1 fw-bold">
-                                    {{ $hasReviewed ? 'Lihat Penilaian' : 'Berikan Ulasan' }}
-                                </p>
-                            </a>
-
-
-
 
                         </div>
                     @else
