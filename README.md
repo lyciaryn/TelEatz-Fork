@@ -1,3 +1,14 @@
+<h1>TUBES PAW KELOMPOK 1</h1>
+
+<p>Project TelEatz Telkom University</p>
+<ol>
+    <li>Vio Salman Kafiyan - 102042300167</li>
+    <li>Rayhan Arya Ardani - 102042330190</li>
+    <li>Junhaikal Syahwana - 102042300182</li>
+    <li>Nadya Maulida Rahmadien - 102042300181</li>
+</ol>
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
