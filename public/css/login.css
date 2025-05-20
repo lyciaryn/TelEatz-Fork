@@ -2,7 +2,7 @@
 
 
 :root{
-    --fblue: #0d95d9;
+    --fblue: #1092FE;
     --lblue: #4F709C;
     --dbluet: #4aa2d47b;
     --dblue: #2f80af;
@@ -33,17 +33,12 @@ H1{
 }
 
 body{
-    background: rgb(159,220,255);
-    background: -moz-linear-gradient(90deg, rgba(159,220,255,1) 0%, rgba(30,95,133,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(159,220,255,1) 0%, rgba(30,95,133,1) 100%);
-    background: linear-gradient(90deg, rgba(159,220,255,1) 0%, rgb(52, 140, 190) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#9fdcff",endColorstr="#1e5f85",GradientType=1);
+    background: #1092FE !important;
 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
 }
 
 
@@ -62,10 +57,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(178, 215, 236);
-    background: -moz-linear-gradient(90deg, rgb(154, 217, 254) 0%, rgba(30,95,133,1) 100%);
-    background: -webkit-linear-gradient(90deg, rgb(27, 66, 88) 0%, rgba(30,95,133,1) 100%);
-    background: linear-gradient(360deg, rgba(159,220,255,1) 0%, rgb(94, 173, 219) 100%);
+    background: #1092FE !important;
     width: 50%;
     height: 97%;
     margin: 0.6rem;

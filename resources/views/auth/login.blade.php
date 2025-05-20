@@ -21,12 +21,12 @@
     <div class="canvas-log animate__animated animate__fadeIn">
         <div class="left-sec">
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-            <dotlottie-player src="https://lottie.host/f590e3bb-fa83-4f0a-9bcd-ea506a5b4a91/pEQ48RBjDJ.lottie"
-                background="transparent" speed="1" style="width: 500px; height: 500px" loop autoplay
-                class="animate__animated animate__fadeInUp"></dotlottie-player>
+            <dotlottie-player src="https://lottie.host/4e2cd31d-1fac-42b1-8d94-84565c925c08/YAAGuE6FAB.lottie"
+                background="transparent" speed="1" style="width: 420px; height: 420px" loop
+                autoplay></dotlottie-player>
         </div>
         <div class="right-sec">
-            <h1 class="animate__animated animate__fadeInUp"><b>Login</b></h1>
+            <h1 style="color: #1092FE;" class="animate__animated animate__fadeInUp"><b>Login</b></h1>
             <p class="animate__animated animate__fadeInUp"><span style=" color: var(--fbluet); font-weight: bold;"
                     class="">Login</span> untuk masuk ke TelEats!
             </p>
@@ -56,6 +56,7 @@
                             Password</a>
                     </p>
                 </form>
+
             </div>
 
 

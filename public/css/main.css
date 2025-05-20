@@ -18,7 +18,7 @@
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+:root {
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
   --default-color: #222222; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #172a28; /* Color for headings, subheadings and title throughout the website */
@@ -38,6 +38,11 @@
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+ul{
+    list-style: none !important;
+}
+
 
 .light-background {
   --background-color: #f2f9f9;
@@ -75,15 +80,10 @@ body {
   font-family: var(--default-font);
 }
 
-a {
-  color: var(--accent-color);
-  text-decoration: none;
-  transition: 0.3s;
-}
+
 
 a:hover {
-  color: color-mix(in srgb, var(--accent-color), transparent 25%);
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 h1,
@@ -231,7 +231,7 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: #1081de;
+  --background-color: transparent;
   --heading-color: #ffffff;
   color: var(--default-color);
   transition: all 0.5s;
@@ -271,11 +271,6 @@ h6 {
   transition: 0.3s;
 }
 
-.header .topbar .contact-info i a:hover {
-  color: var(--contrast-color);
-  text-decoration: underline;
-}
-
 .header .topbar .social-links a {
   color: color-mix(in srgb, var(--contrast-color), transparent 40%);
   line-height: 0;
@@ -305,7 +300,7 @@ h6 {
   font-size: 30px;
   margin: 0;
   font-weight: 700;
-  color: var(--heading-color);
+  color: var(--contrast-color);
 }
 
 .header .logo span {
@@ -316,6 +311,7 @@ h6 {
 
 .scrolled .header {
   box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  background-color:  #1092FE;
 }
 
 /*--------------------------------------------------------------
@@ -331,7 +327,7 @@ h6 {
     margin: 0;
     padding: 0;
     display: flex;
-    list-style: none;
+    list-style: none !important;
     align-items: center;
   }
 
@@ -496,6 +492,7 @@ h6 {
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
+    list-style: none;
     transition: 0.3s;
   }
 
@@ -551,6 +548,11 @@ h6 {
     display: block;
     background-color: rgba(33, 37, 41, 0.03);
   }
+
+  .navmenu a {
+    text-decoration: none !important;
+}
+
 
   .mobile-nav-active {
     overflow: hidden;
@@ -986,7 +988,7 @@ section,
   padding: 60px 30px;
   position: relative;
   overflow: hidden;
-  background: var(--background-color);
+  background: var(--default-color);
   box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
@@ -1003,7 +1005,7 @@ section,
 }
 
 .hero .icon-box .title a {
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  color: color-mix(in srgb, var(--background-color), transparent 20%);
   transition: 0.3s;
 }
 
@@ -1014,7 +1016,7 @@ section,
   transition: all 0.3s ease-in-out;
   font-size: 48px;
   line-height: 1;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  color: color-mix(in srgb, var(--background-color), transparent 20%);
 }
 
 .hero .icon-box:hover {
