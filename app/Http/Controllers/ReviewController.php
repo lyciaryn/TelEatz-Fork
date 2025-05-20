@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
@@ -44,11 +45,23 @@ class ReviewController extends Controller
         return back()->with('success', 'Ulasan berhasil dihapus.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $makanan = Product::where('seller_id', auth::id())->get();
-        return view('seller.Review.review', compact('makanan'));
+        $makanan = Product::where('seller_id', auth::id());
+
+        // Filter search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $makanan->where(function ($q) use ($search) {
+                $q->where('nama_product', 'like', "%$search%");
+            });
+        }
+
+        $makanan = $makanan->get();
+        $categories = Category::all(); // ambil semua kategori dari DB
+        return view('seller.Review.review', compact('makanan', 'categories'));
     }
+
     public function showReview($id)
     {
         $product = Product::with('reviews')->findOrFail($id);

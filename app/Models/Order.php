@@ -43,4 +43,9 @@ class Order extends Model
     {
         return $this->hasOne(Review::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

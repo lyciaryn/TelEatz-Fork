@@ -12,7 +12,7 @@
             </div>
             
             <div class="col-lg-9 d-flex flex-column gap-3">
-                <x-header title="Pesanan Saya" />
+                <x-header title="Ulasan Untuk {{$product->nama_product}}" />
                 <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')], ['label' => 'Ulasan', 'url' => route('seller.review')], ['label'=>'Detail Ulasan']]" />
                 
                 {{-- ================== PESANAN LOOP ================== --}}
@@ -21,7 +21,7 @@
                     <div class="card-header bg-white d-flex align-items-center justify-content-between">
                         <div>
                         <strong>
-                            {{ ucwords(strtolower($product->nama_product)) ?? 'Tidak Diketahui'}}
+                            {{ ucwords(strtolower(string: $product->nama_product)) ?? 'Tidak Diketahui'}}
                         </strong>
                         <br>
                         <br>

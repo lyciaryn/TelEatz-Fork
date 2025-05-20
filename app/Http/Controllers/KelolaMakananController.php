@@ -10,10 +10,32 @@ use Illuminate\Support\Facades\Auth;
 
 class KelolaMakananController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $makanan = Product::where('seller_id', auth::id())->get();
-        return view('seller.KelolaMakanan.KelolaMakanan_seller', compact('makanan'));
+        $makanan = Product::where('seller_id', auth::id());
+
+                // Filter search
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $makanan->where(function ($q) use ($search) {
+                $q->where('nama_product', 'like', "%$search%")
+                    ->orWhereHas('user', function ($q2) use ($search) {
+                        $q2->where('name', 'like', "%$search%");
+                    });
+            });
+        }
+
+        // Filter kategori
+        if ($request->filled('category')) {
+            $makanan->whereHas('category', function ($q) use ($request) {
+                $q->where('nama_kategori', $request->category);
+            });
+        }
+
+        $makanan = $makanan->get();
+        $categories = Category::all(); // ambil semua kategori dari DB
+        
+        return view('seller.KelolaMakanan.KelolaMakanan_seller', compact('makanan', 'categories'));
     }
 
     public function store(Request $request)
