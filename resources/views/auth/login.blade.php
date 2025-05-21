@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous"> -->
 
     <script src="https://kit.fontawesome.com/e51a3b91d6.js" crossorigin="anonymous"></script>
 </head>
@@ -21,12 +19,12 @@
     <div class="canvas-log animate__animated animate__fadeIn">
         <div class="left-sec">
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-            <dotlottie-player src="https://lottie.host/f590e3bb-fa83-4f0a-9bcd-ea506a5b4a91/pEQ48RBjDJ.lottie"
-                background="transparent" speed="1" style="width: 500px; height: 500px" loop autoplay
-                class="animate__animated animate__fadeInUp"></dotlottie-player>
+            <dotlottie-player src="https://lottie.host/4e2cd31d-1fac-42b1-8d94-84565c925c08/YAAGuE6FAB.lottie"
+                background="transparent" speed="1" style="width: 420px; height: 420px" loop
+                autoplay></dotlottie-player>
         </div>
         <div class="right-sec">
-            <h1 class="animate__animated animate__fadeInUp"><b>Login</b></h1>
+            <h1 style="color: #1092FE;" class="animate__animated animate__fadeInUp"><b>Login</b></h1>
             <p class="animate__animated animate__fadeInUp"><span style=" color: var(--fbluet); font-weight: bold;"
                     class="">Login</span> untuk masuk ke TelEats!
             </p>
@@ -56,9 +54,21 @@
                             Password</a>
                     </p>
                 </form>
+
             </div>
 
 
+
+            <a href="{{ route('buyer.landing') }}"
+                style="position: fixed; bottom: 20px; left: 20px;
+                   background-color: #1092FE; color: white;
+                   padding: 8px 12px; border-radius: 8px;
+                   font-size: 14px; text-decoration: none;
+                   display: flex; align-items: center;
+                   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+                   z-index: 999;">
+                <i class='bx bx-arrow-back' style="font-size: 18px; margin-right: 6px;"></i> Kembali
+            </a>
 
         </div>
     </div>

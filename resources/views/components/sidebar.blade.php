@@ -1,10 +1,9 @@
 <div class="card-nav card mb-3 animate_animated animate_fadeInUp">
     <div class="card-body nav-dash d-flex flex-column text-decoration-none gap-3 ">
         <div class=" nav-2 sidebar-profile d-flex justify-content-start align-items-center py-3  px-3">
-            @if (Auth::check() && Auth::user()->profile_picture)
-                <img class="rounded-circle img-thumbnail shadow-lg"
-                    src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}" alt="Profil"
-                    width="50">
+            @if (Auth::check() && Auth::user()->img)
+                <img src="{{ asset('images/' . Auth::user()->img) }}" alt="Profil"
+                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
             @else
                 <div class="rounded-circle img-thumbnail shadow-lg"
                     style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; background-color: #369a74;">
@@ -13,6 +12,8 @@
                     </span>
                 </div>
             @endif
+
+
             <div class="nav-link ms-3" href="">
                 <p id="username-sidebar" style="font-size: 17px;" class="fw-bold text-light text-capitalize">
                     {{ Auth::user()->name }}</p>
@@ -26,15 +27,15 @@
             <p style="font-size: 14px;">Home</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.daftarmenu.index') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bx-bowl-rice'></i>
             <p style="font-size: 14px;">Daftar Menu</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.keranjang.index') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bx-cart-alt'></i>
             <p style="font-size: 14px;">Keranjang</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.pesanan.index') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bx-notepad'></i>
             <p style="font-size: 14px;">Pesanan</p>
         </a>
         <div class="border-top"></div>
@@ -44,7 +45,8 @@
         {{-- <a class="nav-link d-flex align-items-center gap-2" href="/historipesanan"><i class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Histori Pesanan</p>
         </a> --}}
-        <a class="nav-link d-flex align-items-center gap-2" href="/profil"><i class='bx bx-home-alt me-2'></i>
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.profile.profile_buyer') }}"><i
+                class='bx bx-user'></i>
             <p style="font-size: 14px;">Profil Saya</p>
         </a>
         <div class="border-top"></div>

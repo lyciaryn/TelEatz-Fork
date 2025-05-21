@@ -12,6 +12,81 @@
                 <x-header title="Pesanan Saya" />
                 <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')], ['label' => 'Pesanan Saya']]" />
 
+                <div class="card p-3 mb-4 shadow-sm">
+                    <form method="GET" action="{{ route('seller.pesanan') }}">
+                        <div class="row align-items-end mb-4 g-2">
+                            {{-- Select Filter --}}
+                            <div class="col-12 col-md-3">
+                                <label for="status" class="form-label" style="font-size: 14px;">Status</label>
+                                <select name="status" id="status" class="form-select"
+                                    style="font-size: 14px; background-color: #fcfeff;">
+                                    <option value="">Semua Status</option>
+                                    @foreach ($allStatus as $status)
+                                        <option value="{{ $status }}"
+                                            {{ request('status') == $status ? 'selected' : '' }}>
+                                            {{ ucfirst($status) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <label for="dine_option" class="form-label" style="font-size: 14px;">Dine Options</label>
+                                <select name="dine_option" id="dine_option" class="form-select"
+                                    style="font-size: 14px; background-color: #fcfeff;">
+                                    <option value="">Dine Options</option>
+                                    @foreach ($allDineOptions as $dine_option)
+                                        <option value="{{ $dine_option }}"
+                                            {{ request('dine_option') == $dine_option ? 'selected' : '' }}>
+                                            {{ ucfirst($dine_option) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <label for="status" class="form-label" style="font-size: 14px;">Pembayaran</label>
+                                <select name="payment" id="payment" class="form-select"
+                                    style="font-size: 14px; background-color: #fcfeff;">
+                                    <option value="">Pembayaran</option>
+                                    @foreach ($allPayment as $payment)
+                                        <option value="{{ $payment }}"
+                                            {{ request('payment') == $payment ? 'selected' : '' }}>
+                                            {{ ucfirst($payment) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <label for="ordering" class="form-label" style="font-size: 14px;">Urutan</label>
+                                <select name="ordering" id="ordering" class="form-select" style="font-size: 14px; background-color: #fcfeff;">
+                                    <option value="desc" {{ request('ordering') == 'desc' ? 'selected' : '' }}>Terbaru</option>
+                                    <option value="asc" {{ request('ordering') == 'asc' ? 'selected' : '' }}>Terlama</option>
+                                </select>
+                            </div>
+                            {{-- Input Search --}}
+                            <div class="col-12 col-md-4">
+                                <label for="search" class="form-label" style="font-size: 14px; background-color: #fcfeff;">Cari Menu</label>
+                                <div class="d-flex justify-content-end">
+
+                                    <input type="text" name="search" id="search" class="form-control"
+                                    placeholder="🔍   Cari nama menu"
+                                    value="{{ request('search') }}">
+                                </div>
+                            </div>
+                            
+                            {{-- Tombol Search --}}
+                            <div class="col-12 col-md-2 d-grid">
+                                <button type="submit" name="search_button" value="1"
+                                class="btn btn-primary d-flex justify-content-center align-items-center"
+                                style="border-radius: 8px !important; box-shadow:none !important">
+                                <i class='bx bx-search me-1'></i>
+                                <span style="font-size: 14px;">Search</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                
                 {{-- ================== PESANAN LOOP ================== --}}
                 @forelse($pesanan as $order)
                     <div class="card mb-3 p-3">
@@ -75,11 +150,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">Review:</div>
-                                    <div class="text-dark mt-1 opacity-50 ps-3">
-                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }} <hr>
-                                    </div>
-
                                 @elseif ($i === 1)
                                     {{-- ========== COLLAPSE START ========== --}}
                                     <div class="collapse mt-2" id="{{ $collapseId }}">
@@ -116,10 +186,6 @@
                                             <span
                                                 class="text-dark mt-1 opacity-50">{{ ucfirst($order->dine_option) }}</span>
                                         </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">Review:</div>
-                                    <div class="text-dark mt-1 opacity-50 ps-3">
-                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }} <hr>
                                     </div>
                                 @endif
 

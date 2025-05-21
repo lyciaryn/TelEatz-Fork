@@ -11,7 +11,55 @@
                 <x-header title="Kelola Makanan" />
                 <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')], ['label' => 'Kelola Makanan']]" />
                 <div><a href="{{ route('kelolamakanan.create') }}" class="btn btn-primary w-100">Tambah Makanan</a></div>
+                
+                <div class="card p-3 mb-4 shadow-sm">
+                    <form method="GET" action="{{ route('kelolamakanan') }}">
+                        <div class="row align-items-end mb-4 g-2">
+                            {{-- Input Search --}}
+                            <div class="col-12 col-md-4">
+                                <label for="search" class="form-label" style="font-size: 14px;">Cari Menu</label>
+                                <input type="text" name="search" id="search" class="form-control"
+                                    placeholder="🔍   Cari nama menu atau toko..." value="{{ request('search') }}"
+                                    style="font-size: 14px;">
+                            </div>
 
+                            {{-- Tombol Search --}}
+                            <div class="col-12 col-md-2 d-grid">
+                                <button type="submit" name="search_button" value="1"
+                                    class="btn btn-primary d-flex justify-content-center align-items-center"
+                                    style="border-radius: 8px !important; box-shadow:none !important">
+                                    <i class='bx bx-search me-1'></i>
+                                    <span style="font-size: 14px;">Search</span>
+                                </button>
+                            </div>
+
+                            {{-- Select Filter --}}
+                            <div class="col-12 col-md-4">
+                                <label for="category" class="form-label" style="font-size: 14px;">Kategori</label>
+                                <select name="category" id="category" class="form-select"
+                                    style="font-size: 14px; background-color: #fcfeff;">
+                                    <option value="">Semua Kategori</option>
+                                    @foreach ($categories as $cat)
+                                        <option value="{{ $cat->nama_kategori }}"
+                                            {{ request('category') == $cat->nama_kategori ? 'selected' : '' }}>
+                                            {{ $cat->nama_kategori }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            {{-- Tombol Filter --}}
+                            <div class="col-12 col-md-2 d-grid">
+                                <button type="submit" name="filter_button" value="1"
+                                    class="btn btn-success d-flex justify-content-center align-items-center">
+                                    <i class='bx bx-filter-alt me-1'></i>
+                                    <span style="font-size: 14px;">Filter</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
                 <!-- Check jika ada data makanan -->
                 @if ($makanan->isEmpty())
                     <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">

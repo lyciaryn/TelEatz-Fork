@@ -43,17 +43,31 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            // Redirect berdasarkan role
             $user = Auth::user();
-            if ($user->role === 'buyer') {
-                return redirect()->route('buyer.dashboard')->with('justsuccess', 'Kamu berhasil login!');
-            } else if ($user->role === 'seller') {
-                return redirect()->route('seller.dashboard')->with('justsuccess', 'Kamu berhasil login!');
+
+            // Cek apakah email sudah diverifikasi
+            if (is_null($user->email_verified_at)) {
+                Auth::logout(); // logout user jika belum verifikasi
+                return back()->with('error', 'Email kamu belum terverifikasi!');
+            }
+
+            // Redirect berdasarkan role
+            switch ($user->role) {
+                case 'buyer':
+                    return redirect()->route('buyer.dashboard')->with('justsuccess', 'Kamu berhasil login!');
+                case 'seller':
+                    return redirect()->route('seller.dashboard')->with('justsuccess', 'Kamu berhasil login!');
+                case 'admin':
+                    return redirect()->route('admin.dashboard')->with('justsuccess', 'Selamat datang, Admin!');
+                default:
+                    Auth::logout(); // jika role tidak dikenali
+                    return back()->with('error', 'Akun kamu tidak memiliki akses.');
             }
         }
 
         return back()->with('error', 'Email atau password salah!');
     }
+
 
     public function logout(Request $request)
     {

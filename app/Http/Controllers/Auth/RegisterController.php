@@ -17,19 +17,24 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:5', 'confirmed'],
-            'role' => ['required', 'in:buyer,seller'], 
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:5|confirmed',
+            'role' => 'required|in:buyer,seller',
         ]);
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'role' => $validated['role'],
-            'email_verified_at' => $validated['role'] === 'buyer' ? now() : null,
-        ]);
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = Hash::make($validated['password']);
+        $user->role = $validated['role'];
+
+        // Atur email_verified_at kalau buyer
+        if ($validated['role'] === 'buyer') {
+            $user->email_verified_at = now();
+        }
+
+        $user->save();
 
         return redirect('/login')->with('success', 'Registrasi berhasil, silakan login!');
     }
