@@ -15,7 +15,7 @@
     --bgThird: rgb(47, 53, 75)46 ;
     --glowBlue: var(--fblue) 0px 1px 30px, rgba(0, 0, 0, 0) 0px 0px 0px;
     --glowBlue2: var(--fblue) 0px 1px 10px, rgba(0, 0, 0, 0) 0px 0px 0px;
-    --glowDark: #00000029 0px 1px 30px, rgba(0, 0, 0, 0) 0px 0px 0px;
+    --glowDark: #00000019 0px 1px 30px, rgba(0, 0, 0, 0) 0px 0px 0px;
     --glowWhite: #949494 0px 1px 30px, rgba(0, 0, 0, 0) 0px 0px 0px;
     --glowRed: #ff2a2a 0px 1px 30px, rgba(0, 0, 0, 0) 0px 0px 0px;
 }
@@ -32,8 +32,12 @@ H1{
     margin: 0;
 }
 
+a{
+    text-decoration: none !important;
+}
+
 body{
-    background: #1092FE !important;
+    background: #eef6fd !important;
 
     display: flex;
     justify-content: center;
@@ -48,9 +52,10 @@ body{
     justify-content: center;
     align-items: center;
     border-radius: 25px;
-    width: 800px;
-    height: 700px;
+    width: 900px;
+    height: 600px;
     background-color: var(--blueish);
+    box-shadow: var(--glowDark);
 }
 
 .left-sec{

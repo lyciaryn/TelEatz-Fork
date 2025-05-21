@@ -11,7 +11,8 @@ class ProductController extends Controller
     // menampilkan semua produk
     public function index(Request $request)
     {
-        $query = Product::with('user', 'category');
+        $query = Product::with('user', 'category')
+            ->where('is_available', true); // hanya yang tersedia
 
         // Filter search
         if ($request->filled('search')) {

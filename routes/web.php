@@ -5,6 +5,7 @@ use App\Http\Controllers\KelolaMakananController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileBuyerController;
 use App\Http\Controllers\reviewController;
 use App\Http\Controllers\Transaction;
 use Illuminate\Support\Facades\Route;
@@ -18,14 +19,17 @@ use App\Http\Controllers\DashboardSellerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-// LOGIN
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+
 Route::get('/', function () {
     return view('landing');
-});
+})->name('buyer.landing');
 
 Route::get('/landing', function () {
-    return view('landing');
+    return redirect()->route('buyer.landing');
 });
+
 
 
 
@@ -75,6 +79,14 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     // Simpan ulasan
     Route::post('/ulasan/{order}/{product}', [ReviewController::class, 'store'])->name('buyer.review.store');
     Route::delete('/ulasan/{id}', [ReviewController::class, 'destroy'])->name('buyer.review.destroy');
+
+    Route::get('/buyer/profile', [ProfileBuyerController::class, 'index'])->name('buyer.profile.menu');
+    Route::get('/buyerseller', [ProfileBuyerController::class, 'index'])->name('buyer.profile.profile_buyer');
+    Route::put('/buyerseller/{id}', [ProfileBuyerController::class, 'update'])->name('buyer.profile.update');
+    Route::get('/buyerseller/gantiPassword', [ProfileBuyerController::class, 'changePasswordIndex'])->name('buyer.profile.changePassword');
+    Route::put('/buyer/profile/{id}', [ProfileBuyerController::class, 'changePassword'])->name('buyer.profile.changePassword.update');
+    route::get('/buyerseller/gantiEmail', [ProfileBuyerController::class, 'changeEmailIndex'])->name('buyer.profile.changeEmail');
+    Route::put('/buyerseller/gantiEmail/{id}', [ProfileBuyerController::class, 'changeEmail'])->name('buyer.profile.changeEmail.update');
 });
 
 
@@ -109,12 +121,14 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
     Route::put('/seller/profile/{id}', [ProfileController::class, 'changePassword'])->name('seller.profile.changePassword.update');
     route::get('/profilseller/gantiEmail', [ProfileController::class, 'changeEmailIndex'])->name('seller.profile.changeEmail');
     Route::put('/profilseller/gantiEmail/{id}', [ProfileController::class, 'changeEmail'])->name('seller.profile.changeEmail.update');
-
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolauser.index');
+    Route::get('/category', [CategoryController::class, 'index'])->name('admin.kategori.index');
+
 
     // Transaksi
     Route::get('/transaksi', [Transaction::class, 'index'])->name('admin.transaction');

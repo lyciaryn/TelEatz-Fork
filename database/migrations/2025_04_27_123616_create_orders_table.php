@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->foreignId('buyer_id')->references('id')->on('users');
             $table->foreignId('seller_id')->references('id')->on('users');
-            $table->integer('total_harga');
+            $table->integer('total_price');
             $table->enum('status', ['pending', 'diproses', 'selesai', 'dibatalkan']);
             $table->enum('dine_option', ['dine-in', 'takeaway']);
             $table->enum('payment', ['qris', 'cash']);
+            $table->timestamp('estimated_ready_at')->nullable();
             $table->timestamps();
         });
     }

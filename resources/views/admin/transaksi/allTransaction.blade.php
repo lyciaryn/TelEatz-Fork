@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-lg-9 d-flex flex-column gap-3">
-                <x-header title="Pesanan Saya" />
+                <x-header title="Daftar Transaksi" />
                 <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')], ['label' => 'History']]" />
 
                 {{-- ================== PESANAN LOOP ================== --}}
@@ -18,11 +18,11 @@
                         {{-- ========== HEADER PESANAN ========== --}}
                         <div class="card-header bg-white d-flex align-items-center justify-content-between">
                             <div>
-                            <strong>
-                                qq
-                            </strong>
-                            <br>
-                            <br>
+                                <strong>
+                                    qq
+                                </strong>
+                                <br>
+                                <br>
                                 <small class="text-muted"><b>Id Pesanan: {{ $order->id }}</b></small><br>
                                 <small class="text-muted">Tanggal: {{ $order->created_at }}</small>
                             </div>
@@ -75,11 +75,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">Review:</div>
+                                    <div
+                                        class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">
+                                        Review:</div>
                                     <div class="text-dark mt-1 opacity-50 ps-3">
-                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }} <hr>
+                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }}
+                                        <hr>
                                     </div>
-
                                 @elseif ($i === 1)
                                     {{-- ========== COLLAPSE START ========== --}}
                                     <div class="collapse mt-2" id="{{ $collapseId }}">
@@ -117,9 +119,12 @@
                                                 class="text-dark mt-1 opacity-50">{{ ucfirst($order->dine_option) }}</span>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">Review:</div>
+                                    <div
+                                        class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">
+                                        Review:</div>
                                     <div class="text-dark mt-1 opacity-50 ps-3">
-                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }} <hr>
+                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }}
+                                        <hr>
                                     </div>
                                 @endif
 
@@ -127,7 +132,7 @@
                         </div> {{-- ========== COLLAPSE END ========== --}}
                 @endif
                 @endforeach
-                
+
 
                 {{-- ========== ESTIMASI & TOTAL ========== --}}
                 <div class="text-start">
@@ -144,16 +149,16 @@
                     </h6>
                 </div>
 
-                 <div class="text-center mt-2">
+                <div class="text-center mt-2">
                     @php
                         $items = $order->orderItems;
                         $reviewCollapseId = 'orderCollapse' . $order->id;
                     @endphp
                     @if ($items->count() > 1)
                         <div class="text-center mt-2">
-                            <button class="btn btn-sm text-secondary" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}"
-                                aria-expanded="false" aria-controls="{{ $collapseId }}">
+                            <button class="btn btn-sm text-secondary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#{{ $collapseId }}" aria-expanded="false"
+                                aria-controls="{{ $collapseId }}">
                                 Tampilkan menu lainnya ▼
                             </button>
                         </div>
@@ -166,7 +171,8 @@
             <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                 <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
                 <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Histori Pesanan</h2>
-                <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum menyelesaikan pesanan</small>
+                <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum menyelesaikan
+                    pesanan</small>
             </div>
         </div>
         @endforelse
