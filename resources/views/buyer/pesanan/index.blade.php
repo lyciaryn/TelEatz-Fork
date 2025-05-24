@@ -85,7 +85,9 @@
                                             <div class="fw-bold small text-danger">
                                                 Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
                                             </div>
-
+                                            <div class="text-secondary small">
+                                                📝 {{ $item->notes }}
+                                            </div>
                                             @if ($order->status === 'selesai')
                                                 {{-- Tombol ulasan per produk --}}
                                                 @php
@@ -151,7 +153,9 @@
                                             <div class="fw-bold small text-danger">
                                                 Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
                                             </div>
-
+                                            <div class="text-secondary small">
+                                                📝 {{ $item->notes }}
+                                            </div>
                                             @if ($order->status === 'selesai')
                                                 {{-- Tombol ulasan per produk --}}
                                                 @php
@@ -245,7 +249,15 @@
             </div>
         </div>
     @empty
-        <p class="text-muted">Tidak ada pesanan ditemukan.</p>
+        {{-- Tampilkan jika tidak ada item dalam keranjang --}}
+        <div class="card text-center animate_animated animate_fadeInUp" style="border-radius: 50px;">
+            <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
+                <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200" alt="">
+                <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Pesanan</h2>
+                <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum pesan apa-apa
+                    🤔​​</small>
+            </div>
+        </div>
         @endforelse
         {{-- ================== END PESANAN LOOP ================== --}}
     </div>

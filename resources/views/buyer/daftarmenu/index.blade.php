@@ -65,7 +65,7 @@
 
                     <div class="row g-2 mt-2"> <!-- g-0 = no gutter -->
 
-                        @foreach ($products as $product)
+                        @forelse ($products as $product)
                             <div class="col-6 col-md-3">
                                 <div class="card border border-1 border-light rounded-3 shadow-sm">
                                     @if ($product->img)
@@ -128,7 +128,19 @@
                                 </div>
 
                             </div>
-                        @endforeach
+                        @empty
+                            {{-- Tampilkan jika tidak ada item dalam keranjang --}}
+                            <div class="card text-center animate_animated animate_fadeInUp" style="border-radius: 50px;">
+                                <div
+                                    class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
+                                    <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200"
+                                        alt="">
+                                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Daftar Menu</h2>
+                                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Maaf ya, makanan sedang
+                                        tidak tersedia 😭​</small>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 {{-- PEMBUNGKUS CONTENT --}}

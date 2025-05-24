@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreignId('product_id')->references('id')->on('products');
+            $table->text('notes')->nullable();
             $table->integer('quantity');
             $table->integer('price');
             $table->timestamps();

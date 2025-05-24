@@ -46,7 +46,7 @@
 
                 <div class="row">
                     <div class="col-lg-8 order-2 order-lg-1">
-                        @foreach ($groupedCartItems as $sellerId => $items)
+                        @forelse ($groupedCartItems as $sellerId => $items)
                             @php
                                 // Asumsikan salah satu item dari seller tersebut
                                 $firstItem = $items->first();
@@ -72,6 +72,7 @@
                                     @foreach ($items as $item)
                                         @php
                                             $subtotal = $item->product->harga * $item->quantity;
+                                            $notes = $item->notes;
                                             $totalPrice += $subtotal;
                                         @endphp
                                         <div
@@ -102,19 +103,30 @@
                                                         <span class="badge bg-danger ms-2">Produk Tidak Tersedia</span>
                                                     @endif
                                                 </div>
+
+
                                                 <div class="text-muted small">Rp
                                                     {{ number_format($item->product->harga, 0, ',', '.') }}</div>
                                                 <div class="fw-bold small text-danger">
                                                     Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
+
                                                 </div>
+
+
+
                                             </div>
+
 
                                             <div class="d-flex align-items-center gap-2" style="min-width: 140px;">
                                                 @if (!$productUnavailable)
                                                     <form action="{{ route('buyer.keranjang.update', $item->id) }}"
-                                                        method="POST" class="d-flex">
+                                                        method="POST" class="d-flex align-items-center gap-2 mb-2">
                                                         @csrf
                                                         @method('PUT')
+
+                                                        <textarea class="form-control form-control-sm" name="notes" id="notes_{{ $item->id }}" placeholder="Catatan: ..."
+                                                            rows="1" style="resize: none; overflow: hidden;" onchange="this.form.submit()">{{ $item->notes }}</textarea>
+
                                                         <input type="number" name="quantity" min="1"
                                                             value="{{ $item->quantity }}"
                                                             class="form-control form-control-sm" style="width: 70px;"
@@ -136,12 +148,29 @@
                                                         <i class='bx bxs-trash'></i>
                                                     </button>
                                                 </form>
+
                                             </div>
+
+                                        </div>
+                                        <div class="mt-2 p-0">
+
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            {{-- Tampilkan jika tidak ada item dalam keranjang --}}
+                            <div class="card text-center animate_animated animate_fadeInUp" style="border-radius: 50px;">
+                                <div
+                                    class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
+                                    <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200"
+                                        alt="">
+                                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Keranjang</h2>
+                                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Sepertinya kamu belum
+                                        menambahkan produk apapun ke keranjang nih 🔥​</small>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
 
                     <div class="col-lg-4 order-1 order-lg-2 mb-3 ringkasan-belanja">

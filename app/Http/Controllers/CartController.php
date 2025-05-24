@@ -93,28 +93,26 @@ class CartController extends Controller
         try {
             $request->validate([
                 'quantity' => 'required|integer|min:1',
+                'notes' => 'nullable|string|max:255',
             ]);
 
-            // Ambil item berdasarkan ID dan pastikan milik buyer yang login
             $item = CartItem::where('id', $id)
                 ->whereHas('cart', function ($query) {
                     $query->where('buyer_id', auth()->id());
                 })
                 ->firstOrFail();
 
-            // Ambil harga per item dari relasi produk
-            $hargaPerItem = $item->product->harga ?? 0;
-
-            // Update quantity dan harga total
             $item->quantity = $request->quantity;
-            $item->harga = $hargaPerItem * $request->quantity;
+            $item->notes = $request->notes; // simpan catatan
+            $item->harga = $item->product->harga * $request->quantity;
             $item->save();
 
-            return redirect()->back()->with('justsuccess', 'Jumlah keranjang berhasil diperbarui');
+            return redirect()->back()->with('justsuccess', 'Keranjang diperbarui!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
 
 
 

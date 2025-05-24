@@ -94,7 +94,8 @@ class OrderController extends Controller
                     'product_id' => $product->id,
                     'quantity' => $item->quantity,
                     'price' => $harga, // satuan
-                ]);
+                    'notes' => $item->notes
+                ]); 
             }
 
             // update total_price setelah loop
