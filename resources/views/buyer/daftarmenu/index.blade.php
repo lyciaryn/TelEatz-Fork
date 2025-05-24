@@ -90,26 +90,40 @@
 
                                             <h6 class="card-title"><b>{{ $product->nama_product }}</b></h6>
                                         </a>
-                                        <p class="text-secondary mb-2 fw-bold opacity-75" style="font-size: 11px;">Kedai
+                                        <p class="text-secondary fw-bold opacity-75" style="font-size: 11px;">Kedai
                                             {{ $product->user?->name ?? '-' }} 🏪</p>
+                                        <p class="mb-2">
+                                            @if ($product->user)
+                                                <span
+                                                    class="badge {{ $product->user?->is_open ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $product->user?->is_open ? 'Open' : 'Tutup' }}
+                                                </span>
+                                            @else
+                                                <span class="badge bg-secondary">Status Tidak Diketahui</span>
+                                            @endif
+                                        </p>
                                         </p>
                                         <p>{{ Str::limit($product->deskripsi, 36) }}</p>
                                         <h6 class="card-text fw-bold mt-1 mb-2 text-danger mt-2 mb-2">Rp
                                             {{ number_format($product->harga, 0, ',', '.') }}</h6>
-
-                                        <div class=" cart-section d-flex align-items-center justify-content-end">
+                                        <div class="cart-section d-flex align-items-center justify-content-end">
                                             <form action="{{ route('buyer.keranjang.store') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                 <div class="addtocart d-flex gap-2 align-items-center justify-content-end">
                                                     <input type="number" name="quantity" value="1" min="1"
-                                                        class="form-control" style="width: 65px;">
-                                                    <button type="submit" class="btn btn-warning">
+                                                        class="form-control" style="width: 65px;"
+                                                        {{ $product->user?->is_open ? '' : 'disabled' }}>
+
+                                                    <button type="submit" class="btn btn-warning"
+                                                        {{ $product->user?->is_open ? '' : 'disabled' }}
+                                                        title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
                                                         <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
                                                     </button>
                                                 </div>
                                             </form>
                                         </div>
+
                                     </div>
                                 </div>
 

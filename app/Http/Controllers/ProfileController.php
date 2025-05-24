@@ -63,7 +63,7 @@ class ProfileController extends Controller
                 $file->move(public_path('images'), $filename);
                 $profile->img = $filename;
             }
-            
+
             $waktu_sekarang = Carbon::now();
             if ($waktu_sekarang->between($request->close_time, $request->open_time))
             {
@@ -97,7 +97,7 @@ class ProfileController extends Controller
             // Validasi input
             $request->validate([
                 'oldPassword' => 'required',
-                'newPassword' => 'required|min:8|confirmed',
+                'newPassword' => 'required|min:5|confirmed',
             ]);
 
             // Ambil data user berdasarkan ID
@@ -145,11 +145,11 @@ class ProfileController extends Controller
             // Temukan data berdasarkan ID
             $profile = User::findOrFail($id);
 
-            
+
             if (!Hash::check($request->password, $profile->password)) {
                 return redirect()->route('seller.profile.changeEmail')->with('error', 'Password lama tidak sesuai');
             }
-            
+
             // Update email
             $profile->email = $request->newEmail;
             $profile->save();
