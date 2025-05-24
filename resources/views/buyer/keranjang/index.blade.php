@@ -47,15 +47,27 @@
                 <div class="row">
                     <div class="col-lg-8 order-2 order-lg-1">
                         @foreach ($groupedCartItems as $sellerId => $items)
+                            @php
+                                // Asumsikan salah satu item dari seller tersebut
+                                $firstItem = $items->first();
+                                $productUnavailable =
+                                    $firstItem->product->user->deleted_at !== null ||
+                                    !$firstItem->product->is_available ||
+                                    !$firstItem->product->user->is_open;
+                            @endphp
+
                             <div class="card mb-3 p-3">
                                 <div class="card-header bg-white d-flex align-items-center justify-content-between">
                                     <div>
                                         <strong>🏪 Kedai
-                                            {{ $items->first()->product->user->name ?? 'Unknown Seller' }}</strong>
+                                            {{ $firstItem->product->user->name ?? 'Unknown Seller' }}</strong>
                                     </div>
-                                    <span class="text-success fw-bold">Ready To Buy</span>
+                                    @if ($productUnavailable)
+                                        <span class="text-danger fw-bold opacity-50">Pesanan ini tidak bisa diproses</span>
+                                    @else
+                                        <span class="text-success fw-bold">Ready To Buy</span>
+                                    @endif
                                 </div>
-
                                 <div class="card-body p-2">
                                     @foreach ($items as $item)
                                         @php
@@ -76,7 +88,19 @@
                                                 </div>
                                             @endif
                                             <div class="flex-grow-1 me-auto">
-                                                <div class="fw-semibold text-truncate">{{ $item->product->nama_product }}
+                                                <div class="fw-semibold text-truncate">
+                                                    {{ $item->product->nama_product }}
+
+                                                    @php
+                                                        $productUnavailable =
+                                                            $item->product->user->deleted_at !== null ||
+                                                            !$item->product->is_available ||
+                                                            !$item->product->user->is_open;
+                                                    @endphp
+
+                                                    @if ($productUnavailable)
+                                                        <span class="badge bg-danger ms-2">Produk Tidak Tersedia</span>
+                                                    @endif
                                                 </div>
                                                 <div class="text-muted small">Rp
                                                     {{ number_format($item->product->harga, 0, ',', '.') }}</div>
@@ -86,14 +110,23 @@
                                             </div>
 
                                             <div class="d-flex align-items-center gap-2" style="min-width: 140px;">
-                                                <form action="{{ route('buyer.keranjang.update', $item->id) }}"
-                                                    method="POST" class="d-flex">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <input type="number" name="quantity" min="1"
-                                                        value="{{ $item->quantity }}" class="form-control form-control-sm"
-                                                        style="width: 70px;" onchange="this.form.submit()">
-                                                </form>
+                                                @if (!$productUnavailable)
+                                                    <form action="{{ route('buyer.keranjang.update', $item->id) }}"
+                                                        method="POST" class="d-flex">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <input type="number" name="quantity" min="1"
+                                                            value="{{ $item->quantity }}"
+                                                            class="form-control form-control-sm" style="width: 70px;"
+                                                            onchange="this.form.submit()">
+                                                    </form>
+                                                @else
+                                                    <div class="form-control form-control-sm bg-light text-muted d-flex align-items-center"
+                                                        style="width: 70px;">
+                                                        ~
+                                                    </div>
+                                                @endif
+
 
                                                 <form action="{{ route('buyer.keranjang.destroy', $item->id) }}"
                                                     method="POST">
@@ -144,9 +177,17 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 fw-bold mt-3"
-                                        style="border-radius: 8px !important;">
+                                        style="border-radius: 8px !important;"
+                                        {{ $hasUnavailableProduct ? 'disabled' : '' }}>
                                         Checkout
                                     </button>
+
+                                    @if ($hasUnavailableProduct)
+                                        <div class="text-danger text-center small mt-2">
+                                            Ada produk tidak tersedia, silahkan hapus.
+                                        </div>
+                                    @endif
+
                                 </form>
 
                             </div>

@@ -32,10 +32,17 @@ class CartController extends Controller
             return $item->product->user->id ?? null;
         });
 
+
+        $hasUnavailableProduct = $cartItems->contains(function ($item) {
+            $seller = $item->product->user;
+            return !$item->product->is_available || !$seller->is_open || $seller->deleted_at !== null;
+        });
+
         return view('buyer.keranjang.index', [
             'groupedCartItems' => $grouped,
-            'total' => $total,
-            'title' => 'keranjang'
+            'totalPrice' => $total,
+            'title' => 'keranjang',
+            'hasUnavailableProduct' => $hasUnavailableProduct,
         ]);
     }
 
