@@ -7,6 +7,8 @@
             <div class="col-lg-3 pos">
                 <x-sidebar_admin />
             </div>
+
+
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Kelola Kategori" />
                 <div class="row g-3">
@@ -14,6 +16,8 @@
                     <h1>Kelola Kategori</h1>
                 </div>
             </div>
+
+
         </div>
     </div>
     <x-nav-bottom />

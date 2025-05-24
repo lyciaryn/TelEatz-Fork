@@ -27,7 +27,7 @@
                 class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Home</p>
         </a>
-        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.kelolauser.index') }}"><i
+        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.kelola_akun.index') }}"><i
                 class='bx bx-home-alt me-2'></i>
             <p style="font-size: 14px;">Kelola User</p>
         </a>

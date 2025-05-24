@@ -51,4 +51,10 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
     }
+
+
+//  YANG ATAS JANGAN DI UBAH
+// BOLEH TAMBAHIN KODINGAN BARU DI BAWAH 
+
+
 }
