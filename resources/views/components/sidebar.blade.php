@@ -27,15 +27,15 @@
             <p style="font-size: 14px;">Home</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.daftarmenu.index') }}"><i
-                class='bx bx-bowl-rice'></i>
+                class='bx bx-bowl-rice me-2'></i>
             <p style="font-size: 14px;">Daftar Menu</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.keranjang.index') }}"><i
-                class='bx bx-cart-alt'></i>
+                class='bx bx-cart-alt me-2'></i>
             <p style="font-size: 14px;">Keranjang</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.pesanan.index') }}"><i
-                class='bx bx-notepad'></i>
+                class='bx bx-notepad me-2'></i>
             <p style="font-size: 14px;">Pesanan</p>
         </a>
         <div class="border-top"></div>
@@ -46,7 +46,7 @@
             <p style="font-size: 14px;">Histori Pesanan</p>
         </a> --}}
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('buyer.profile.profile_buyer') }}"><i
-                class='bx bx-user'></i>
+                class='bx bx-user me-2'></i>
             <p style="font-size: 14px;">Profil Saya</p>
         </a>
         <div class="border-top"></div>

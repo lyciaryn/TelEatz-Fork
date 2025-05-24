@@ -36,7 +36,7 @@ class OrderController extends Controller
             'dibatalkan' => Order::where('buyer_id', $userId)->where('status', 'dibatalkan')->count(),
         ];
 
-        return view('buyer.pesanan.index', compact('orders', 'statusCounts'));
+        return view('buyer.pesanan.index', compact('orders', 'statusCounts'), ['title' => 'Pesanan Saya']);
     }
 
 
@@ -95,7 +95,7 @@ class OrderController extends Controller
                     'quantity' => $item->quantity,
                     'price' => $harga, // satuan
                     'notes' => $item->notes
-                ]); 
+                ]);
             }
 
             // update total_price setelah loop

@@ -65,8 +65,7 @@ class ProfileController extends Controller
             }
 
             $waktu_sekarang = Carbon::now();
-            if ($waktu_sekarang->between($request->close_time, $request->open_time))
-            {
+            if ($waktu_sekarang->between($request->close_time, $request->open_time)) {
                 $profile->is_open = 1; // buka
             } else {
                 $profile->is_open = 0; // tutup
@@ -122,7 +121,6 @@ class ProfileController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
     }
 
     public function changeEmailIndex()
@@ -155,7 +153,6 @@ class ProfileController extends Controller
             $profile->save();
 
             return redirect()->route('seller.profile.changeEmail')->with('success', 'Email berhasil diperbarui');
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi Kesalahan: ' . $e->getMessage());
         }

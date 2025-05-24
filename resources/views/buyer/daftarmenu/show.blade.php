@@ -35,6 +35,24 @@
                         <h3 class="card-title fw-bold">{{ $product->nama_product }}</h3>
                         <h5 class="text-danger fw-semibold">Rp {{ number_format($product->harga, 0, ',', '.') }}</h5>
 
+                        <p class="mb-2">
+                            @php
+                                $averageRating = $product->reviews->avg('rating');
+                                $roundedRating = round($averageRating);
+                            @endphp
+
+                            @if ($product->reviews->count() > 0)
+                                <div class="text-warning my-1">
+                                    {!! str_repeat('★', $roundedRating) . str_repeat('☆', 5 - $roundedRating) !!}
+                                    <small class="text-muted">({{ number_format($averageRating, 1) }}/5)</small>
+                                </div>
+                            @else
+                                <div class="text-muted my-1">
+                                    ~
+                                </div>
+                            @endif
+                        </p>
+
                         <p class="mt-3"><strong>Deskripsi:</strong><br> {{ $product->deskripsi ?? '-' }}</p>
                         <p><strong>Kategori:</strong> {{ $product->category->nama_kategori ?? '-' }}</p>
                         <p><strong>Penjual:</strong> {{ $product->user?->name ?? '-' }}</p>

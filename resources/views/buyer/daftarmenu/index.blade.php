@@ -102,6 +102,24 @@
                                                 <span class="badge bg-secondary">Status Tidak Diketahui</span>
                                             @endif
                                         </p>
+                                        <p class="mb-2">
+                                            @php
+                                                $averageRating = $product->reviews->avg('rating');
+                                                $roundedRating = round($averageRating);
+                                            @endphp
+
+                                            @if ($product->reviews->count() > 0)
+                                                <div class="text-warning my-1">
+                                                    {!! str_repeat('★', $roundedRating) . str_repeat('☆', 5 - $roundedRating) !!}
+                                                    <small
+                                                        class="text-muted">({{ number_format($averageRating, 1) }}/5)</small>
+                                                </div>
+                                            @else
+                                                <div class="text-muted my-1">
+                                                    ~
+                                                </div>
+                                            @endif
+                                        </p>
                                         </p>
                                         <p>{{ Str::limit($product->deskripsi, 36) }}</p>
                                         <h6 class="card-text fw-bold mt-1 mb-2 text-danger mt-2 mb-2">Rp
@@ -136,7 +154,8 @@
                                     <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200"
                                         alt="">
                                     <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Daftar Menu</h2>
-                                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Maaf ya, makanan sedang
+                                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Maaf ya, makanan
+                                        sedang
                                         tidak tersedia 😭​</small>
                                 </div>
                             </div>
