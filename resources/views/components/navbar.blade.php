@@ -72,7 +72,20 @@
 
                     </li>
                 </div>
+                <a id="name" class="position-relative me-4" href="{{ route('buyer.keranjang.index') }}"
+                    aria-expanded="false">
+                    <i class='bx bxs-cart fs-3'></i>
+                    @if ($cartItemCount > 0)
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                            {{ $cartItemCount }}
+                        </span>
+                    @endif
+                </a>
+
                 <li class="nav-item dropdown d-flex justify-content-center align-items-center m-0">
+
+
+
                     <a class="nav-link px-0" href="#">
                         @if (Auth::check() && Auth::user()->img)
                             <img src="{{ asset('images/' . Auth::user()->img) }}" alt="Profil"
@@ -86,6 +99,8 @@
                             </div>
                         @endif
                     </a>
+
+
                     <a id="name" class="nav-link dropdown-toggle fs-6" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->email }}

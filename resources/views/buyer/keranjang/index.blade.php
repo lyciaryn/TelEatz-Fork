@@ -9,17 +9,18 @@
         @media (max-width: 991.98px) {
             .ringkasan-belanja {
                 position: fixed;
-                bottom: 0;
+                bottom: 4rem;
                 left: 0;
                 right: 0;
-                z-index: 1050;
+                z-index: 1;
                 background: #fff;
                 box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
                 padding: 8px;
+                margin-bottom: 4rem;
             }
 
             body {
-                padding-bottom: 230px;
+                padding-bottom: 350px;
             }
 
             .ringkasan-belanja .card {

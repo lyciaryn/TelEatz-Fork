@@ -55,6 +55,7 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardBuyerController::class, 'index'])->name('buyer.dashboard');
 
+
     // Daftar Menu
     Route::get('/daftarmenu', [ProductController::class, 'index'])->name('buyer.daftarmenu.index');
     Route::get('/daftarmenudetail/{id}', [ProductController::class, 'show'])->name('buyer.daftarmenu.show');

@@ -627,6 +627,9 @@ label{
 
 
   @media (max-width: 991.98px) {
+    body{
+        padding-bottom: 100px;
+    }
     .nav-bottom{
       display: flex;
       visibility: visible;
