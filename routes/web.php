@@ -33,6 +33,7 @@ Route::get('/landing', function () {
 
 
 
+
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -54,6 +55,7 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'
 Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardBuyerController::class, 'index'])->name('buyer.dashboard');
+
 
     // Daftar Menu
     Route::get('/daftarmenu', [ProductController::class, 'index'])->name('buyer.daftarmenu.index');

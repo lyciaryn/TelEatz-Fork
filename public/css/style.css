@@ -156,7 +156,7 @@ p{
 }
 
 .scroll{
-  height: 238px;
+  height: 152px;
   overflow-y: scroll;
   box-shadow: rgba(149, 157, 165, 0.132) 0px 8px 31px;
   border-radius: 15px;
@@ -627,6 +627,9 @@ label{
 
 
   @media (max-width: 991.98px) {
+    body{
+        padding-bottom: 100px;
+    }
     .nav-bottom{
       display: flex;
       visibility: visible;

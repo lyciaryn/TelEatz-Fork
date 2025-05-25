@@ -22,7 +22,7 @@ class ProfileBuyerController extends Controller
     {
         $profile = User::where('id', auth::id())->first();
 
-        return view('buyer.profile.menu', compact('profile'));
+        return view('buyer.profile.menu', compact('profile'), ['title' => 'Profile Saya']);
     }
 
     public function update(Request $request, $id)
@@ -65,7 +65,7 @@ class ProfileBuyerController extends Controller
     {
         // Temukan data berdasarkan ID
         $profile = User::where('id', auth::id())->first();
-        return view('buyer.profile.changePassword', compact('profile'));
+        return view('buyer.profile.changePassword', compact('profile'), ['title' => 'Change Password']);
     }
 
     public function changePassword(Request $request, $id)
@@ -110,7 +110,7 @@ class ProfileBuyerController extends Controller
     {
         // Temukan data berdasarkan ID
         $profile = User::where('id', auth::id())->first();
-        return view('buyer.profile.changeEmail', compact('profile'));
+        return view('buyer.profile.changeEmail', compact('profile'), ['title' => 'Change Email']);
     }
 
     public function changeEmail(Request $request, $id)
