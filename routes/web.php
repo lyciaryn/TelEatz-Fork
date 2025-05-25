@@ -96,7 +96,8 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardSellerController::class, 'index'])->name('seller.dashboard');
-    ROUTE::post('/dashboard/status', [DashboardSellerController::class, 'changeStatus'])->name('seller.dashboard.status');
+    Route::post('/dashboard/status', [DashboardSellerController::class, 'changeStatus'])->name('seller.dashboard.status');
+
 
     //Kelola Makanan
     Route::get('/kelolamakanan', [KelolaMakananController::class, 'index'])->name('kelolamakanan');

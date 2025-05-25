@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar_seller/>
+    <x-navbar_seller />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -34,18 +34,17 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title text-center pb-3">Buka Toko</h5>
-                                <p class="card-text text-center">{{$status}}</p>
+                                <p class="card-text text-center">{{ $status }}</p>
                             </div>
                             <div class="text-center pb-3">
                                 <form action="{{ route('seller.dashboard.status') }}" method="POST">
                                     @csrf
                                     @if ($status == 'Sedang Tutup')
-                                    <input type="hidden" name="action" value="buka">
-                                    <button type="submit" class="btn btn-primary w-75">Buka Toko</button>
-
+                                        <input type="hidden" name="action" value="buka">
+                                        <button type="submit" class="btn btn-primary w-75">Buka Toko</button>
                                     @else
-                                    <input type="hidden" name="action" value="tutup">
-                                    <button type="submit" class="btn btn-danger w-75">Tutup Toko</button>
+                                        <input type="hidden" name="action" value="tutup">
+                                        <button type="submit" class="btn btn-danger w-75">Tutup Toko</button>
                                     @endif
                                 </form>
                             </div>
@@ -55,7 +54,7 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title text-center pb-3">Total Produk</h5>
-                                <p class="text-center pb-3">{{$makanan}} Produk</p>
+                                <p class="text-center pb-3">{{ $makanan }} Produk</p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Grafik Harian -->
                     <div class="col-md-12">
                         <div class="card shadow-sm">
@@ -116,87 +115,111 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title text-center pb-3">Total Pemasukan Selama Berdagang</h5>
-                                    <h5 class="text-center">Rp. {{ number_format(150000, 0, ',', '.') }}</h5>
+                                <h5 class="text-center">Rp. {{ number_format(150000, 0, ',', '.') }}</h5>
+                            </div>
                         </div>
-                    </div>
 
-                    
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                    <script>
-                        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
-                        new Chart(weeklyCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: [@foreach($weeklyLabels as $label)'{{ $label }}', @endforeach],
-                                datasets: [{
-                                    label: 'Pemasukan Mingguan',
-                                    data: [@foreach($weeklyData as $data){{ $data }}, @endforeach],
-                                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                                    borderColor: 'rgba(54, 162, 235, 1)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: { beginAtZero: true }
-                                }
-                            }
-                        });
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                        const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
-                        new Chart(monthlyCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: [@foreach($monthlyLabels as $label)'{{ $label }}', @endforeach],
-                                datasets: [{
-                                    label: 'Pemasukan Bulanan',
-                                    data: [@foreach($monthlyData as $data){{ $data }}, @endforeach],
-                                    backgroundColor: 'rgba(153, 102, 255, 0.5)',
-                                    borderColor: 'rgba(153, 102, 255, 1)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: { beginAtZero: true }
-                                }
-                            }
-                        });
-
-                        const dailyCtx = document.getElementById('dailyChart').getContext('2d');
-                        new Chart(dailyCtx, {
-                            type: 'bar',
-                            data: {
-                                labels: [
-                                    @foreach($dailyLabels as $label)'{{ $label }}',@endforeach],
-                                datasets: [{
-                                    label: 'Pemasukan Harian',
-                                    data: [
-                                        @foreach($dailyData as $data)
-                                            {{ $data }},
+                        <script>
+                            const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+                            new Chart(weeklyCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels: [
+                                        @foreach ($weeklyLabels as $label)
+                                            '{{ $label }}',
                                         @endforeach
                                     ],
-                                    backgroundColor: 'rgba(75, 192, 192, 0.5)',  // kamu bisa ganti warna sesuai selera
-                                    borderColor: 'rgba(75, 192, 192, 1)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: { beginAtZero: true }
+                                    datasets: [{
+                                        label: 'Pemasukan Mingguan',
+                                        data: [
+                                            @foreach ($weeklyData as $data)
+                                                {{ $data }},
+                                            @endforeach
+                                        ],
+                                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
                                 }
-                            }
-                        });
+                            });
 
-                    </script>
+                            const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+                            new Chart(monthlyCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels: [
+                                        @foreach ($monthlyLabels as $label)
+                                            '{{ $label }}',
+                                        @endforeach
+                                    ],
+                                    datasets: [{
+                                        label: 'Pemasukan Bulanan',
+                                        data: [
+                                            @foreach ($monthlyData as $data)
+                                                {{ $data }},
+                                            @endforeach
+                                        ],
+                                        backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                                        borderColor: 'rgba(153, 102, 255, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
 
+                            const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+                            new Chart(dailyCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels: [
+                                        @foreach ($dailyLabels as $label)
+                                            '{{ $label }}',
+                                        @endforeach
+                                    ],
+                                    datasets: [{
+                                        label: 'Pemasukan Harian',
+                                        data: [
+                                            @foreach ($dailyData as $data)
+                                                {{ $data }},
+                                            @endforeach
+                                        ],
+                                        backgroundColor: 'rgba(75, 192, 192, 0.5)', // kamu bisa ganti warna sesuai selera
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <x-nav-bottom_seller />
-@endsection
+        <x-nav-bottom_seller />
+    @endsection
