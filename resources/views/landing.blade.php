@@ -160,13 +160,13 @@
                 <div class="row align-items-center gy-4">
                     <!-- Gambar Logo -->
                     <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
-                        <img src="{{ asset('img/Teleatz1.png') }}" class="img-fluid" style="max-width: 500px;"
-                            alt="Logo TelEatz">
+                        <img src="{{ asset('img/Teleatz1-primary.png') }}" class="img-fluid"
+                            style="max-width: 400px;" alt="Logo TelEatz">
                     </div>
 
                     <!-- Konten Teks -->
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                        <h3 class="fw-semibold mb-3">Apa itu TelEatz?</h3>
+                        <h3 class="fw-semibold mb-3">Apa itu <span style="color: #1092FE;">TelEatz?</span> </h3>
                         <p>
                             <strong>TelEatz</strong> adalah platform <em>e-canteen</em> berbasis web yang memudahkan
                             pemesanan makanan di lingkungan kampus secara online.
