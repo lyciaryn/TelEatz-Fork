@@ -1,29 +1,3 @@
-{{-- <form action="{{ route('password.update') }}" method="POST">
-    @csrf
-    <input type="hidden" name="token" value="{{ $token }}">
-
-    <div>
-        <label>Email</label>
-        <input type="email" name="email" value="{{ request('email') }}" readonly required>
-
-    </div>
-
-    <div>
-        <label>Password Baru</label>
-        <input type="password" name="password" required>
-    </div>
-
-    <div>
-        <label>Konfirmasi Password</label>
-        <input type="password" name="password_confirmation" required>
-    </div>
-
-    <button type="submit">Reset Password</button>
-</form> --}}
-
-
-
-
 @extends('layouts.app')
 
 <head>
@@ -84,7 +58,7 @@
                     </div>
                     <div class="button text-center animate__animated animate__fadeInUp mt-2">
                         <button class="submit text-light w-100 " type="submit">
-                            Kirim Link Reset
+                            Reset Password
                         </button>
                     </div>
 

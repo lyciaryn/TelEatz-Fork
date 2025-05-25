@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
 
     <div class="container my-5">
         <div class="row dash">
@@ -12,7 +12,7 @@
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Detail Makanan" />
                 <x-breadcrumbs :links="[
-                    ['label' => 'Dashboard', 'url' => route('buyer.dashboard')],
+                    ['label' => 'Home', 'url' => route('buyer.dashboard')],
                     ['label' => 'Daftar Menu', 'url' => route('buyer.daftarmenu.index')],
                     ['label' => 'Detail'],
                 ]" />
@@ -34,6 +34,24 @@
                     <div class="card-body">
                         <h3 class="card-title fw-bold">{{ $product->nama_product }}</h3>
                         <h5 class="text-danger fw-semibold">Rp {{ number_format($product->harga, 0, ',', '.') }}</h5>
+
+                        <p class="mb-2">
+                            @php
+                                $averageRating = $product->reviews->avg('rating');
+                                $roundedRating = round($averageRating);
+                            @endphp
+
+                            @if ($product->reviews->count() > 0)
+                                <div class="text-warning my-1">
+                                    {!! str_repeat('★', $roundedRating) . str_repeat('☆', 5 - $roundedRating) !!}
+                                    <small class="text-muted">({{ number_format($averageRating, 1) }}/5)</small>
+                                </div>
+                            @else
+                                <div class="text-muted my-1">
+                                    ~
+                                </div>
+                            @endif
+                        </p>
 
                         <p class="mt-3"><strong>Deskripsi:</strong><br> {{ $product->deskripsi ?? '-' }}</p>
                         <p><strong>Kategori:</strong> {{ $product->category->nama_kategori ?? '-' }}</p>
