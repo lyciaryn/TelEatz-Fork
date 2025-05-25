@@ -35,7 +35,7 @@
 
 
 
-    <x-navbar />
+    <x-navbarBuyer />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -43,7 +43,7 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Keranjang Saya" />
-                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('buyer.dashboard')], ['label' => 'Keranjang']]" />
+                <x-breadcrumbs :links="[['label' => 'Home', 'url' => route('buyer.dashboard')], ['label' => 'Keranjang']]" />
 
                 <div class="row">
                     <div class="col-lg-8 order-2 order-lg-1">

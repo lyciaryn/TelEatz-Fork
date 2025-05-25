@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -10,6 +10,11 @@
 
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Ganti Password" />
+                <x-breadcrumbs :links="[
+                    ['label' => 'Home', 'url' => route('buyer.dashboard')],
+                    ['label' => 'Profile Saya', 'url' => route('buyer.profile.menu')],
+                    ['label' => 'Password'],
+                ]" />
                 <div class="card shadow rounded-4 text-center py-4 px-3 d-flex align-items-center">
                     <form action="{{ route('buyer.profile.changePassword.update', $profile->id) }}" method="POST"
                         enctype="multipart/form-data" style="width: 100%; max-width: 600px;">

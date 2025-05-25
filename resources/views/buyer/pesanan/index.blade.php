@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -10,7 +10,7 @@
 
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Pesanan Saya" />
-                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('buyer.dashboard')], ['label' => 'Pesanan Saya']]" />
+                <x-breadcrumbs :links="[['label' => 'Home', 'url' => route('buyer.dashboard')], ['label' => 'Pesanan Saya']]" />
 
                 <div class="nav nav-pills fw-bold mb-3 d-flex gap-3" role="tablist">
                     <a class="nav-link {{ request('status') === null ? 'active' : '' }}"
@@ -193,23 +193,34 @@
 
                 {{-- ========== ESTIMASI & TOTAL ========== --}}
                 <div class="text-start mt-3">
-                    @if ($order->estimated_ready_at || $order->status === 'selesai' || $order->status === 'dibatalkan')
-                        <h6 class="alert fw-bold p-3 w-100"
-                            style=" border: none;  background-color: {{ $order->status === 'selesai'
-                                ? 'rgb(184, 245, 235)'
-                                : ($order->status === 'dibatalkan'
-                                    ? '#ffe5e5'
-                                    : 'rgb(184, 245, 235)') }}; color: {{ $order->status === 'dibatalkan' ? '#d8000c' : 'rgb(5, 151, 127)' }};">
+                    <h6 class="alert fw-bold p-3 w-100"
+                        style="border: none; background-color:
+                        {{ $order->status === 'selesai'
+                            ? 'rgb(184, 245, 235)'
+                            : ($order->status === 'dibatalkan'
+                                ? '#ffe5e5'
+                                : ($order->status === 'pending'
+                                    ? '#fff7e6'
+                                    : 'rgb(184, 245, 235)')) }};
+                        color:
+                        {{ $order->status === 'dibatalkan'
+                            ? '#d8000c'
+                            : ($order->status === 'pending'
+                                ? '#856404'
+                                : 'rgb(5, 151, 127)') }};">
 
-                            @if ($order->status === 'selesai')
-                                Pesanan siap diambil
-                            @elseif ($order->status === 'dibatalkan')
-                                Pesanan dibatalkan
-                            @else
-                                Estimasi Siap pada {{ $order->estimated_ready_at->format('H:i') }}
-                            @endif
-                        </h6>
-                    @endif
+                        @if ($order->status === 'selesai')
+                            Pesanan siap diambil
+                        @elseif ($order->status === 'dibatalkan')
+                            Pesanan dibatalkan
+                        @elseif ($order->status === 'diproses' && $order->estimated_ready_at)
+                            Estimasi siap pada {{ $order->estimated_ready_at->format('H:i') }}
+                        @elseif ($order->status === 'pending')
+                            Pesananmu belum dikonfirmasi penjual
+                        @endif
+                    </h6>
+
+
                 </div>
 
                 <div class="text-end mt-3 fw-bold d-flex justify-content-between">

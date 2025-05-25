@@ -23,6 +23,10 @@ class DashboardBuyerController extends Controller
             ->latest()
             ->get();
 
+        // Hitung total order items
+        $totalActiveOrderItems = $activeOrders->sum(function ($order) {
+            return $order->orderItems->count();
+        });
         // Produk
         $query = Product::with(['user', 'category', 'reviews'])
             ->withCount('orderItems')
@@ -56,6 +60,6 @@ class DashboardBuyerController extends Controller
                 ->get();
         }
 
-        return view('buyer.dashboard', compact('products', 'categories', 'activeOrders'), ['title' => 'Home']);
+        return view('buyer.dashboard', compact('products', 'categories', 'activeOrders', 'totalActiveOrderItems'), ['title' => 'Home']);
     }
 }

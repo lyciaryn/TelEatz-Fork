@@ -76,7 +76,7 @@ class OrderController extends Controller
                 'status' => 'pending',
                 'dine_option' => $request->dine_option,
                 'payment' => $request->payment,
-                'estimated_ready_at' => now()->addMinutes($maxEstimate), // pakai timestamp
+
             ]);
 
 
@@ -108,6 +108,25 @@ class OrderController extends Controller
 
         return redirect()->route('buyer.pesanan.index')->with('success', 'Pesanan berhasil dibuat!');
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        if ($request->status === 'diproses') {
+            $maxEstimate = $order->orderItems->max(function ($item) {
+                return $item->product->estimate ?? 0;
+            });
+
+            $order->estimated_ready_at = now()->addMinutes($maxEstimate);
+        }
+
+        $order->status = $request->status;
+        $order->save();
+
+        return back()->with('success', 'Pesananmu diproses');
+    }
+
 
     public function cancelOrder($id)
     {

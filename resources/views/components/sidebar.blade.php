@@ -1,4 +1,4 @@
-<div class="card-nav card mb-3 animate_animated animate_fadeInUp">
+<div class="card-nav card mb-3 animate_animated animate_fadeInUp" style="position: sticky; top: 101px; z-index: 100;">
     <div class="card-body nav-dash d-flex flex-column text-decoration-none gap-3 ">
         <div class=" nav-2 sidebar-profile d-flex justify-content-start align-items-center py-3  px-3">
             @if (Auth::check() && Auth::user()->img)

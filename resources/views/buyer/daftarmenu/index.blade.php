@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -10,7 +10,7 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Daftar Menu" />
-                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('buyer.dashboard')], ['label' => 'Daftar Menu']]" />
+                <x-breadcrumbs :links="[['label' => 'Home', 'url' => route('buyer.dashboard')], ['label' => 'Daftar Menu']]" />
 
                 {{-- PEMBUNGKUS CONTENT --}}
                 <div class="card p-3 mb-4 shadow-sm">

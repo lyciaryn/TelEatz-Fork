@@ -72,7 +72,15 @@
 
                     </li>
                 </div>
-
+                <a id="name" class="position-relative me-4" href="{{ route('buyer.keranjang.index') }}"
+                    aria-expanded="false">
+                    <i class='bx bxs-cart fs-3'></i>
+                    @if ($cartItemCount > 0)
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-circle bg-danger">
+                            {{ $cartItemCount }}
+                        </span>
+                    @endif
+                </a>
 
                 <li class="nav-item dropdown d-flex justify-content-center align-items-center m-0">
 

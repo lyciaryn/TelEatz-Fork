@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
 
     <div class="container my-5">
         <div class="row dash">
@@ -12,7 +12,7 @@
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Detail Makanan" />
                 <x-breadcrumbs :links="[
-                    ['label' => 'Dashboard', 'url' => route('buyer.dashboard')],
+                    ['label' => 'Home', 'url' => route('buyer.dashboard')],
                     ['label' => 'Daftar Menu', 'url' => route('buyer.daftarmenu.index')],
                     ['label' => 'Detail'],
                 ]" />

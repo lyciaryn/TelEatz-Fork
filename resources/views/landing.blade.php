@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Impact Bootstrap Template</title>
+    <title>Teleatz</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('img/Teleatz1-white-full.png') }}" rel="icon">
     <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -43,7 +44,9 @@
     <header id="header" class="header fixed-top">
         <div class="branding d-flex align-items-center">
             <div class="container position-relative d-flex align-items-center justify-content-between">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <a href=""
+                    class="logo d-flex align-items-center d-lg-flex justify-content-center align-content-center gap-1 ">
+                    <img src="{{ asset('img/Teleatz1-white-full.png') }}" alt="" srcset="">
                     <h1 class="sitename">TelEatz</h1>
                     <span>.</span>
                 </a>
@@ -131,6 +134,7 @@
                         <img src="{{ asset('img/about.jpg" class="img-fluid rounded-4 mb-4') }}" alt="">
                         <p>Website E-Canteen yang diberi nama TelEatz, merupakan platform digital agar memudahkan anda
                             saat melakukan pemesanan secara online, meilhat menu dari berbagai kedai.</p>
+                        <img src="{{ asset('img/Teleatz1-white-full.png') }}" alt="" srcset="">
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
                         <div class="content ps-0 ps-lg-5">
@@ -211,16 +215,18 @@
             <div class="d-flex justify-content-between">
                 <div class="col-lg-5 col-md-12 footer-about ">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">TelEatz</span>
+                        <span class="sitename">
+
+                            TelEatz</span>
                     </a>
                     <p>Website E-Canteen yang diberi nama TelEatz, merupakan platform digital agar memudahkan anda saat
                         melakukan pemesanan secara online, meilhat menu dari berbagai tenant, mengetahui ketersediaan
                         makanan, dan juga melakukan pembayaran secara non-tunai dengan praktis.</p>
+
                     <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        {{-- <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-facebook"></i></a> --}}
+                        <a href="https://www.instagram.com/telkomuniversity/"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
 

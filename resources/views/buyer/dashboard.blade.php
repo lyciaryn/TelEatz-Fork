@@ -4,7 +4,7 @@
 @endphp
 
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -47,7 +47,7 @@
                                 <div class="d-flex gap-3     align-items-center pt-3 ps-3 pe-3 pb-2">
                                     <h6 class="fw-bold text-primarys m-0">​Pesanan Aktif</h6>
                                     @if ($activeOrders->isNotEmpty())
-                                        <span class="badge bg-primary rounded-pill">{{ $activeOrders->count() }}</span>
+                                        <span class="badge bg-primary rounded-pill">{{ $totalActiveOrderItems }}</span>
                                     @endif
                                 </div>
 
@@ -63,7 +63,9 @@
                                                         <i class='bx bxs-notepad'></i>
                                                     </div>
                                                     <div class="tugas-desc">
-                                                        <h6 class="m-0 text-secondary">{{ $item->product->nama_product }}
+                                                        <h6 class="m-0 text-secondary"> {{ $item->product->nama_product }}
+                                                            <span class="text-muted fw-normal"> ~ (ID:
+                                                                {{ $order->id }})</span>
                                                         </h6>
                                                         <p class="m-0 text-muted">Status:
                                                             <span
@@ -97,10 +99,8 @@
                     {{-- FILTER --}}
 
                     <div class="row g-2 mt-2"> <!-- g-0 = no gutter -->
-                        <h6 class="fw-bold text-secondary"><i class='bx bxs-bowl-hot fs-4 me-2'></i> Menu dengan rating
-                            terbaik
-                            saat
-                            ini 🤩​​</h6>
+                        <h6 class="fw-bold text-secondary"><i class='bx bxs-bowl-hot fs-4 me-2 '></i> Menu jempolan saat ini
+                            🤩​​</h6>
 
                         @forelse ($products as $product)
                             <div class="col-6 col-md-3">
