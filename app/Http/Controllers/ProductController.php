@@ -47,7 +47,6 @@ class ProductController extends Controller
     }
 
 
-
     // Menampilkan detail produk
     public function show($id)
     {

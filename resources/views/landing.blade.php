@@ -9,8 +9,7 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/Teleatz1-white-full.png') }}" rel="icon">
-    <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link rel="icon" type="image/png" href="{{ asset('img/Teleatz1-white-full.png') }}">
 
 
     <!-- Fonts -->
@@ -36,6 +35,36 @@
         a {
             text-decoration: none !important;
         }
+
+        .icon-box {
+            position: relative;
+            background: #e0f2e9;
+            border-radius: 15px;
+            padding: 30px;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .icon-box .icon {
+            position: absolute;
+            bottom: -50px;
+            right: -20px;
+            font-size: 300px;
+            /* Lebih besar lagi */
+            color: rgba(0, 0, 0, 0.05);
+            line-height: 1;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(10%, 10%);
+        }
+
+        .icon-box .title {
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #2d2d2d;
+        }
     </style>
 
 </head>
@@ -46,7 +75,7 @@
             <div class="container position-relative d-flex align-items-center justify-content-between">
                 <a href=""
                     class="logo d-flex align-items-center d-lg-flex justify-content-center align-content-center gap-1 ">
-                    <img src="{{ asset('img/Teleatz1-white-full.png') }}" alt="" srcset="">
+                    <img src="{{ asset('img/Teleatz1-solidwhite.png') }}" alt="" srcset="">
                     <h1 class="sitename">TelEatz</h1>
                     <span>.</span>
                 </a>
@@ -72,7 +101,7 @@
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section accent-background">
+        <section id="home" class="hero section accent-background">
             <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
                 <div class="row gy-5 justify-content-between">
                     <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
@@ -92,166 +121,164 @@
                     </div>
                 </div>
             </div>
-
             <div class="icon-boxes position-relative" data-aos="fade-up" data-aos-delay="200">
                 <div class="container position-relative">
-                    <div class="row gy-2 mt-5">
+                    <div class="row gy-4 mt-5">
 
                         <div class="col-xl-6 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class='bx bxs-bowl-hot'></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Lihat Makanan</a></h4>
+                                <div class="icon"><i style="font-size: 10rem; opacity: 50%"
+                                        class='bx bxs-bowl-hot'></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Lihat Makanan😍​</a></h4>
                             </div>
-                        </div><!--End Icon Box -->
+
+                        </div>
 
                         <div class="col-xl-6 col-md-6">
                             <div class="icon-box">
-                                <div class="icon"><i class='bx bxs-food-menu'></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Pesan Makanan</a></h4>
+                                <div class="icon"><i style="font-size: 10rem; opacity: 50%"
+                                        class='bx bxs-food-menu'></i></div>
+                                <h4 class="title"><a href="" class="stretched-link">Pesan Makanan😋​</a></h4>
                             </div>
-                        </div><!--End Icon Box -->
+                        </div>
 
                     </div>
                 </div>
             </div>
-
         </section><!-- /Hero Section -->
 
         <!-- About Section -->
-        <section id="about" class="about section">
+        <section id="about" class="about">
 
             <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>About Us<br></h2>
-                {{-- <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> --}}
+            <div class="container section-title text-center" data-aos="fade-up">
+                <h2 style="color: #1092FE;" class="fw-bold">Tentang Kami</h2>
+                <p class="text-muted">Membawa pengalaman baru dalam memesan makanan di kantin kampus.</p>
             </div><!-- End Section Title -->
 
-            <div class="container">
-
-                <div class="row gy-4">
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Apa itu Tel-Eatz?</h3>
-                        <img src="{{ asset('img/about.jpg" class="img-fluid rounded-4 mb-4') }}" alt="">
-                        <p>Website E-Canteen yang diberi nama TelEatz, merupakan platform digital agar memudahkan anda
-                            saat melakukan pemesanan secara online, meilhat menu dari berbagai kedai.</p>
-                        <img src="{{ asset('img/Teleatz1-white-full.png') }}" alt="" srcset="">
+            <div class="container py-4">
+                <div class="row align-items-center gy-4">
+                    <!-- Gambar Logo -->
+                    <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <img src="{{ asset('img/Teleatz1.png') }}" class="img-fluid" style="max-width: 500px;"
+                            alt="Logo TelEatz">
                     </div>
-                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-                        <div class="content ps-0 ps-lg-5">
-                            <p class="fst-italic">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore
-                                magna aliqua.
-                            </p>
-                            <ul>
-                                <li><i class="bi bi-check-circle-fill"></i> <span>Bisa pesan makanan</span></li>
-                                <li><i class="bi bi-check-circle-fill"></i> <span>bisa lihat keda1</span></li>
-                                <li><i class="bi bi-check-circle-fill"></i> <span>Bisa lihat</span></li>
-                            </ul>
 
-
-                            <div class="position-relative mt-4">
-                                <img src="{{ asset('img/about-2.jpg') }}" class="img-fluid rounded-4"
-                                    alt="">
-                            </div>
-                        </div>
+                    <!-- Konten Teks -->
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="fw-semibold mb-3">Apa itu TelEatz?</h3>
+                        <p>
+                            <strong>TelEatz</strong> adalah platform <em>e-canteen</em> berbasis web yang memudahkan
+                            pemesanan makanan di lingkungan kampus secara online.
+                            Tanpa perlu antre, pengguna dapat memilih menu, melakukan pembayaran, dan mengambil makanan
+                            saat sudah siap.
+                        </p>
+                        <ul class="list-unstyled ms-5">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Pesan makanan
+                                secara online dari berbagai kedai</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Lihat menu,
+                                deskripsi, dan estimasi waktu penyajian</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Dukungan
+                                pembayaran tunai dan QRIS</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Minim antrean,
+                                maksimal efisiensi</li>
+                        </ul>
                     </div>
                 </div>
-
             </div>
-
         </section><!-- /About Section -->
 
-        <!-- Clients Section -->
-        <section id="clients" class="clients section">
+        <section id="features" class="features mb-4  ">
+            @php
+                use App\Models\Product;
 
-            <div class="container">
-
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 2,
-                  "spaceBetween": 40
-                },
-                "480": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 60
-                },
-                "640": {
-                  "slidesPerView": 4,
-                  "spaceBetween": 80
-                },
-                "992": {
-                  "slidesPerView": 6,
-                  "spaceBetween": 120
-                }
-              }
-            }
-          </script>
+                $products = Product::all();
+            @endphp
+            <div class="container my-5">
+                <div class="container section-title text-center" data-aos="fade-up">
+                    <h2 style="color: #1092FE;" class="mb-4 text-center">Menu Makanan Populer</h2>
                 </div>
 
+                <div class="d-flex justify-content-center">
+                    <div class="row justify-content-center" style="max-width: 1200px;">
+                        @php
+                            $products = \App\Models\Product::take(4)->get(); // tampilkan maksimal 4 produk
+                        @endphp
+
+                        @forelse ($products as $product)
+                            <div class="col-md-3 col-sm-6 mb-4 d-flex">
+                                <div class="card shadow-sm no-outline w-100 border-0">
+                                    <div class="p-2">
+                                        <img src="{{ asset('images/' . $product->img) }}" class="img-fluid rounded"
+                                            alt="{{ $product->nama }}"
+                                            style="height: 160px; object-fit: cover; width: 100%;">
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h6 class="card-title fw-bold">{{ $product->nama }}</h6>
+                                        <p class="card-text small text-muted">
+                                            {{ \Illuminate\Support\Str::limit($product->deskripsi, 60) }}
+                                        </p>
+                                        <a href="{{ route('login') }}"
+                                            class="btn btn-sm text-white mt-2 rounded-pill px-3 py-2 fw-bold"
+                                            style="background-color: #1092FE;">Pesan
+                                            Sekarang</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        @empty
+                            <div class="col-12">
+                                <p class="text-center">Belum ada produk tersedia.</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
             </div>
 
-        </section><!-- /Clients Section -->
+        </section>
+
+
+
+
 
     </main>
 
     <footer id="footer" class="footer accent-background">
 
         <div class="container footer-top">
-            <div class="d-flex justify-content-between">
-                <div class="col-lg-5 col-md-12 footer-about ">
+            <div class="row">
+                <!-- About Section -->
+                <div class="col-md-6 mb-4 footer-about">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">
-
-                            TelEatz</span>
+                        <span class="sitename">TelEatz</span>
                     </a>
-                    <p>Website E-Canteen yang diberi nama TelEatz, merupakan platform digital agar memudahkan anda saat
-                        melakukan pemesanan secara online, meilhat menu dari berbagai tenant, mengetahui ketersediaan
-                        makanan, dan juga melakukan pembayaran secara non-tunai dengan praktis.</p>
-
+                    <p>
+                        Website E-Canteen yang diberi nama TelEatz, merupakan platform digital agar memudahkan anda saat
+                        melakukan pemesanan secara online, melihat menu dari berbagai tenant, mengetahui ketersediaan
+                        makanan, dan juga melakukan pembayaran secara non-tunai dengan praktis.
+                    </p>
                     <div class="social-links d-flex mt-4">
-                        {{-- <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a> --}}
                         <a href="https://www.instagram.com/telkomuniversity/"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                <!-- Contact Section -->
+                <div class="col-md-6 footer-contact text-start">
                     <h4>Contact Us</h4>
                     <p>Jl. Telekomunikasi No. 1, Bandung Terusan Buahbatu - Bojongsoang, Sukapura, Kec. Dayeuhkolot,
                         Kabupaten Bandung, Jawa Barat 40257</p>
                     <p class="mt-4"><strong>Phone:</strong> <span>+62 5589 55488 55</span></p>
                     <p><strong>Email:</strong> <span>telkom@university</span></p>
                 </div>
-
             </div>
         </div>
+
 
         <div class="container copyright text-center mt-4">
             <p>© <span>Copyright</span> <strong class="px-1 sitename">TelEatz</strong> <span>All Rights
                     Reserved</span>
             </p>
             <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                {{-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
-                    href="https://themewagon.com">ThemeWagon</a> --}}
             </div>
         </div>
 
@@ -270,6 +297,7 @@
     <script src="{{ asset('vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Main JS File -->
     <script src="{{ asset('js/main.js') }}"></script>
