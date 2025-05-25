@@ -15,11 +15,12 @@
 
 
     <script src="https://kit.fontawesome.com/e51a3b91d6.js" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 @section('content')
     <!-- form login -->
 
-    <div class="canvas-log animate__animated animate__fadeIn">
+    <div class="canvas-log animate__animated animate__fadeIn" style="width: 900px; height: 700px;">
         <div class="left-sec">
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
             <dotlottie-player src="https://lottie.host/f590e3bb-fa83-4f0a-9bcd-ea506a5b4a91/pEQ48RBjDJ.lottie"
@@ -99,6 +100,16 @@
                             <i class="fa-solid fa-key"></i>
                         </button>
                     </div>
+                    <!-- CAPTCHA -->
+                    <div class="mt-3 text-center">
+                        <div class="g-recaptcha" data-sitekey={{env('GOOGLE_RECAPTCHA_KEY')}}></div>
+                        @if ($errors->has('g-recaptcha-response'))
+                            <span class="text-danger small mt-1 ms-1" style="font-size: 11px">
+                                {{ $errors->first('g-recaptcha-response') }}
+                            </span>
+                        
+                        @endif
+                    </div>
 
                     {{-- Tombol Submit --}}
                     <div class="button text-center animate__animated animate__fadeInUp mt-5">
@@ -124,3 +135,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
 @endsection
+
+@push('scripts')
+    {!! NoCaptcha::renderJs() !!}
+@endpush

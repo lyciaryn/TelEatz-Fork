@@ -21,11 +21,15 @@ class ProfileController extends Controller
     public function index()
     {
         $profile = User::where('id', auth::id())->first();
-        if ($profile->open_time || $profile->close_time) {
-            $profile->open_time = \Carbon\Carbon::createFromFormat('H:i:s', $profile->open_time)->format('H:i');
-            $profile->close_time = \Carbon\Carbon::createFromFormat('H:i:s', $profile->close_time)->format('H:i');
+        if ($profile->open_time !== null) {
+            $profile->open_time = Carbon::createFromFormat('H:i:s', $profile->open_time)->format('H:i');
         } else {
             $profile->open_time = null;
+        }
+
+        if ($profile->close_time !== null) {
+            $profile->close_time = Carbon::createFromFormat('H:i:s', $profile->close_time)->format('H:i');
+        } else {
             $profile->close_time = null;
         }
 
@@ -153,7 +157,8 @@ class ProfileController extends Controller
             $profile->save();
 
             return redirect()->route('seller.profile.changeEmail')->with('success', 'Email berhasil diperbarui');
-        } catch (\Exception $e) {
+
+        } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi Kesalahan: ' . $e->getMessage());
         }
     }

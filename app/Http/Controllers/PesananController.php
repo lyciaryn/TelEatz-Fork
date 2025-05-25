@@ -126,12 +126,19 @@ class PesananController extends Controller
     {
         $pesanan = auth()->user()->receivedOrders()->where('id', $id)->firstOrFail();
 
-        if ($pesanan->status == 'pending') {
-            $pesanan->status = 'diproses';
-        } elseif ($pesanan->status == 'diproses') {
-            $pesanan->status = 'selesai';
+        if ($request->input('action') == 'lanjut'){
+            if ($pesanan->status == 'pending') {
+                $pesanan->status = 'diproses';
+            } elseif ($pesanan->status == 'diproses') {
+                $pesanan->status = 'selesai';
+            }
+        }
+
+        if ($request->input('action') == 'batal'){
+            $pesanan->status = 'dibatalkan';
 
         }
+        
         $pesanan->save();
 
         return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui.');

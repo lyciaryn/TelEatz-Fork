@@ -14,7 +14,7 @@ class KelolaMakananController extends Controller
     {
         $makanan = Product::where('seller_id', auth::id());
 
-                // Filter search
+        // Filter search
         if ($request->filled('search')) {
             $search = $request->search;
             $makanan->where(function ($q) use ($search) {
