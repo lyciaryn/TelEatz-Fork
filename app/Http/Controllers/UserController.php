@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -46,17 +47,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'role' => 'required|in:admin,seller,buyer',
+            'password' => 'required|min:5',
+            'email_verified_at' => now()
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        $user = new User();
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = bcrypt($validated['password']);
+        $user->role = $validated['role'];
+        $user->email_verified_at = now();
+        $user->is_open = false;
+        $user->save();
 
         return redirect()->route('admin.kelola_akun.index')->with('success', 'User berhasil ditambahkan.');
     }
@@ -68,18 +74,60 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required|in:admin,seller,buyer',
+            'password' => 'nullable|min:6',
+            'verified' => 'nullable|boolean', // untuk checkbox
         ]);
 
-        $user->update($request->only('name', 'email'));
+        // Update field dasar
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->role = $validated['role'];
+
+        // Update password jika diberikan
+        if (!empty($validated['password'])) {
+            $user->password = bcrypt($validated['password']);
+        }
+
+        // Update status verifikasi
+        if ($request->has('verified') && $validated['verified']) {
+            $user->email_verified_at = now();
+        } else {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
 
         return redirect()->route('admin.kelola_akun.index')->with('success', 'User berhasil diupdate.');
     }
 
+
     public function destroy(User $user)
     {
+        // Cek apakah user adalah buyer dan punya pesanan yang sedang diproses
+        $hasProcessingOrderAsBuyer = DB::table('orders')
+            ->where('buyer_id', $user->id)
+            ->where('status', 'diproses')
+            ->exists();
+
+        // Cek apakah user adalah seller dan ada produk miliknya yang masuk dalam order yang belum selesai
+        $hasProcessingOrderAsSeller = DB::table('orders')
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->join('products', 'order_items.product_id', '=', 'products.id')
+            ->where('products.seller_id', $user->id) // pastikan kolom seller_id sesuai dengan skema kamu
+            ->whereIn('orders.status', ['pending', 'diproses'])
+            ->exists();
+
+        if ($hasProcessingOrderAsBuyer || $hasProcessingOrderAsSeller) {
+            return redirect()
+                ->route('admin.kelola_akun.index')
+                ->with('error', 'User tidak dapat dihapus karena masih memiliki pesanan.');
+        }
+
+
         if ($user->email_verified_at) {
             // User sudah verified → soft delete
 
@@ -94,7 +142,7 @@ class UserController extends Controller
             // Soft delete user
             $user->delete();
 
-            $message = 'User verified berhasil di hapus, produk dinonaktifkan.';
+            $message = 'User verified berhasil dihapus, produk dinonaktifkan.';
         } else {
             // User belum verified → hapus permanen
 

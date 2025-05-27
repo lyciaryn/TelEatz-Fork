@@ -9,7 +9,10 @@
             </div>
 
             <div class="col-lg-9 d-flex flex-column gap-3">
+
                 <x-header title="Kelola Akun User" />
+
+                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('admin.dashboard')], ['label' => 'Kelola User']]" />
 
                 <!-- Tombol Tambah User -->
                 <div>
@@ -103,5 +106,5 @@
 
         </div>
 
-        <x-nav-bottom />
+        <x-nav-bottom_admin />
     @endsection

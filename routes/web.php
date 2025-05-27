@@ -100,7 +100,8 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardSellerController::class, 'index'])->name('seller.dashboard');
-    ROUTE::post('/dashboard/status', [DashboardSellerController::class, 'changeStatus'])->name('seller.dashboard.status');
+    Route::post('/dashboard/status', [DashboardSellerController::class, 'changeStatus'])->name('seller.dashboard.status');
+
 
     //Kelola Makanan
     Route::get('/kelolamakanan', [KelolaMakananController::class, 'index'])->name('kelolamakanan');
@@ -133,11 +134,18 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/category', [CategoryController::class, 'index'])->name('admin.kategori.index');
+    Route::get('/kelolakategori', [CategoryController::class, 'index'])->name('admin.kategori.index');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.kategori.create');
+    Route::post('/category', [CategoryController::class, 'store'])->name('admin.kategori.store');
+
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.kategori.edit');
+    Route::put('/category/{id}', [CategoryController::class, 'update'])->name('admin.kategori.update');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.kategori.destroy');
 
 
     Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelola_akun.index');
-    Route::post('/kelolauser/tambahuser', [UserController::class, 'store'])->name('admin.kelola_akun.create');
+    Route::post('/kelolauser/tambahuser', [UserController::class, 'store'])->name('admin.kelola_akun.store');
+    Route::get('/kelolauser/tambahuser', [UserController::class, 'create'])->name('admin.kelola_akun.create');
     Route::get('/kelolauser/edit/{user}', [UserController::class, 'edit'])->name('admin.kelola_akun.edit');
     Route::put('/kelolauser/edit/{user}', [UserController::class, 'update'])->name('admin.kelola_akun.update');
     Route::delete('/kelolauser/delete/{user}', [UserController::class, 'destroy'])->name('admin.kelola_akun.destroy');

@@ -24,15 +24,16 @@
 
         </div>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.dashboard') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bxs-home me-2'></i>
             <p style="font-size: 14px;">Home</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.kelola_akun.index') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bxs-user-detail me-2'></i>
             <p style="font-size: 14px;">Kelola User</p>
         </a>
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.kategori.index') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bxs-category-alt me-2'></i>
+
             <p style="font-size: 14px;">Kelola Kategori</p>
         </a>
         <div class="border-top"></div>
@@ -40,12 +41,8 @@
 
 
         <a class="nav-link d-flex align-items-center gap-2" href="{{ route('admin.transaction') }}"><i
-                class='bx bx-home-alt me-2'></i>
+                class='bx bxs-notepad me-2'></i>
             <p style="font-size: 14px;">Semua Transaksi</p>
-        </a>
-        <a class="nav-link d-flex align-items-center gap-2" href="{{ route('seller.profile') }}"><i
-                class='bx bx-home-alt me-2'></i>
-            <p style="font-size: 14px;">Profil Saya</p>
         </a>
         <div class="border-top"></div>
         <a style="color: #c38484" class="nav-link d-flex align-items-center gap-2 mt-1" href="#"

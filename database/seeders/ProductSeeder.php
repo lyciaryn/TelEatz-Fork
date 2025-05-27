@@ -19,6 +19,7 @@ class ProductSeeder extends Seeder
             'harga' => 15000,
             'deskripsi' => 'Makanan nasi goreng dengan bumbu rempah bawang-bawangan',
             'is_available' => 1,
+            'estimate' => 15,
             'category_id' => 1,
             'img' => null,
         ]);
@@ -29,6 +30,7 @@ class ProductSeeder extends Seeder
             'harga' => 13000,
             'deskripsi' => 'Makanan Mie Ayam dengan bumbu rempah bawang-bawangan',
             'is_available' => 1,
+            'estimate' => 20,
             'category_id' => 1,
             'img' => null,
         ]);
@@ -39,6 +41,7 @@ class ProductSeeder extends Seeder
             'harga' => 15000,
             'deskripsi' => 'Es buah yang sangat enak dengan buah buahan bergizi',
             'is_available' => 1,
+            'estimate' => 5,
             'category_id' => 2,
             'img' => null,
         ]);
@@ -49,6 +52,7 @@ class ProductSeeder extends Seeder
             'harga' => 15000,
             'deskripsi' => 'Es Kocok dengan buah-buhanan yang sangat lezat dan bergizi',
             'is_available' => 1,
+            'estimate' => 8,
             'category_id' => 2,
             'img' => null,
         ]);

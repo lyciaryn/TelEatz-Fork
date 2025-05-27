@@ -208,13 +208,14 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 fw-bold mt-3"
                                         style="border-radius: 8px !important;"
-                                        {{ $hasUnavailableProduct ? 'disabled' : '' }}>
+                                        {{ $hasUnavailableProduct || $groupedCartItems->isEmpty() ? 'disabled' : '' }}>
                                         Checkout
                                     </button>
 
+
                                     @if ($hasUnavailableProduct)
                                         <div class="text-danger text-center small mt-2">
-                                            Ada produk tidak tersedia, silahkan hapus.
+                                            Hapus produk tidak tersedia.
                                         </div>
                                     @endif
 

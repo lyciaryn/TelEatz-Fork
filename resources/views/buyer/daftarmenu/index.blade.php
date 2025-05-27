@@ -64,8 +64,28 @@
                     {{-- FILTER --}}
 
                     <div class="row g-2 mt-2"> <!-- g-0 = no gutter -->
+                        {{-- Filter Sorting --}}
+                        <div class="mb-3 d-flex flex-wrap gap-2">
+                            {{-- Tombol Banyak Dibeli --}}
+                            <a href="{{ route('buyer.daftarmenu.index', array_merge(request()->except('sort'), ['sort' => null])) }}"
+                                class="badge {{ request('sort') == null ? 'bg-primarys' : 'bg-light text-dark' }} rounded-pill px-3 py-2"
+                                style="cursor: pointer; text-decoration: none;">Banyak Dibeli</a>
+
+                            {{-- Tombol Rating Tertinggi --}}
+                            <a href="{{ route('buyer.daftarmenu.index', array_merge(request()->query(), ['sort' => 'rating'])) }}"
+                                class="badge {{ request('sort') == 'rating' ? 'bg-primarys' : 'bg-light text-dark' }} rounded-pill px-3 py-2"
+                                style="cursor: pointer; text-decoration: none;">Rating Tertinggi</a>
+
+                        </div>
+
 
                         @forelse ($products as $product)
+                            @if (isset($notFound) && $notFound)
+                                <div class="alert alert-warning text-center mt-3">
+                                    Produk tidak ditemukan untuk kata kunci/kategori yang dipilih.
+                                </div>
+                            @endif
+
                             <div class="col-6 col-md-3">
                                 <div class="card border border-1 border-light rounded-3 shadow-sm">
                                     @if ($product->img)
@@ -133,11 +153,17 @@
                                                         class="form-control" style="width: 65px;"
                                                         {{ $product->user?->is_open ? '' : 'disabled' }}>
 
-                                                    <button type="submit" class="btn btn-warning"
-                                                        {{ $product->user?->is_open ? '' : 'disabled' }}
-                                                        title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
-                                                        <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
-                                                    </button>
+                                                    @if ($product->user?->is_open == 1)
+                                                        <button type="submit" class="btn btn-warning"
+                                                            title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
+                                                            <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="btn btn-secondary disabled"
+                                                            title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
+                                                            <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
+                                                        </button>
+                                                    @endif
                                                 </div>
                                             </form>
                                         </div>

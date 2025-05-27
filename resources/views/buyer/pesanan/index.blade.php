@@ -215,6 +215,8 @@
                             Pesanan dibatalkan
                         @elseif ($order->status === 'diproses' && $order->estimated_ready_at)
                             Estimasi siap pada {{ $order->estimated_ready_at->format('H:i') }}
+                        @elseif ($order->status === 'diproses' && $order->estimated_ready_at == null)
+                            Pesananmu akan siap sebentar lagi
                         @elseif ($order->status === 'pending')
                             Pesananmu belum dikonfirmasi penjual
                         @endif
