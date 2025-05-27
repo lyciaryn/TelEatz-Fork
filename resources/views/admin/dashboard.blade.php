@@ -41,5 +41,5 @@
             </div>
         </div>
     </div>
-    <x-nav-bottom />
+    <x-nav-bottom_admin />
 @endsection

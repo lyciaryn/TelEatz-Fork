@@ -30,12 +30,14 @@
 
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama</label>
-                                <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}" required>
+                                <input type="text" name="name" id="name" class="form-control"
+                                    value="{{ $user->name }}" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}" required>
+                                <input type="email" name="email" id="email" class="form-control"
+                                    value="{{ $user->email }}" required>
                             </div>
 
                             <div class="mb-3">
@@ -46,8 +48,8 @@
 
                             <div class="mb-3 d-flex align-items-center gap-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="verified" id="verified" value="1"
-                                        {{ $user->email_verified_at ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="verified" id="verified"
+                                        value="1" {{ $user->email_verified_at ? 'checked' : '' }}>
 
                                 </div>
                                 <label>Verifikasi User</label>
@@ -69,5 +71,5 @@
             </div>
         </div>
     </div>
-    <x-nav-bottom />
+    <x-nav-bottom_admin />
 @endsection

@@ -130,13 +130,13 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/kelolakategori', [CategoryController::class, 'index'])->name('admin.kategori.index');
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('admin.kategori.create');
+    Route::post('/category', [CategoryController::class, 'store'])->name('admin.kategori.store');
 
-    Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolauser.index');
-    Route::resource('/kategori', CategoryController::class, [
-        'as' => 'admin'
-    ]);
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('/category/{id}', [CategoryController::class, 'update'])->name('admin.kategori.update');
+    Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('admin.kategori.destroy');
 
 
     Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelola_akun.index');

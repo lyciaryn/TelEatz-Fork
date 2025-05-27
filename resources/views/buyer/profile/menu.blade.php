@@ -11,7 +11,7 @@
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Profile Saya" />
                 <x-breadcrumbs :links="[['label' => 'Home', 'url' => route('buyer.dashboard')], ['label' => 'Profile Saya']]" />
-                <x-header title="Profil Saya" />
+
                 <div class="card shadow rounded-4 text-center">
                     <form action="{{ route('buyer.profile.update', $profile->id) }}" method="POST"
                         enctype="multipart/form-data">

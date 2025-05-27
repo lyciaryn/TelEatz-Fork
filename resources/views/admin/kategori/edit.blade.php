@@ -16,11 +16,12 @@
                         @method('PUT')
                         <div class="mb-3">
                             <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                            <input type="text" name="nama_kategori" class="form-control" value="{{ old('nama_kategori', $kategori->nama_kategori) }}" required>
+                            <input type="text" name="nama_kategori" class="form-control"
+                                value="{{ old('nama_kategori', $kategori->nama_kategori) }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" rows="3" required>{{ old('deskripsi', $kategori->deskripsi) }}</textarea>
+                            <textarea name="deskripsi" class="form-control" rows="3" required>{{ old('deskripsi', $kategori->deskripsi) }}</textarea>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -31,5 +32,5 @@
             </div>
         </div>
     </div>
-    <x-nav-bottom />
+    <x-nav-bottom_admin />
 @endsection
