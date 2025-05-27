@@ -9,6 +9,7 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Dashboard" />
+                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')]]" />
                 <div class="row g-3">
                     <!-- Kolom 1: Alert -->
                     <div class="col-md-8">

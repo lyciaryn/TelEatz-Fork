@@ -76,14 +76,13 @@
                         @foreach ($makanan as $item)
                             <div class="col-md-4 mb-4">
                                 <div class="card h-100 d-flex flex-column">
-                                    
                                     @if($item->img)
                                         <img src="{{ asset('images/' . $item->img) }}" class="card-img-top" alt="{{ $item->nama }}" style="height: 135px; object-fit: cover;">
                                     @else
                                         <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold" style="height: 135px;">
                                             {{ $item->nama_product }}
                                         </div>
-                                    @endif
+                                    @endif
                                     <div class="card-body d-flex flex-column">
                                         <h4 class="card-title" style="font-weight: bold; !important">
                                             {{ $item->nama_product }}
@@ -98,7 +97,7 @@
                                         <p class="card-text">{{ $item->category->nama_kategori }}</p>
                                         <br>
                                         <label for="ketersediaan">Ketersediaan</label>
-                                        <p class="card-text">{{ $item->is_avaialable == 1 ? 'Tersedia' : 'Tidak Tersedia' }}
+                                        <p class="card-text">{{ $item->is_avaialable == 1 ? 'Tidak Tersedia' : 'Tersedia' }}
                                         </p> <br>
 
                                         <!-- Tombol di bawah -->

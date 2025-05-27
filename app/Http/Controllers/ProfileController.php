@@ -78,7 +78,7 @@ class ProfileController extends Controller
             $profile->save();
 
             return redirect()->route('seller.profile', ['id' => $profile->id])->with('success', 'Profil berhasil diperbarui');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()->with('error', 'Terjadi Kesalahan: ' . $e->getMessage());
         }
     }

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+@php
+$title = 'Profil Saya';
+@endphp
+
 <x-navbar_seller />
 <div class="container">
     <div class="row dash" style="margin-top: 100px;">
@@ -10,6 +15,7 @@
 
         <div class="col-lg-9 d-flex flex-column gap-3">
             <x-header title="Profil Saya"/>
+            <x-breadcrumbs :links="[['label' => 'Profile', 'url' => route('seller.profile')]]" />
             <div class="card shadow rounded-4 text-center">
                 <form action="{{ route('seller.profile.update', $profile->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf

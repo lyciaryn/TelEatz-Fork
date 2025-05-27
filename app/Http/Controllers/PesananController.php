@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\OrderItem;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PesananController extends Controller
 {
@@ -155,4 +156,14 @@ class PesananController extends Controller
 
         return view('seller.Pesanan.Pesanan_seller', compact('order'));
     }
+
+    public function exportPDF($id)
+    {
+        $order = Order::with(['orderItems.product', 'buyer'])->findOrFail($id);
+
+        $pdf = PDF::loadView('seller.pesanan.export_pdf', compact('order'));
+
+        return $pdf->download('pesanan-'.$order->id.'.pdf');
+    }
+
 }
