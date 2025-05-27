@@ -66,6 +66,12 @@
                     <div class="row g-2 mt-2"> <!-- g-0 = no gutter -->
 
                         @forelse ($products as $product)
+                            @if (isset($notFound) && $notFound)
+                                <div class="alert alert-warning text-center mt-3">
+                                    Produk tidak ditemukan untuk kata kunci/kategori yang dipilih.
+                                </div>
+                            @endif
+
                             <div class="col-6 col-md-3">
                                 <div class="card border border-1 border-light rounded-3 shadow-sm">
                                     @if ($product->img)

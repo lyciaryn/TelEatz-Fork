@@ -99,8 +99,9 @@
                     {{-- FILTER --}}
 
                     <div class="row g-2 mt-2"> <!-- g-0 = no gutter -->
-                        <h6 class="fw-bold text-secondary"><i class='bx bxs-bowl-hot fs-4 me-2 '></i> Menu jempolan saat ini
-                            🤩​​</h6>
+                        <h5 class="fw-bold text-secondary mb-3"><i class='bx bxs-bowl-hot fs-4 me-2 '></i> Menu yang paling
+                            banyak dibeli orang-orang
+                            🤩​​</h5>
 
                         @forelse ($products as $product)
                             <div class="col-6 col-md-3">
