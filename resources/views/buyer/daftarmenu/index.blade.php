@@ -1,9 +1,8 @@
 @php use Illuminate\Support\Str; @endphp
 
 @extends('layouts.app')
-
 @section('content')
-    <x-navbar />
+    <x-navbarBuyer />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -11,7 +10,7 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Daftar Menu" />
-                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('buyer.dashboard')], ['label' => 'Daftar Menu']]" />
+                <x-breadcrumbs :links="[['label' => 'Home', 'url' => route('buyer.dashboard')], ['label' => 'Daftar Menu']]" />
 
                 {{-- PEMBUNGKUS CONTENT --}}
                 <div class="card p-3 mb-4 shadow-sm">
@@ -66,7 +65,13 @@
 
                     <div class="row g-2 mt-2"> <!-- g-0 = no gutter -->
 
-                        @foreach ($products as $product)
+                        @forelse ($products as $product)
+                            @if (isset($notFound) && $notFound)
+                                <div class="alert alert-warning text-center mt-3">
+                                    Produk tidak ditemukan untuk kata kunci/kategori yang dipilih.
+                                </div>
+                            @endif
+
                             <div class="col-6 col-md-3">
                                 <div class="card border border-1 border-light rounded-3 shadow-sm">
                                     @if ($product->img)
@@ -91,31 +96,76 @@
 
                                             <h6 class="card-title"><b>{{ $product->nama_product }}</b></h6>
                                         </a>
-                                        <p class="text-secondary mb-2 fw-bold opacity-75" style="font-size: 11px;">Kedai
+                                        <p class="text-secondary fw-bold opacity-75" style="font-size: 11px;">Kedai
                                             {{ $product->user?->name ?? '-' }} 🏪</p>
+                                        <p class="mb-2">
+                                            @if ($product->user)
+                                                <span
+                                                    class="badge {{ $product->user?->is_open ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $product->user?->is_open ? 'Open' : 'Tutup' }}
+                                                </span>
+                                            @else
+                                                <span class="badge bg-secondary">Status Tidak Diketahui</span>
+                                            @endif
+                                        </p>
+                                        <p class="mb-2">
+                                            @php
+                                                $averageRating = $product->reviews->avg('rating');
+                                                $roundedRating = round($averageRating);
+                                            @endphp
+
+                                            @if ($product->reviews->count() > 0)
+                                                <div class="text-warning my-1">
+                                                    {!! str_repeat('★', $roundedRating) . str_repeat('☆', 5 - $roundedRating) !!}
+                                                    <small
+                                                        class="text-muted">({{ number_format($averageRating, 1) }}/5)</small>
+                                                </div>
+                                            @else
+                                                <div class="text-muted my-1">
+                                                    ~
+                                                </div>
+                                            @endif
+                                        </p>
                                         </p>
                                         <p>{{ Str::limit($product->deskripsi, 36) }}</p>
                                         <h6 class="card-text fw-bold mt-1 mb-2 text-danger mt-2 mb-2">Rp
                                             {{ number_format($product->harga, 0, ',', '.') }}</h6>
-
-                                        <div class=" cart-section d-flex align-items-center justify-content-end">
+                                        <div class="cart-section d-flex align-items-center justify-content-end">
                                             <form action="{{ route('buyer.keranjang.store') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                 <div class="addtocart d-flex gap-2 align-items-center justify-content-end">
                                                     <input type="number" name="quantity" value="1" min="1"
-                                                        class="form-control" style="width: 65px;">
-                                                    <button type="submit" class="btn btn-warning">
+                                                        class="form-control" style="width: 65px;"
+                                                        {{ $product->user?->is_open ? '' : 'disabled' }}>
+
+                                                    <button type="submit" class="btn btn-warning"
+                                                        {{ $product->user?->is_open ? '' : 'disabled' }}
+                                                        title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
                                                         <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
                                                     </button>
                                                 </div>
                                             </form>
                                         </div>
+
                                     </div>
                                 </div>
 
                             </div>
-                        @endforeach
+                        @empty
+                            {{-- Tampilkan jika tidak ada item dalam keranjang --}}
+                            <div class="card text-center animate_animated animate_fadeInUp" style="border-radius: 50px;">
+                                <div
+                                    class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
+                                    <img class="img-fluid" src="{{ asset('img/nothing.svg') }}" width="200"
+                                        alt="">
+                                    <h2 class="fw-bold fs-4 mt-3" style="color:var(--darkt);">Halaman Daftar Menu</h2>
+                                    <small class="text-secondary fw-bold" style="font-size: 0.8rem;">Maaf ya, makanan
+                                        sedang
+                                        tidak tersedia 😭​</small>
+                                </div>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 {{-- PEMBUNGKUS CONTENT --}}

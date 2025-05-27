@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar />
+    <x-navbar_seller />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -124,33 +124,41 @@
                                 @endphp
 
                                 @if ($i === 0)
-                                    <div
-                                        class="d-flex flex-wrap justify-content-between align-items-center py-2 ps-3 gap-2">
+                                    <div class="d-flex py-2 ps-3 gap-2">
+
+                                        {{-- Gambar Produk --}}
                                         @if ($item->product->img)
                                             <img src="{{ asset('images/' . $item->product->img) }}" class="rounded"
-                                                style="width: 80px; height: 80px; object-fit: cover; margin-right: 10px;">
+                                                style="width: 80px; height: 80px; object-fit: cover; flex-shrink: 0;">
                                         @else
                                             <div class="rounded bg-light d-flex align-items-center justify-content-center text-muted"
-                                                style="width: 80px; height: 80px; margin-right: 10px; font-size:10px;">
+                                                style="width: 80px; height: 80px; font-size: 10px; flex-shrink: 0;">
                                                 {{ $item->product->nama_product }}
                                             </div>
                                         @endif
 
-                                        <div class="flex-grow-1 me-auto">
-                                            <div class="fw-semibold text-truncate">{{ $item->product->nama_product }}</div>
-                                            <div class="text-muted small">
-                                                Harga: Rp {{ number_format($item->product->harga, 0, ',', '.') }} x
-                                                {{ $item->quantity }}
+                                        {{-- Konten Tengah + Payment Kanan --}}
+                                        <div class="d-flex justify-content-between w-100">
+                                            {{-- Info Produk --}}
+                                            <div class="me-3" style="min-width: 0;">
+                                                <div class="fw-semibold text-truncate">{{ $item->product->nama_product }}</div>
+                                                <div class="text-muted small">
+                                                    Harga: Rp {{ number_format($item->product->harga, 0, ',', '.') }} x {{ $item->quantity }}
+                                                </div>
+                                                <div class="fw-bold small text-danger">
+                                                    Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
+                                                </div>
+                                                <div class="text-muted small" style="white-space: normal; word-break: break-word;">
+                                                    {{ $item->notes ?? 'Tanpa catatan' }}
+                                                </div>
                                             </div>
-                                            <div class="fw-bold small text-danger">
-                                                Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
-                                            </div>
-                                        </div>
 
-                                        <div class="text-end">
-                                            <span class="text-dark opacity-50">{{ ucfirst($order->payment) }}</span><br>
-                                            <span
-                                                class="text-dark mt-1 opacity-50">{{ ucfirst($order->dine_option) }}</span>
+                                            {{-- Payment & Dine Option --}}
+                                            <div class="text-end" style="white-space: nowrap;">
+                                                <div class="text-dark opacity-50">{{ ucfirst($order->payment) }}</div>
+                                                <div class="text-dark opacity-50">{{ ucfirst($order->dine_option) }}</div>
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -166,39 +174,40 @@
 
                                 {{-- ========== ITEM SELAIN PERTAMA ========== --}}
                                 @if ($i > 0)
-                                    <div
-                                        class="d-flex flex-wrap justify-content-between align-items-center py-2 ps-3 gap-2">
+                                    <div class="d-flex py-2 ps-3 gap-2">
+                                        {{-- Gambar Produk --}}
                                         @if ($item->product->img)
                                             <img src="{{ asset('images/' . $item->product->img) }}" class="rounded"
-                                                style="width: 80px; height: 80px; object-fit: cover; margin-right: 10px;">
+                                                style="width: 80px; height: 80px; object-fit: cover; flex-shrink: 0;">
                                         @else
                                             <div class="rounded bg-light d-flex align-items-center justify-content-center text-muted"
-                                                style="width: 80px; height: 80px; margin-right: 10px; font-size:10px;">
+                                                style="width: 80px; height: 80px; font-size: 10px; flex-shrink: 0;">
                                                 {{ $item->product->nama_product }}
                                             </div>
                                         @endif
 
-                                        <div class="flex-grow-1 me-auto">
-                                            <div class="fw-semibold text-truncate">{{ $item->product->nama_product }}</div>
-                                            <div class="text-muted small">
-                                                Harga: Rp {{ number_format($item->product->harga, 0, ',', '.') }} x
-                                                {{ $item->quantity }}
+                                        {{-- Konten Tengah + Payment Kanan --}}
+                                        <div class="d-flex justify-content-between w-100">
+                                            {{-- Info Produk --}}
+                                            <div class="me-3" style="min-width: 0;">
+                                                <div class="fw-semibold text-truncate">{{ $item->product->nama_product }}</div>
+                                                <div class="text-muted small">
+                                                    Harga: Rp {{ number_format($item->product->harga, 0, ',', '.') }} x {{ $item->quantity }}
+                                                </div>
+                                                <div class="fw-bold small text-danger">
+                                                    Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
+                                                </div>
+                                                <div class="text-muted small" style="white-space: normal; word-break: break-word;">
+                                                    {{ $item->notes ?? 'Tanpa catatan' }}
+                                                </div>
                                             </div>
-                                            <div class="fw-bold small text-danger">
-                                                Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
-                                            </div>
-                                            <div class="text-dark mt-1 opacity-50">{{ ucfirst($order->dine_option) }}</div>
-                                        </div>
 
-                                        <div class="text-end">
-                                            <span class="text-dark opacity-50">{{ ucfirst($order->payment) }}</span><br>
-                                            <span
-                                                class="text-dark mt-1 opacity-50">{{ ucfirst($order->dine_option) }}</span>
+                                            {{-- Payment & Dine Option --}}
+                                            <div class="text-end" style="white-space: nowrap;">
+                                                <div class="text-dark opacity-50">{{ ucfirst($order->payment) }}</div>
+                                                <div class="text-dark opacity-50">{{ ucfirst($order->dine_option) }}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center mt-3 text-dark mt-1 opacity-50">Review:</div>
-                                    <div class="text-dark mt-1 opacity-50 ps-3">
-                                        {{ $item->review ? $item->review->comment : 'Pembeli Belum Memberikan Ulasan' }} <hr>
                                     </div>
                                 @endif
 
@@ -253,5 +262,5 @@
     </div>
     </div>
     </div>
-    <x-nav-bottom />
+    <x-nav-bottom_seller />
 @endsection

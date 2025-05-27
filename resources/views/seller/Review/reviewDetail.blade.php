@@ -4,7 +4,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <x-navbar />
+    <x-navbar_seller />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
             <div class="col-lg-3 pos">
@@ -135,5 +135,5 @@
             </div>
         </div>
     </div>
-    <x-nav-bottom />
+    <x-nav-bottom_seller />
 @endsection

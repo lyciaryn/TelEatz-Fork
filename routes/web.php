@@ -33,6 +33,7 @@ Route::get('/landing', function () {
 
 
 
+
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -54,6 +55,7 @@ Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'
 Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardBuyerController::class, 'index'])->name('buyer.dashboard');
+
 
     // Daftar Menu
     Route::get('/daftarmenu', [ProductController::class, 'index'])->name('buyer.daftarmenu.index');
@@ -94,6 +96,8 @@ Route::middleware(['auth', 'role:buyer'])->prefix('buyer')->group(function () {
 Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardSellerController::class, 'index'])->name('seller.dashboard');
+    Route::post('/dashboard/status', [DashboardSellerController::class, 'changeStatus'])->name('seller.dashboard.status');
+
 
     //Kelola Makanan
     Route::get('/kelolamakanan', [KelolaMakananController::class, 'index'])->name('kelolamakanan');
@@ -126,6 +130,7 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolauser.index');
     Route::resource('/kategori', CategoryController::class, [
         'as' => 'admin'
@@ -133,33 +138,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.kategori.edit');
     Route::put('/admin/category/{id}', [CategoryController::class, 'update'])->name('admin.kategori.update');
 
+    Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelola_akun.index');
+    Route::post('/kelolauser/tambahuser', [UserController::class, 'store'])->name('admin.kelola_akun.store');
+    Route::get('/kelolauser/tambahuser', [UserController::class, 'create'])->name('admin.kelola_akun.create');
+    Route::get('/kelolauser/edit/{user}', [UserController::class, 'edit'])->name('admin.kelola_akun.edit');
+    Route::put('/kelolauser/edit/{user}', [UserController::class, 'update'])->name('admin.kelola_akun.update');
+    Route::delete('/kelolauser/delete/{user}', [UserController::class, 'destroy'])->name('admin.kelola_akun.destroy');
+
+
     // Transaksi
     Route::get('/transaksi', [Transaction::class, 'index'])->name('admin.transaction');
 });
-
-
-
-
-// Route::get('/kelolamenuseller', function () {
-//     return view('seller.profil_seller');
-// });
-
-// Route::get('/pesananseller', function () {
-//     return view('seller.pesanan_seller');
-// });
-
-// Route::get('/historiseller', function () {
-//     return view('seller.histori_seller');
-// })->name('seller.historiseller');
-
-// Route::get('/ulasanseller', function () {
-//     return view('seller.ulasan_seller');
-// });
-
-// Route::get('/logoutseller', function () {
-//     return view('seller.profil_seller');
-// });
-
-// Route::get('/kelolamakanan', function () {
-//     return view('seller.KelolaMakanan.KelolaMakanan_seller');
-// });

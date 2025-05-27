@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Rules\Recaptcha;
 
 class RegisterController extends Controller
 {
@@ -21,6 +22,7 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:5|confirmed',
             'role' => 'required|in:buyer,seller',
+            'g-recaptcha-response' => [new Recaptcha],
         ]);
 
         $user = new User();
@@ -28,6 +30,7 @@ class RegisterController extends Controller
         $user->email = $validated['email'];
         $user->password = Hash::make($validated['password']);
         $user->role = $validated['role'];
+
 
         // Atur email_verified_at kalau buyer
         if ($validated['role'] === 'buyer') {

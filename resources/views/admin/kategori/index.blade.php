@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <x-navbar />
 <div class="container">
     <div class="row dash" style="margin-top: 100px;">
