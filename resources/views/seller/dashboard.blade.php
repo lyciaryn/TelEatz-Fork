@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@php
+    use Illuminate\Support\Carbon;
+@endphp
 
 @section('content')
     <x-navbar_seller />
@@ -21,8 +24,14 @@
                                     <h2 class="text-light text-lg-start text-md-start mb-1 mt-0 text-uppercase">
                                         {{ Auth::user()->name }}👋
                                     </h2>
-                                    <p style="font-size: 12px !important" class="text-light fw-lighter ">⏰ Terakhir Login:
-                                        20:202:20s</p>
+                                    <p style="font-size: 12px !important" class="text-light fw-lighter">
+                                        ⏰ Last Login:
+                                        {{ Auth::user()->last_logout_at
+                                            ? Carbon::parse(Auth::user()->last_logout_at)->translatedFormat('l, d F Y') .
+                                                ' · ' .
+                                                Carbon::parse(Auth::user()->last_logout_at)->format('H:i')
+                                            : '-' }}
+                                    </p>
                                 </div>
                                 <img class="img-fluid" src="{{ asset('img/alert-nama.svg') }}" width="130"
                                     alt="">
@@ -79,7 +88,7 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title text-center pb-3">Rata - Rata Review</h5>
-                                <p class="text-center pb-3">{{ number_format($avgReviews, 2, ',') }}</p>
+                                <p class="text-center pb-3">{{ number_format($avgReviews, 2, ',') }}/5</p>
                             </div>
                         </div>
                     </div>

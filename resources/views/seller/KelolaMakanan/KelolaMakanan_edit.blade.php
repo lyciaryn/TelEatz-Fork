@@ -12,18 +12,21 @@ $title = 'Edit Produk Saya';
             <x-sidebar_seller/>
         </div>
         <div class="col-lg-9 d-flex flex-column gap-3">
-            <x-header title="Dashboard" />
+            <x-header title="Edit Produk" />
+            <x-breadcrumbs :links="[['label' => 'Kelola Menu', 'url' => route('kelolamakanan')], ['label' => 'Edit Kelola Menu', 'url' => route('seller.dashboard')]], ['label' => 'Kelola Menu']" />
             <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
-            <form action="{{ route('kelolamakanan.update', $makanan->id) }}" method="POST" enctype="multipart/form-data">
+            <form id="editForm{{ $makanan->id }}" action="{{ route('kelolamakanan.update', $makanan->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                     <div class="d-flex align-items-center">
                         @if ($makanan->img)
                             <img src="{{ asset('images/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
-                                class="img-fluid me-4" style="max-width: 300px; height: auto; border-radius: 20px;">
+                                class="img-fluid me-4" 
+                                style="width: 300px; height: 300px; object-fit: cover; border-radius: 20px;">
                             @else
-                                <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" style="height: 135px; border-radius: 16px;">
+                                <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" 
+                                    style="width: 300px; height: 300px; border-radius: 20px; flex-shrink: 0;">
                                     {{ $makanan->nama_product }}
                                 </div>
                         @endif
@@ -57,15 +60,14 @@ $title = 'Edit Produk Saya';
                                 <img id="imagePreview" src="#" alt="Preview" style="display: none; max-width: 200px; margin-top: 10px;">
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <button type="button" class="btn btn-primary" onclick="confirmEdited({{ $makanan->id }})">Simpan</button>
                                 <button type="reset" class="btn btn-danger">Batal</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
-
-                 </div>
+            </div>
             </div>
         </div>
     </div>

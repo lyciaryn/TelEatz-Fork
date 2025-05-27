@@ -224,7 +224,18 @@ $title = 'Histori Pesanan';
                 <div class="text-start">
                     <p class="alert alert-success text-start fw-bold p-3 w-50 btn-disable w-100 mt-3"
                         style="border: none; color: rgb(5, 151, 127); background-color:rgb(184, 245, 235)">
-                        Estimasi Siap 15 menit
+                        @if ($order->status === 'selesai')
+                            Pesanan siap
+                        @elseif ($order->status === 'dibatalkan')
+                            Pesanan dibatalkan
+                        @elseif ($order->status === 'diproses' && $order->estimated_ready_at)
+                            Estimasi siap pada {{ $order->estimated_ready_at->format('H:i') }}
+                            @if ($order->estimated_ready_at->isPast())
+                                <span class="text"> (Pesananmu sudah lewat estimasi nih!)</span>
+                            @endif
+                        @elseif ($order->status === 'diproses' && $order->estimated_ready_at == null)
+                            Pesananmu akan siap sebentar lagi
+                        @endif
                     </p>
                 </div>
 

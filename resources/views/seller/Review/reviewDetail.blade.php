@@ -49,9 +49,12 @@
                                 <div class="text-muted small">
                                     Harga: Rp {{ number_format($product->harga, 0, ',', '.') }}
                                 </div>
-                                <div class="text-muted small">Deskripsi: {{ str::limit($product->deskripsi, 40) }}</div>
+                                <div class="text-muted small">Deskripsi: {{ str::limit($product->deskripsi, 70) }}</div>
                                 <div class="fw-bold small text-danger">
                                     Total Review: {{ $product->reviews ? $product->reviews->count() : 0 }}
+                                </div>
+                                <div class="fw-bold small text-danger" style="white-space: normal; word-break: break-word;">
+                                    Rata - Rata Review: {{ $product->reviews->avg('rating') ?? 0 }}
                                 </div>
                             </div>
 
