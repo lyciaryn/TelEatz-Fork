@@ -9,6 +9,11 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Edit Kategori" />
+                <x-breadcrumbs :links="[
+                    ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+                    ['label' => 'Kelola Kategori', 'url' => route('admin.kategori.index')],
+                    ['label' => 'Edit Kategori'],
+                ]" />
                 <div class="row g-3">
                     <!-- Kolom 1: Alert -->
                     <form action="{{ route('admin.kategori.update', $kategori->id) }}" method="POST">

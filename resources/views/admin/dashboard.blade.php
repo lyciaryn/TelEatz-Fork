@@ -9,6 +9,7 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Dashboard" />
+
                 <div class="row g-3">
                     <!-- Kolom 1: Alert -->
                     <div class="col-md-8">
@@ -27,13 +28,40 @@
                         </div>
                     </div>
 
-                    <!-- Kolom 2: Card tambahan -->
+                    <!-- Kolom 2: Info tambahan -->
                     <div class="col-md-4">
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm text-center">
                             <div class="card-body">
-                                <h5 class="card-title">Info Tambahan</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium,
-                                    maiores!.</p>
+                                <h6 class="text-muted">Total Seller</h6>
+                                <h2 class="fw-bold">{{ $totalSeller }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistik -->
+                <div class="row g-3 mt-3">
+                    <div class="col-md-4">
+                        <div class="card shadow-sm text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Total Penjualan</h6>
+                                <h2 class="fw-bold">{{ $totalPenjualan }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Jumlah Pengguna</h6>
+                                <h2 class="fw-bold">{{ $totalBuyer }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm text-center">
+                            <div class="card-body">
+                                <h6 class="text-muted">Transaksi Aktif</h6>
+                                <h2 class="fw-bold">{{ $transaksiAktif }}</h2>
                             </div>
                         </div>
                     </div>
@@ -41,5 +69,6 @@
             </div>
         </div>
     </div>
+
     <x-nav-bottom_admin />
 @endsection

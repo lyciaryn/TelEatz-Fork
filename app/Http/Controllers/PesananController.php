@@ -24,7 +24,7 @@ class PesananController extends Controller
         $allStatus = Order::where('seller_id', auth()->id())->pluck('status')->unique()->values();
         $allDineOptions = Order::where('seller_id', auth()->id())->pluck('dine_option')->unique()->values();
         $allPayment = Order::where('seller_id', auth()->id())->pluck('payment')->unique()->values();
-        
+
         if ($request->filled('search')) {
             $search = $request->search;
             $pesanan->where(function ($q) use ($search) {
@@ -41,7 +41,7 @@ class PesananController extends Controller
         } elseif ($request->filled('end_date')) {
             $pesanan->where('created_at', '<=', $request->end_date);
         }
- 
+
         // Filter status
         if ($request->filled('status')) {
             $pesanan->where('status', $request->status);
@@ -56,8 +56,7 @@ class PesananController extends Controller
         }
 
         $sortOrder = $request->input('ordering', 'asc'); // default: terbaru
-        if ($request->filled('ordering'))
-        {
+        if ($request->filled('ordering')) {
             $pesanan = $pesanan->orderBy('created_at', $sortOrder);
         }
 
@@ -68,14 +67,14 @@ class PesananController extends Controller
     public function indexPesanan(Request $request)
     {
         $pesanan = auth()->user()->receivedOrders()
-        ->whereIn('status', ['diproses', 'pending'])
-        ->with('orderItems.product');
+            ->whereIn('status', ['diproses', 'pending'])
+            ->with('orderItems.product');
 
         // Get all status for filter
         $allStatus = Order::where('seller_id', auth()->id())->pluck('status')->unique()->values();
         $allDineOptions = Order::where('seller_id', auth()->id())->pluck('dine_option')->unique()->values();
         $allPayment = Order::where('seller_id', auth()->id())->pluck('payment')->unique()->values();
-        
+
         if ($request->filled('search')) {
             $search = $request->search;
             $pesanan->where(function ($q) use ($search) {
@@ -86,8 +85,8 @@ class PesananController extends Controller
         }
 
         $pesanan->whereIn('status', ['diproses', 'pending'])
-        ->with('orderItems.product');
-        
+            ->with('orderItems.product');
+
         // Filter status
         if ($request->filled('status')) {
             $pesanan->where('status', $request->status);
@@ -102,8 +101,7 @@ class PesananController extends Controller
         }
 
         $sortOrder = $request->input('ordering', 'asc'); // default: terbaru
-        if ($request->filled('ordering'))
-        {
+        if ($request->filled('ordering')) {
             $pesanan = $pesanan->orderBy('created_at', $sortOrder);
         }
 
@@ -115,9 +113,9 @@ class PesananController extends Controller
     public function show($id)
     {
         $pesanan = auth()->user()->orders()
-        ->where('id', $id)
-        ->with('orderItems.product')
-        ->firstOrFail();
+            ->where('id', $id)
+            ->with('orderItems.product')
+            ->firstOrFail();
 
         return view('buyer.Pesanan.Pesanan_detail', compact('pesanan'));
     }
@@ -126,19 +124,25 @@ class PesananController extends Controller
     {
         $pesanan = auth()->user()->receivedOrders()->where('id', $id)->firstOrFail();
 
-        if ($request->input('action') == 'lanjut'){
+        if ($request->input('action') == 'lanjut') {
             if ($pesanan->status == 'pending') {
                 $pesanan->status = 'diproses';
+
+                // Tambahkan estimated_ready_at
+                $maxEstimate = $pesanan->orderItems->max(function ($item) {
+                    return $item->product->estimate ?? 0;
+                });
+
+                $pesanan->estimated_ready_at = now()->addMinutes($maxEstimate);
             } elseif ($pesanan->status == 'diproses') {
                 $pesanan->status = 'selesai';
             }
         }
 
-        if ($request->input('action') == 'batal'){
+        if ($request->input('action') == 'batal') {
             $pesanan->status = 'dibatalkan';
-
         }
-        
+
         $pesanan->save();
 
         return redirect()->back()->with('success', 'Status pesanan berhasil diperbarui.');
@@ -151,6 +155,4 @@ class PesananController extends Controller
 
         return view('seller.Pesanan.Pesanan_seller', compact('order'));
     }
-
-    
 }

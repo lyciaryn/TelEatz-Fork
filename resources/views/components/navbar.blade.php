@@ -54,13 +54,13 @@
                 <div class="responsive-nav-drop d-lg-none mb-3 " style="border-radius: 25px; width: 80%;">
                     <li class="nav-item text-center border-2 text-light "
                         style=" padding: 1rem; border: 1px solid rgba(0, 0, 0, 0.09); background-color: var(--primary); border-radius: 25px; margin-top: 1rem;">
-                        <a class="nav-link px-0 text-light " href="{{ route('buyer.dashboard') }}">Home</a>
-                        <a class="nav-link px-0 text-light " href="{{ route('buyer.daftarmenu.index') }}">Daftar
-                            Menu</a>
-                        <a class="nav-link px-0 text-light " href="{{ route('buyer.pesanan.index') }}">Pesanan</a>
-                        <a class="nav-link px-0 text-light " href="{{ route('buyer.keranjang.index') }}">Keranjang</a>
-                        <a class="nav-link px-0 text-light " href="{{ route('buyer.profile.profile_buyer') }}">Profil
-                            Saya</a>
+                        <a class="nav-link px-0 text-light " href="{{ route('admin.dashboard') }}">Home</a>
+                        <a class="nav-link px-0 text-light " href="{{ route('admin.kelola_akun.index') }}">Kelola
+                            User</a>
+                        <a class="nav-link px-0 text-light " href="{{ route('admin.kategori.index') }}">Kelola
+                            Kategori</a>
+                        <a class="nav-link px-0 text-light " href="{{ route('admin.transaction') }}">Histori
+                            Transaksi</a>
                         <form id="logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

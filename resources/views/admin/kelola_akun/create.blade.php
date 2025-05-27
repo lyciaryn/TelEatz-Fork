@@ -10,6 +10,11 @@
 
             <div class="col-lg-9">
                 <x-header title="Tambah User" />
+                <x-breadcrumbs :links="[
+                    ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+                    ['label' => 'Kelola User', 'url' => route('admin.kelola_akun.index')],
+                    ['label' => 'Tambah User'],
+                ]" />
 
                 <div class="card shadow-sm">
                     <div class="card-body">

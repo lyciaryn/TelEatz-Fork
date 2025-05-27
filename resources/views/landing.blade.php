@@ -83,8 +83,8 @@
                 <nav id="navmenu" class="navmenu">
                     <ul>
                         <li><a style="text-decoration:none;" href="#home" class="active">Home<br></a></li>
-                        <li><a href="#features">Features</a></li>
                         <li><a href="#about">About</a></li>
+                        <li><a href="#features">Features</a></li>
                         <li><a style="color:#1092FE" class="btn btn-light px-4 py-2 fw-bold"
                                 href="{{ route('login') }}">Login</a>
                         </li>
@@ -129,7 +129,8 @@
                             <div class="icon-box">
                                 <div class="icon"><i style="font-size: 10rem; opacity: 50%"
                                         class='bx bxs-bowl-hot'></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Lihat Makanan😍​</a></h4>
+                                <h4 class="title"><a href="" class="stretched-link"
+                                        style="cursor: default;">Lihat Makanan😍​</a></h4>
                             </div>
 
                         </div>
@@ -138,7 +139,8 @@
                             <div class="icon-box">
                                 <div class="icon"><i style="font-size: 10rem; opacity: 50%"
                                         class='bx bxs-food-menu'></i></div>
-                                <h4 class="title"><a href="" class="stretched-link">Pesan Makanan😋​</a></h4>
+                                <h4 class="title"><a href="" class="stretched-link"
+                                        style="cursor: default;">Pesan Makanan😋​</a></h4>
                             </div>
                         </div>
 
@@ -258,7 +260,8 @@
                         makanan, dan juga melakukan pembayaran secara non-tunai dengan praktis.
                     </p>
                     <div class="social-links d-flex mt-4">
-                        <a href="https://www.instagram.com/telkomuniversity/"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.instagram.com/telkomuniversity/" target="_blank"><i
+                                class="bi bi-instagram"></i></a>
                     </div>
                 </div>
 

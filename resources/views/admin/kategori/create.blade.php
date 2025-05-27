@@ -9,6 +9,11 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Tambah Kategori" />
+                <x-breadcrumbs :links="[
+                    ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+                    ['label' => 'Kelola Kategori', 'url' => route('admin.kategori.index')],
+                    ['label' => 'Tambah Kategori'],
+                ]" />
                 <div class="row g-3">
                     <form action="{{ route('admin.kategori.store') }}" method="POST">
                         @csrf

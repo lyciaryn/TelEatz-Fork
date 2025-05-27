@@ -10,7 +10,11 @@
 
             <div class="col-lg-9">
                 <x-header title="Edit User" />
-
+                <x-breadcrumbs :links="[
+                    ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+                    ['label' => 'Kelola User', 'url' => route('admin.kelola_akun.index')],
+                    ['label' => 'Edit User'],
+                ]" />
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <!-- Tampilkan error jika ada -->

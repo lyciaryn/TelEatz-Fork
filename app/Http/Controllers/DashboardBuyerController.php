@@ -27,9 +27,16 @@ class DashboardBuyerController extends Controller
         $totalActiveOrderItems = $activeOrders->sum(function ($order) {
             return $order->orderItems->count();
         });
-        // Produk
+
+        // Produk: hanya hitung order items yang status order-nya 'diproses'
         $query = Product::with(['user', 'category', 'reviews'])
-            ->withCount('orderItems')
+            ->withCount([
+                'orderItems as order_items_count' => function ($query) {
+                    $query->whereHas('order', function ($q) {
+                        $q->where('status', 'diproses');
+                    });
+                }
+            ])
             ->where('is_available', true)
             ->orderByDesc('order_items_count');
 
@@ -52,6 +59,7 @@ class DashboardBuyerController extends Controller
         $products = $query->take(4)->get(); // maksimal 4 produk
         $categories = Category::all();
 
+        // Kalau semua order_items_count = 0, fallback ke produk terbaru
         if ($products->every(fn($product) => $product->order_items_count === 0)) {
             $products = Product::with(['user', 'category', 'reviews'])
                 ->where('is_available', true)

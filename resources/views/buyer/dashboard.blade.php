@@ -129,10 +129,17 @@
                                             <h6 class="card-title d-flex align-items-center justify-content-start">
                                                 <b>{{ $product->nama_product }}</b>
 
-                                                <span style="font-size: 11px; background-color: var(--primary)"
-                                                    class="ms-2 badge small">
-                                                    {{ $product->order_items_count }}x dibeli
-                                                </span>
+                                                @if ($product->order_items_count == null)
+                                                    <span style="font-size: 11px; background-color: var(--grey)"
+                                                        class="ms-2 badge small">
+                                                        0x dibeli
+                                                    </span>
+                                                @else
+                                                    <span style="font-size: 11px; background-color: var(--primary)"
+                                                        class="ms-2 badge small">
+                                                        {{ $product->order_items_count }}x dibeli
+                                                    </span>
+                                                @endif
 
                                             </h6>
 
@@ -175,11 +182,18 @@
                                                         class="form-control" style="width: 65px;"
                                                         {{ $product->user?->is_open ? '' : 'disabled' }}>
 
-                                                    <button type="submit" class="btn btn-warning"
-                                                        {{ $product->user?->is_open ? '' : 'disabled' }}
-                                                        title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
-                                                        <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
-                                                    </button>
+                                                    @if ($product->user?->is_open == 1)
+                                                        <button type="submit" class="btn btn-warning"
+                                                            title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
+                                                            <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
+                                                        </button>
+                                                    @else
+                                                        <button type="submit" class="btn btn-secondary disabled"
+                                                            title="{{ $product->user?->is_open ? 'Tambah ke keranjang' : 'Toko sedang tutup' }}">
+                                                            <i class='bx bxs-cart-add fs-5 mt-1 text-white'></i>
+                                                        </button>
+                                                    @endif
+
                                                 </div>
                                             </form>
                                         </div>

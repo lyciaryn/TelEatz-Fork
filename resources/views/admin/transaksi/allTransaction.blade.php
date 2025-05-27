@@ -10,7 +10,7 @@
 
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Daftar Transaksi" />
-                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')], ['label' => 'History']]" />
+                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('admin.dashboard')], ['label' => 'History']]" />
 
                 {{-- ================== PESANAN LOOP ================== --}}
                 @forelse($transaction as $order)
@@ -18,13 +18,12 @@
                         {{-- ========== HEADER PESANAN ========== --}}
                         <div class="card-header bg-white d-flex align-items-center justify-content-between">
                             <div>
-                                <strong>
-                                    qq
-                                </strong>
-                                <br>
-                                <br>
-                                <small class="text-muted"><b>Id Pesanan: {{ $order->id }}</b></small><br>
-                                <small class="text-muted">Tanggal: {{ $order->created_at }}</small>
+                                <div>
+                                    <strong>🏪 Kedai
+                                        {{ $order->order_items->first()?->product->user->name ?? 'Tidak Diketahui' }}</strong><br>
+                                    <small class="text-muted"><b>Id Pesanan: {{ $order->id }}</b></small><br>
+                                    <small class="text-muted">Tanggal: {{ $order->created_at }}</small>
+                                </div>
                             </div>
                             <span class="fw-bold text-{{ $order->status === 'pending' ? 'warning' : 'success' }}">
                                 {{ ucfirst($order->status) }}
@@ -60,7 +59,7 @@
                                         <div class="flex-grow-1 me-auto">
                                             <div class="fw-semibold text-truncate">{{ $item->product->nama_product }}</div>
                                             <div class="text-muted small">
-                                                Harga: Rp {{ number_format($item->product->harga, 0, ',', '.') }} x
+                                                Harga: Rp {{ number_format($item->price, 0, ',', '.') }} x
                                                 {{ $item->quantity }}
                                             </div>
                                             <div class="fw-bold small text-danger">
@@ -145,7 +144,7 @@
                 <div class="d-flex mt-3">
                     {{-- TOMBOL BATAL --}}
                     <h6 class="fw-bold text-danger mt-1 ms-auto">
-                        Total: Rp {{ number_format($order->total_harga, 0, ',', '.') }}
+                        Subtotal: Rp {{ number_format($subtotal, 0, ',', '.') }}
                     </h6>
                 </div>
 

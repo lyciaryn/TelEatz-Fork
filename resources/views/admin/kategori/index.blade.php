@@ -9,6 +9,10 @@
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Kelola Kategori" />
+                <x-breadcrumbs :links="[
+                    ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+                    ['label' => 'Kelola Kategori', 'url' => route('admin.kategori.index')],
+                ]" />
                 <a href="{{ route('admin.kategori.create') }}" class="btn btn-primary">+ Tambah Kategori</a>
 
                 <table class="table table-bordered mt-3">

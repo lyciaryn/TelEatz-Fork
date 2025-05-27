@@ -12,10 +12,11 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = Product::with(['user', 'category'])
-            ->withCount('orderItems') // hitung jumlah order item per product
-            ->where('is_available', true)
-            ->orderByDesc('order_items_count'); // urutkan dari yang paling sering dibeli
+            ->withCount('orderItems') // jumlah order item
+            ->withAvg('reviews', 'rating') // hitung rata-rata rating
+            ->where('is_available', true);
 
+        // Search by nama product atau nama user
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -26,11 +27,22 @@ class ProductController extends Controller
             });
         }
 
+        // Filter by kategori
         if ($request->filled('category')) {
             $query->whereHas('category', function ($q) use ($request) {
                 $q->where('nama_kategori', $request->category);
             });
         }
+
+        // Filter by urutan / sorting
+        // Filter by urutan / sorting
+        if ($request->filled('sort') && $request->sort == 'rating') {
+            $query->orderByDesc('reviews_avg_rating'); // rating tertinggi
+        } else {
+            $query->orderByDesc('order_items_count'); // default: terbanyak dibeli
+        }
+
+
 
         $products = $query->get();
         $categories = Category::all();
