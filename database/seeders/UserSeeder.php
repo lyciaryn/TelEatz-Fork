@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345'),
             'email_verified_at' => now(),
             'role' => 'seller',
+            'is_open' => 1
         ]);
 
         // SELLER ID 2
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345'),
             'email_verified_at' => now(),
             'role' => 'seller',
+            'is_open' => 0
         ]);
 
         User::create([
@@ -51,6 +53,21 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'rayhan ardani',
             'email' => 'rayhan@gmail.com',
+            'password' => Hash::make('12345'),
+            'email_verified_at' => now(),
+            'role' => 'buyer',
+        ]);
+
+        User::create([
+            'name' => 'Junhaikal',
+            'email' => 'junha@gmail.com',
+            'password' => Hash::make('12345'),
+            'email_verified_at' => now(),
+            'role' => 'buyer',
+        ]);
+        User::create([
+            'name' => 'Nadya',
+            'email' => 'nadya@gmail.com',
             'password' => Hash::make('12345'),
             'email_verified_at' => now(),
             'role' => 'buyer',

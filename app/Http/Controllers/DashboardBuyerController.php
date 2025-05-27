@@ -33,7 +33,7 @@ class DashboardBuyerController extends Controller
             ->withCount([
                 'orderItems as order_items_count' => function ($query) {
                     $query->whereHas('order', function ($q) {
-                        $q->where('status', 'diproses');
+                        $q->whereIn('status', ['diproses', 'selesai']);
                     });
                 }
             ])
