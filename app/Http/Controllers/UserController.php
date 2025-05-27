@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -44,69 +45,106 @@ class UserController extends Controller
         return view('admin.kelola_akun.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
+   public function store(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'role' => 'required|in:admin,seller,buyer',
+        'password' => 'required|min:5',
+        'email_verified_at' => now()
+    ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+    $user = new User();
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];
+    $user->password = bcrypt($validated['password']);
+    $user->role = $validated['role'];
+    $user->email_verified_at = now();
+    $user->is_open = false;
+    $user->save();
 
-        return redirect()->route('admin.kelola_akun.index')->with('success', 'User berhasil ditambahkan.');
-    }
+    return redirect()->route('admin.kelola_akun.index')->with('success', 'User berhasil ditambahkan.');
+}
 
     public function edit(User $user)
     {
         return view('admin.kelola_akun.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-        ]);
+public function update(Request $request, User $user)
+{
+    $validated = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+        'role' => 'required|in:admin,seller,buyer',
+        'password' => 'nullable|min:6',
+        'verified' => 'nullable|boolean', // untuk checkbox
+    ]);
 
-        $user->update($request->only('name', 'email'));
+    // Update field dasar
+    $user->name = $validated['name'];
+    $user->email = $validated['email'];
+    $user->role = $validated['role'];
 
-        return redirect()->route('admin.kelola_akun.index')->with('success', 'User berhasil diupdate.');
+    // Update password jika diberikan
+    if (!empty($validated['password'])) {
+        $user->password = bcrypt($validated['password']);
     }
 
-    public function destroy(User $user)
-    {
-        if ($user->email_verified_at) {
-            // User sudah verified → soft delete
-
-            // Update is_open dan email null
-            $user->is_open = false;
-            $user->email = null;
-            $user->save();
-
-            // Set produk user jadi tidak tersedia
-            $user->products()->update(['is_available' => false]);
-
-            // Soft delete user
-            $user->delete();
-
-            $message = 'User verified berhasil di hapus, produk dinonaktifkan.';
-        } else {
-            // User belum verified → hapus permanen
-
-            // Hapus semua produk user permanen
-            $user->products()->delete();
-
-            // Hapus user permanen
-            $user->forceDelete();
-
-            $message = 'User not verified telah dihapus permanen.';
-        }
-
-        return redirect()->route('admin.kelola_akun.index')->with('success', $message);
+    // Update status verifikasi
+    if ($request->has('verified') && $validated['verified']) {
+        $user->email_verified_at = now();
+    } else {
+        $user->email_verified_at = null;
     }
+
+    $user->save();
+
+    return redirect()->route('admin.kelola_akun.index')->with('success', 'User berhasil diupdate.');
 }
+
+
+public function destroy(User $user)
+{
+    // Cek apakah user memiliki order dengan status "diproses"
+    $hasProcessingOrder = DB::table('orders')
+        ->where('buyer_id', $user->id)
+        ->where('status', 'diproses')
+        ->exists();
+
+    if ($hasProcessingOrder) {
+        return redirect()
+            ->route('admin.kelola_akun.index')
+            ->with('error', 'User tidak dapat dihapus karena masih memiliki pesanan.');
+    }
+
+    if ($user->email_verified_at) {
+        // User sudah verified → soft delete
+
+        // Update is_open dan email null
+        $user->is_open = false;
+        $user->email = null;
+        $user->save();
+
+        // Set produk user jadi tidak tersedia
+        $user->products()->update(['is_available' => false]);
+
+        // Soft delete user
+        $user->delete();
+
+        $message = 'User verified berhasil dihapus, produk dinonaktifkan.';
+    } else {
+        // User belum verified → hapus permanen
+
+        // Hapus semua produk user permanen
+        $user->products()->delete();
+
+        // Hapus user permanen
+        $user->forceDelete();
+
+        $message = 'User not verified telah dihapus permanen.';
+    }
+
+    return redirect()->route('admin.kelola_akun.index')->with('success', $message);
+}}

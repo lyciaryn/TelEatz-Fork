@@ -134,7 +134,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
 
     Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelola_akun.index');
-    Route::post('/kelolauser/tambahuser', [UserController::class, 'store'])->name('admin.kelola_akun.create');
+    Route::post('/kelolauser/tambahuser', [UserController::class, 'store'])->name('admin.kelola_akun.store');
+    Route::get('/kelolauser/tambahuser', [UserController::class, 'create'])->name('admin.kelola_akun.create');
     Route::get('/kelolauser/edit/{user}', [UserController::class, 'edit'])->name('admin.kelola_akun.edit');
     Route::put('/kelolauser/edit/{user}', [UserController::class, 'update'])->name('admin.kelola_akun.update');
     Route::delete('/kelolauser/delete/{user}', [UserController::class, 'destroy'])->name('admin.kelola_akun.destroy');
