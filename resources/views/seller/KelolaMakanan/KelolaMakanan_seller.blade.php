@@ -109,9 +109,9 @@ $title = 'Produk Saya';
                                         <div class="mt-auto d-flex justify-content-around align-items-center"
                                             style="box-shadow: none !important;">
                                             <a href="{{ route('kelolamakanan.showdetail', $item->id) }}"
-                                                class="btn btn-primary d-flex align-items-center justify-content-center" style="height: 40px;">Detail</a>
+                                                class="btn btn-primary d-flex align-items-center justify-content-center" style="height: 40px; width: 80px;">Detail</a>
                                             <a href="{{ route('kelolamakanan.edit', $item->id) }}"
-                                                class="btn btn-primary d-flex align-items-center justify-content-center mx-1" style="height: 40px;">Edit</a>
+                                                class="btn btn-primary d-flex align-items-center justify-content-center mx-1" style="height: 40px; width: 80px">Edit</a>
                                             <form id="deleteForm{{ $item->id }}"
                                                 action="{{ route('kelolamakanan.softdelete', $item->id) }}" method="POST">
                                                 @csrf

@@ -111,6 +111,30 @@
 
 
     <script>
+        function confirmEdited(id) {
+            Swal.fire({
+                title: "Yakin menyimpan perubahan?",
+                text: "Data produk kamu akan diperbarui!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+                reverseButtons: false,
+                customClass: {
+                    confirmButton: 'swal-confirm-btn btn btn-primary me-4',
+                    cancelButton: 'swal-cancel-btn btn btn-danger'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('editForm' + id).submit();
+                }
+            });
+        }
+    </script>
+
+
+    <script>
         function confirmLogout() {
             Swal.fire({
                 title: "Yakin ingin logout?",

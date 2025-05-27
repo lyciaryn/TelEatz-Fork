@@ -11,7 +11,8 @@ $title = 'Detail Produk Saya';
                 <x-sidebar_seller />
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
-                <x-header title="Dashboard" />
+                <x-header title="Detail Produk" />
+                <x-breadcrumbs :links="[['label' => 'Kelola Menu', 'url' => route('kelolamakanan')], ['label' => 'Detail Produk']]" />
                 <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
                     <form action="{{ route('kelolamakanan.showdetail', $makanan->id) }}" method="GET"
                         enctype="multipart/form-data">
@@ -21,9 +22,11 @@ $title = 'Detail Produk Saya';
                             <div class="d-flex align-items-center">
                                 @if ($makanan->img)
                                 <img src="{{ asset('images/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
-                                    class="img-fluid me-4" style="max-width: 300px; height: auto; border-radius: 20px;">
+                                    class="img-fluid me-4" 
+                                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 20px;">
                                 @else
-                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" style="height: 135px; border-radius: 16px;">
+                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" 
+                                        style="width: 300px; height: 300px; border-radius: 20px; flex-shrink: 0;">
                                         {{ $makanan->nama_product }}
                                     </div>
                                 @endif

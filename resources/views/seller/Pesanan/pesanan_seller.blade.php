@@ -222,11 +222,38 @@ $title = 'Pesanan Saya';
                 @endforeach
 
                 {{-- ========== ESTIMASI & TOTAL ========== --}}
-                <div class="text-start">
-                    <p class="alert alert-success text-start fw-bold p-3 w-50 btn-disable w-100 mt-3"
-                        style="border: none; color: rgb(5, 151, 127); background-color:rgb(184, 245, 235)">
-                            Estimasi Selesai: {{ $items->avg(fn($item) => $item->product->estimate) }} menit (Mungkin bisa lebih lama jika sedang ramai)
-                    </p>
+                <div class="text-start mt-3">
+                    <h6 class="alert fw-bold p-3 w-100"
+                        style="border: none; background-color:
+                        {{ $order->status === 'selesai'
+                            ? 'rgb(184, 245, 235)'
+                            : ($order->status === 'dibatalkan'
+                                ? '#ffe5e5'
+                                : ($order->status === 'pending'
+                                    ? '#fff7e6'
+                                    : 'rgb(184, 245, 235)')) }};
+                        color:
+                        {{ $order->status === 'dibatalkan'
+                            ? '#d8000c'
+                            : ($order->status === 'pending'
+                                ? '#856404'
+                                : 'rgb(5, 151, 127)') }};">
+
+                        @if ($order->status === 'selesai')
+                            Pesanan siap diambil
+                        @elseif ($order->status === 'dibatalkan')
+                            Pesanan dibatalkan
+                        @elseif ($order->status === 'diproses' && $order->estimated_ready_at)
+                            Estimasi siap pada {{ $order->estimated_ready_at->format('H:i') }}
+                            @if ($order->estimated_ready_at->isPast())
+                                <span class="text"> (Pesananmu sudah lewat estimasi nih!)</span>
+                            @endif
+                        @elseif ($order->status === 'diproses' && $order->estimated_ready_at == null)
+                            Pesananmu akan siap sebentar lagi
+                        @elseif ($order->status === 'pending')
+                            Hallo ada pesanan baru nih, segera proses ya!
+                        @endif
+                    </h6>   
                 </div>
 
                 <div class="text-end mt-3 fw-bold d-flex justify-content-between align-items-center">
@@ -236,9 +263,9 @@ $title = 'Pesanan Saya';
                         @method('PUT')
                         <button type="submit" class="btn btn-primary btn-lg px-4 py-2 small" name="action" value="lanjut" onclick="return confirmProceed()" style="font-size: 0.9rem;">
                             @if ($order->status == 'pending')
-                                Lanjut Ke Diproses
+                                Proses pesanan
                             @elseif ($order->status == 'diproses')
-                                Lanjut Ke Selesai
+                                Selesai pesanan
                             @else
                                 Update Status
                             @endif
