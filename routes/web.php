@@ -127,8 +127,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolauser.index');
-    Route::get('/category', [CategoryController::class, 'index'])->name('admin.kategori.index');
-
+    Route::resource('/kategori', CategoryController::class, [
+        'as' => 'admin'
+    ]);
+    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.kategori.edit');
+    Route::put('/admin/category/{id}', [CategoryController::class, 'update'])->name('admin.kategori.update');
 
     // Transaksi
     Route::get('/transaksi', [Transaction::class, 'index'])->name('admin.transaction');
