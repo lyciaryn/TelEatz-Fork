@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -10,15 +10,17 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('admin.kategori.index', compact('categories'));
     }
 
+
     public function create()
     {
-        $categories = Categories::all();
+        $categories = Category::all();
         return view('admin.kategori.create', compact('categories'));
     }
+
 
     public function store(Request $request)
     {
@@ -27,7 +29,7 @@ class CategoryController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        Categories::create([
+        Category::create([
             'nama_kategori' => $request->nama_kategori,
             'deskripsi' => $request->deskripsi,
         ]);
@@ -37,7 +39,7 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $kategori = Categories::findOrFail($id);
+        $kategori = Category::findOrFail($id);
         return view('admin.kategori.edit', compact('kategori'));
     }
 
@@ -48,7 +50,7 @@ class CategoryController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        $kategori = Categories::findOrFail($id);
+        $kategori = Category::findOrFail($id);
         $kategori->update([
             'nama_kategori' => $request->nama_kategori,
             'deskripsi' => $request->deskripsi,
@@ -59,7 +61,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $kategori = Categories::findOrFail($id);
+        $kategori = Category::findOrFail($id);
         $kategori->delete();
 
         return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus!');

@@ -12,7 +12,6 @@
                 <div class="row g-3">
                     <form action="{{ route('admin.kategori.store') }}" method="POST">
                         @csrf
-                        @method('PUT')
                         <div class="mb-3">
                             <label for="nama_kategori" class="form-label">Nama Kategori</label>
                             <input type="text" name="nama_kategori" class="form-control" required>
@@ -32,4 +31,3 @@
     </div>
     <x-nav-bottom />
 @endsection
-
