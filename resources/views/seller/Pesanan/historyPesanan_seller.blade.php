@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+$title = 'Histori Pesanan';
+@endphp
     <x-navbar_seller />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
@@ -227,6 +230,11 @@
 
                 <div class="d-flex mt-3">
                     {{-- TOMBOL BATAL --}}
+                    <div class="mt-2 text-end">
+                        <a href="{{ route('seller.pesanan.export_pdf', $order->id) }}" target="_blank" class="btn btn-outline-primary btn-sm">
+                            Export PDF
+                        </a>
+                    </div>
                     <h6 class="fw-bold text-danger mt-1 ms-auto">
                         Total: Rp {{ number_format($order->total_price, 0, ',', '.') }}
                     </h6>

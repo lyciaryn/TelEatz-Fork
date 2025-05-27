@@ -3,7 +3,7 @@
     <div class="kelas d-flex align-items-center">
         <a href="{{ route('kelolamakanan') }}">
             <div class="btn-bottom d-flex justify-content-center flex-column align-items-center">
-                <i class='bx bxs-bowl-rice text-light mb-1'></i>
+                <i class='bx bx-food-menu text-light mb-1'></i>
                 <p style="font-size: 0.65rem !important;" class="fs-6 fw-bold text-light m-0">Kelola Produk</p>
             </div>
         </a>

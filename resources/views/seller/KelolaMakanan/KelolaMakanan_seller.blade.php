@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+$title = 'Produk Saya';
+@endphp
     <x-navbar_seller />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
@@ -99,7 +102,7 @@
                                         <p class="card-text">{{ $item->category->nama_kategori }}</p>
                                         <br>
                                         <label for="ketersediaan">Ketersediaan</label>
-                                        <p class="card-text">{{ $item->is_avaialable == 1 ? 'Tersedia' : 'Tidak Tersedia' }}
+                                        <p class="card-text">{{ $item->is_avaialable == 1 ? 'Tidak Tersedia' : 'Tersedia' }}
                                         </p> <br>
 
                                         <!-- Tombol di bawah -->

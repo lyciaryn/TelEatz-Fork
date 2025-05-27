@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\Recaptcha;
 
+
 class RegisterController extends Controller
 {
     public function showRegister()

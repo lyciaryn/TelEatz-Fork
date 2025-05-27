@@ -2,6 +2,9 @@
 @extends('layouts.app')
 
 @section('content')
+@php
+$title = 'Edit Produk Saya';
+@endphp
 <x-navbar_seller />
 <div class="container">
     <div class="row dash" style="margin-top: 100px;">

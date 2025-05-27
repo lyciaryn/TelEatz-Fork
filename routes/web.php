@@ -22,6 +22,10 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 
+Route::get('/seller/pesanan/{id}/export-pdf', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export_pdf');
+Route::get('/seller/pesanan/{id}/export', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export');
+
+
 Route::get('/', function () {
     return view('landing');
 })->name('buyer.landing');
