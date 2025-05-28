@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-@php
-$title = 'Produk Saya';
-@endphp
+    @php
+        $title = 'Produk Saya';
+    @endphp
     <x-navbar_seller />
     <div class="container">
         <div class="row dash" style="margin-top: 100px;">
@@ -12,9 +12,12 @@ $title = 'Produk Saya';
             </div>
             <div class="col-lg-9 d-flex flex-column gap-3">
                 <x-header title="Kelola Makanan" />
-                <x-breadcrumbs :links="[['label' => 'Dashboard', 'url' => route('seller.dashboard')], ['label' => 'Kelola Makanan']]" />
+                <x-breadcrumbs :links="[
+                    ['label' => 'Dashboard', 'url' => route('seller.dashboard')],
+                    ['label' => 'Kelola Makanan'],
+                ]" />
                 <div><a href="{{ route('kelolamakanan.create') }}" class="btn btn-primary w-100">Tambah Makanan</a></div>
-                
+
                 <div class="card p-3 mb-4 shadow-sm">
                     <form method="GET" action="{{ route('kelolamakanan') }}">
                         <div class="row align-items-end mb-4 g-2">
@@ -62,7 +65,7 @@ $title = 'Produk Saya';
                         </div>
                     </form>
                 </div>
-                
+
                 <!-- Check jika ada data makanan -->
                 @if ($makanan->isEmpty())
                     <div class="card text-center animate_animated animate_fadeInUp mt-4" style="border-radius: 50px;">
@@ -80,11 +83,13 @@ $title = 'Produk Saya';
                         @foreach ($makanan as $item)
                             <div class="col-md-4 mb-4">
                                 <div class="card h-100 d-flex flex-column">
-                                    
-                                    @if($item->img)
-                                        <img src="{{ asset('images/' . $item->img) }}" class="card-img-top" style="height: 135px; object-fit: cover;">
+
+                                    @if ($item->img)
+                                        <img src="{{ asset('images/' . $item->img) }}" class="card-img-top"
+                                            style="height: 135px; object-fit: cover;">
                                     @else
-                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold" style="height: 135px;">
+                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold"
+                                            style="height: 135px;">
                                             {{ $item->nama_product }}
                                         </div>
                                     @endif
@@ -99,19 +104,22 @@ $title = 'Produk Saya';
                                         <p class="card-text">{{ Str::limit($item->deskripsi, 100) }}...</p>
                                         <br>
                                         <label for="kategori">Kategori</label>
-                                        <p class="card-text">{{ $item->category->nama_kategori }}</p>
+                                        <p class="card-text"> {{ $product->category?->nama_kategori ?? '-' }}</p>
                                         <br>
                                         <label for="ketersediaan">Ketersediaan</label>
-                                        <p class="card-text">{{ $item->is_avaialable == 1 ? 'Tidak Tersedia' : 'Tersedia' }}
+                                        <p class="card-text">
+                                            {{ $item->is_avaialable == 1 ? 'Tidak Tersedia' : 'Tersedia' }}
                                         </p> <br>
 
                                         <!-- Tombol di bawah -->
                                         <div class="mt-auto d-flex justify-content-around align-items-center"
                                             style="box-shadow: none !important;">
                                             <a href="{{ route('kelolamakanan.showdetail', $item->id) }}"
-                                                class="btn btn-primary d-flex align-items-center justify-content-center" style="height: 40px; width: 80px;">Detail</a>
+                                                class="btn btn-primary d-flex align-items-center justify-content-center"
+                                                style="height: 40px; width: 80px;">Detail</a>
                                             <a href="{{ route('kelolamakanan.edit', $item->id) }}"
-                                                class="btn btn-primary d-flex align-items-center justify-content-center mx-1" style="height: 40px; width: 80px">Edit</a>
+                                                class="btn btn-primary d-flex align-items-center justify-content-center mx-1"
+                                                style="height: 40px; width: 80px">Edit</a>
                                             <form id="deleteForm{{ $item->id }}"
                                                 action="{{ route('kelolamakanan.softdelete', $item->id) }}" method="POST">
                                                 @csrf

@@ -108,7 +108,22 @@
                                                 </span>
                                             </p>
 
-                                            <h6 class="card-title"><b>{{ $product->nama_product }}</b></h6>
+                                            <h6 class="card-title d-flex align-items-center justify-content-start">
+                                                <b>{{ $product->nama_product }}</b>
+
+                                                @if ($product->order_items_count == null)
+                                                    <span style="font-size: 11px; background-color: var(--grey)"
+                                                        class="ms-2 badge small">
+                                                        0x dibeli
+                                                    </span>
+                                                @else
+                                                    <span style="font-size: 11px; background-color: var(--primary)"
+                                                        class="ms-2 badge small">
+                                                        {{ $product->order_items_count }}x dibeli
+                                                    </span>
+                                                @endif
+
+                                            </h6>
                                         </a>
                                         <p class="text-secondary fw-bold opacity-75" style="font-size: 11px;">Kedai
                                             {{ $product->user?->name ?? '-' }} 🏪</p>
