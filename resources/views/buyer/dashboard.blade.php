@@ -126,17 +126,18 @@
                                                 </span>
                                             </p>
 
-                                            <h6 class="card-title d-flex align-items-center justify-content-start">
+                                            <h6
+                                                class="card-title d-flex-md flex-column align-items-center justify-content-start">
                                                 <b>{{ $product->nama_product }}</b>
 
                                                 @if ($product->order_items_count == null)
                                                     <span style="font-size: 11px; background-color: var(--grey)"
-                                                        class="ms-2 badge small">
+                                                        class="ms-lg-2 badge small">
                                                         0x dibeli
                                                     </span>
                                                 @else
                                                     <span style="font-size: 11px; background-color: var(--primary)"
-                                                        class="ms-2 badge small">
+                                                        class="ms-lg-2 badge small">
                                                         {{ $product->order_items_count }}x dibeli
                                                     </span>
                                                 @endif
@@ -149,7 +150,16 @@
 
                                         <p class="text-secondary fw-bold opacity-75" style="font-size: 11px;">Kedai
                                             {{ $product->user?->name ?? '-' }} 🏪</p>
-
+                                        <p class="mb-2">
+                                            @if ($product->user)
+                                                <span
+                                                    class="badge {{ $product->user?->is_open ? 'bg-success' : 'bg-danger' }}">
+                                                    {{ $product->user?->is_open ? 'Open' : 'Sedang Tutup' }}
+                                                </span>
+                                            @else
+                                                <span class="badge bg-secondary">Status Tidak Diketahui</span>
+                                            @endif
+                                        </p>
                                         <p class="mb-2">
                                             @php
                                                 $averageRating = $product->reviews->avg('rating');

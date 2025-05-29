@@ -108,17 +108,18 @@
                                                 </span>
                                             </p>
 
-                                            <h6 class="card-title d-flex align-items-center justify-content-start">
+                                            <h6
+                                                class="card-title d-flex-md flex-column align-items-center justify-content-start">
                                                 <b>{{ $product->nama_product }}</b>
 
                                                 @if ($product->order_items_count == null)
                                                     <span style="font-size: 11px; background-color: var(--grey)"
-                                                        class="ms-2 badge small">
+                                                        class="ms-lg-2 badge small">
                                                         0x dibeli
                                                     </span>
                                                 @else
                                                     <span style="font-size: 11px; background-color: var(--primary)"
-                                                        class="ms-2 badge small">
+                                                        class="ms-lg-2 badge small">
                                                         {{ $product->order_items_count }}x dibeli
                                                     </span>
                                                 @endif

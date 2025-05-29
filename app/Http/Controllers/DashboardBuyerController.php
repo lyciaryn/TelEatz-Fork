@@ -56,17 +56,24 @@ class DashboardBuyerController extends Controller
             });
         }
 
-        $products = $query->take(4)->get(); // maksimal 4 produk
         $categories = Category::all();
 
-        // Kalau semua order_items_count = 0, fallback ke produk terbaru
-        if ($products->every(fn($product) => $product->order_items_count === 0)) {
-            $products = Product::with(['user', 'category', 'reviews'])
-                ->where('is_available', true)
-                ->latest()
-                ->take(4)
-                ->get();
-        }
+        $products = $query->take(4)->get(); // maksimal 4 produk
+
+        $query = Product::with(['user', 'category', 'reviews'])
+            ->withCount([
+                'orderItems as order_items_count' => function ($query) {
+                    $query->whereHas('order', function ($q) {
+                        $q->whereIn('status', ['diproses', 'selesai']);
+                    });
+                }
+            ])
+            ->where('is_available', true)
+            ->whereHas('user', function ($q) {
+                $q->where('is_open', true); // Hanya toko yang sedang buka
+            })
+            ->orderByDesc('order_items_count');
+
 
         return view('buyer.dashboard', compact('products', 'categories', 'activeOrders', 'totalActiveOrderItems'), ['title' => 'Home']);
     }
