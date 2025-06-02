@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link class="rounded" rel="shortcut icon" href="{{ asset('img/Teleatz1-white-full.png') }}" type="image/x-icon">
+    <link class="rounded" rel="shortcut icon" href="{{ secure_asset('img/Teleatz1-white-full.png') }}" type="image/x-icon">
 </head>
 
 <body style="background-color: #fafbfd;">

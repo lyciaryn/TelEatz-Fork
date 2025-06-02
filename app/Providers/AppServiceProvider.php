@@ -36,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('cartItemCount', $totalCartCount);
         });
+
+        if ($this->app->environment('production')) {
+            \URL::forceScheme('https');
+    }
     }
 }
