@@ -39,6 +39,12 @@ class AppServiceProvider extends ServiceProvider
 
         if ($this->app->environment('production')) {
             \URL::forceScheme('https');
-    }
+        }
+
+        $path = public_path('images');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+        chmod($path, 0777);
     }
 }
