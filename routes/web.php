@@ -22,9 +22,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 
-Route::get('/seller/pesanan/{id}/export-pdf', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export_pdf');
-Route::get('/seller/pesanan/{id}/export', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export');
-
 
 Route::get('/', function () {
     return view('landing');
@@ -129,6 +126,10 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
     Route::put('/seller/profile/{id}', [ProfileController::class, 'changePassword'])->name('seller.profile.changePassword.update');
     route::get('/profilseller/gantiEmail', [ProfileController::class, 'changeEmailIndex'])->name('seller.profile.changeEmail');
     Route::put('/profilseller/gantiEmail/{id}', [ProfileController::class, 'changeEmail'])->name('seller.profile.changeEmail.update');
+
+    // PDF
+    Route::get('/seller/pesanan/{id}/export-pdf', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export_pdf');
+    Route::get('/seller/pesanan/{id}/export', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export');
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
