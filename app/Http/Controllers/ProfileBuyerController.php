@@ -49,8 +49,12 @@ class ProfileBuyerController extends Controller
             if ($request->hasFile('img')) {
                 $file = $request->file('img');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('images'), $filename);
-                $profile->img = $filename;
+
+                // Simpan di storage/app/public/images
+                $path = $file->storeAs('images', $filename, 'public');
+
+                // Simpan path relatifnya (misal: "images/123456789.jpg")
+                $profile->img = $path;
             }
 
 

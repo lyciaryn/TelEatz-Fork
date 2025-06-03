@@ -2,7 +2,7 @@
     <div class="card-body nav-dash d-flex flex-column text-decoration-none gap-3 ">
         <div class=" nav-2 sidebar-profile d-flex justify-content-start align-items-center py-3  px-3">
             @if (Auth::check() && Auth::user()->img)
-                <img src="{{ asset('images/' . Auth::user()->img) }}" alt="Profil"
+                <img src="{{ asset('storage/' . Auth::user()->img) }}" alt="Profil"
                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
             @else
                 <div class="rounded-circle img-thumbnail shadow-lg"

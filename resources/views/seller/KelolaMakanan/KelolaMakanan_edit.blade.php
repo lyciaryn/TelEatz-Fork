@@ -21,7 +21,7 @@ $title = 'Edit Produk Saya';
                 <div class="card-body card-nothings bg-light p-5 d-flex justify-content-center align-items-center flex-column">
                     <div class="d-flex align-items-center">
                         @if ($makanan->img)
-                            <img src="{{ asset('images/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
+                            <img src="{{ asset('storage/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
                                 class="img-fluid me-4" 
                                 style="width: 300px; height: 300px; object-fit: cover; border-radius: 20px;">
                             @else

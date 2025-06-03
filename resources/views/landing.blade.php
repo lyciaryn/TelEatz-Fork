@@ -211,7 +211,7 @@
                             <div class="col-md-3 col-sm-6 mb-4 d-flex">
                                 <div class="card shadow-sm no-outline w-100 border-0">
                                     <div class="p-2">
-                                        <img src="{{ asset('images/' . $product->img) }}" class="img-fluid rounded"
+                                        <img src="{{ asset('storage/' . $product->img) }}" class="img-fluid rounded"
                                             alt="{{ $product->nama }}"
                                             style="height: 160px; object-fit: cover; width: 100%;">
                                     </div>

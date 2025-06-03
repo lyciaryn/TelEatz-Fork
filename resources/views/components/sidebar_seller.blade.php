@@ -3,7 +3,7 @@
         <div class=" nav-2 sidebar-profile d-flex justify-content-start align-items-center py-3  px-3">
             @if(Auth::check() && Auth::user()->img)
             <img class="rounded-circle img-thumbnail shadow-lg"
-                src="{{ asset('images/' . Auth::user()->img) }}"
+                src="{{ asset('storage/' . Auth::user()->img) }}"
                 alt="Profil" style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;">
             @else
                 <div class="rounded-circle img-thumbnail shadow-lg" style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; background-color: #369a74;">

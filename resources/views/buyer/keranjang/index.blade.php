@@ -80,7 +80,7 @@
                                             class="d-flex flex-wrap justify-content-between align-items-center border-bottom py-2 ps-3 gap-2">
 
                                             @if ($item->product->img)
-                                                <img src="{{ asset('images/' . $item->product->img) }}" class="rounded"
+                                                <img src="{{ asset('storage/' . $item->product->img) }}" class="rounded"
                                                     alt="{{ $item->product->img }}"
                                                     style="width: 80px; height: 80px; object-fit: cover; margin-right: 10px;">
                                             @else

@@ -6,7 +6,7 @@
             {{-- Profil Picture --}}
             <a class="nav-link px-0" href="#">
                 @if (Auth::check() && Auth::user()->img)
-                    <img src="{{ asset('images/' . Auth::user()->img) }}" alt="Profil"
+                    <img src="{{ asset('storage/' . Auth::user()->img) }}" alt="Profil"
                         style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
                 @else
                     <div class="rounded-circle img-thumbnail shadow-sm"
@@ -80,7 +80,7 @@
 
                     <a class="nav-link px-0" href="#">
                         @if (Auth::check() && Auth::user()->img)
-                            <img src="{{ asset('images/' . Auth::user()->img) }}" alt="Profil"
+                            <img src="{{ asset('storage/' . Auth::user()->img) }}" alt="Profil"
                                 style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
                         @else
                             <div class="rounded-circle img-thumbnail shadow-lg"

@@ -127,7 +127,7 @@ $title = 'Pesanan Saya';
 
                                         {{-- Gambar Produk --}}
                                         @if ($item->product->img)
-                                            <img src="{{ asset('images/' . $item->product->img) }}" class="rounded"
+                                            <img src="{{ asset('storage/' . $item->product->img) }}" class="rounded"
                                                 style="width: 80px; height: 80px; object-fit: cover; flex-shrink: 0;">
                                         @else
                                             <div class="rounded bg-light d-flex align-items-center justify-content-center text-muted"
@@ -173,7 +173,7 @@ $title = 'Pesanan Saya';
                                     <div class="d-flex py-2 ps-3 gap-2">
                                         {{-- Gambar Produk --}}
                                         @if ($item->product->img)
-                                            <img src="{{ asset('images/' . $item->product->img) }}" class="rounded"
+                                            <img src="{{ asset('storage/' . $item->product->img) }}" class="rounded"
                                                 style="width: 80px; height: 80px; object-fit: cover; flex-shrink: 0;">
                                         @else
                                             <div class="rounded bg-light d-flex align-items-center justify-content-center text-muted"
