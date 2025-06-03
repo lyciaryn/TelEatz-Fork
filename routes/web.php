@@ -31,10 +31,6 @@ Route::get('/landing', function () {
     return redirect()->route('buyer.landing');
 });
 
-
-
-
-
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -128,8 +124,8 @@ Route::middleware(['auth', 'role:seller'])->prefix('seller')->group(function () 
     Route::put('/profilseller/gantiEmail/{id}', [ProfileController::class, 'changeEmail'])->name('seller.profile.changeEmail.update');
 
     // PDF
-    Route::get('/seller/pesanan/{id}/export-pdf', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export_pdf');
-    Route::get('/seller/pesanan/{id}/export', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export');
+    Route::get('/pesanan/{id}/export-pdf', [PesananController::class, 'exportPDF'])->name('seller.pesanan.export_pdf');
+
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
