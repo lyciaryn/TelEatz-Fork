@@ -142,10 +142,6 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan!');
     }
 
-
-
-
-
     public function showFaktur(Order $order)
     {
         $order->load('order_items.product');
@@ -160,9 +156,6 @@ class OrderController extends Controller
         $pdf = Pdf::loadView('buyer.pesanan.faktur', compact('order'));
         return $pdf->download($order->buyer->name . '-faktur-pesanan-' . $order->id . '.pdf');
     }
-
-
-
 
     public function destroy($id)
     {

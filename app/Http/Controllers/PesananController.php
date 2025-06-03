@@ -161,7 +161,7 @@ class PesananController extends Controller
     {
         $order = Order::with(['orderItems.product', 'buyer'])->findOrFail($id);
 
-        $pdf = PDF::loadView('seller.pesanan.export_pdf', compact('order'));
+        $pdf = PDF::loadView('seller.Pesanan.export_pdf', compact('order'));
 
         return $pdf->download('pesanan-'.$order->id.'.pdf');
     }
