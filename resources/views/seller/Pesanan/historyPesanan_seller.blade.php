@@ -225,7 +225,7 @@ $title = 'Histori Pesanan';
                     <p class="alert alert-success text-start fw-bold p-3 w-50 btn-disable w-100 mt-3"
                         style="border: none; color: rgb(5, 151, 127); background-color:rgb(184, 245, 235)">
                         @if ($order->status === 'selesai')
-                            Pesanan siap
+                            Pesanan siap diambil
                         @elseif ($order->status === 'dibatalkan')
                             Pesanan dibatalkan
                         @elseif ($order->status === 'diproses' && $order->estimated_ready_at)
@@ -235,6 +235,8 @@ $title = 'Histori Pesanan';
                             @endif
                         @elseif ($order->status === 'diproses' && $order->estimated_ready_at == null)
                             Pesananmu akan siap sebentar lagi
+                        @elseif ($order->status === 'pending')
+                            Hallo ada pesanan baru nih, segera proses ya!
                         @endif
                     </p>
                 </div>

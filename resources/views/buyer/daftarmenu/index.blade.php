@@ -90,11 +90,11 @@
                                 <div class="card border border-1 border-light rounded-3 shadow-sm">
                                     @if ($product->img)
                                         <img src="{{ asset('storage/' . $product->img) }}" class="card-img-top"
-                                            alt="{{ $product->nama }}" style="height: 135px; object-fit: cover;">
+                                            alt="{{ Str::limit($product->nama_product, 4) }}" style="height: 135px; object-fit: cover;">
                                     @else
-                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white text-uppercase fw-bold"
-                                            style="height: 135px;">
-                                            {{ $product->nama_product }}
+                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white text-uppercase fw-bold text-center px-2"
+                                            style="height: 135px; word-wrap: break-word; white-space: normal;">
+                                            {{ Str::limit($product->nama_product, 36) }}
                                         </div>
                                     @endif
 
@@ -108,23 +108,23 @@
                                                 </span>
                                             </p>
 
-                                            <h6
-                                                class="card-title d-flex-md flex-column align-items-center justify-content-start">
-                                                <b>{{ $product->nama_product }}</b>
+                                            <h6 class="card-title d-flex-md flex-column align-items-start justify-content-start">
+                                                <b>{{ Str::limit($product->nama_product, 36) }}</b>
 
-                                                @if ($product->order_items_count == null)
-                                                    <span style="font-size: 11px; background-color: var(--grey)"
-                                                        class="ms-lg-2 badge small">
-                                                        0x dibeli
-                                                    </span>
-                                                @else
-                                                    <span style="font-size: 11px; background-color: var(--primary)"
-                                                        class="ms-lg-2 badge small">
-                                                        {{ $product->order_items_count }}x dibeli
-                                                    </span>
-                                                @endif
-
+                                                <div class="d-flex justify-content-start align-items-end">
+                                                    @if ($product->order_items_count == null)
+                                                        <span style="font-size: 11px; background-color: var(--grey)" class="badge small">
+                                                            0x dibeli
+                                                        </span>
+                                                    @else
+                                                        <span style="font-size: 11px; background-color: var(--primary)" class="badge small">
+                                                            {{ $product->order_items_count }}x dibeli
+                                                        </span>
+                                                    @endif
+                                                </div>
                                             </h6>
+
+
                                         </a>
                                         <p class="text-secondary fw-bold opacity-75" style="font-size: 11px;">Kedai
                                             {{ $product->user?->name ?? '-' }} 🏪</p>

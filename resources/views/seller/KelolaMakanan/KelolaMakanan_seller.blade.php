@@ -88,14 +88,14 @@
                                         <img src="{{ asset('storage/' . $item->img) }}" class="card-img-top"
                                             style="height: 135px; object-fit: cover;">
                                     @else
-                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold"
-                                            style="height: 135px;">
-                                            {{ $item->nama_product }}
+                                        <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold text-center px-2"
+                                            style="height: 135px; word-wrap: break-word; white-space: normal;">
+                                            {{ Str::limit($item->nama_product, 36) }}
                                         </div>
                                     @endif
                                     <div class="card-body d-flex flex-column">
                                         <h4 class="card-title" style="font-weight: bold; !important">
-                                            {{ $item->nama_product }}
+                                            {{ Str::limit($item->nama_product, 36) }}
                                         </h4>
                                         <label for="Harga">Harga</label>
                                         <p class="card-text">Rp.{{ number_format($item->harga, 0, ',', '.') }}</p>
