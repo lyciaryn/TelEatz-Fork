@@ -22,10 +22,10 @@ $title = 'Detail Produk Saya';
                             <div class="d-flex align-items-center">
                                 @if ($makanan->img)
                                 <img src="{{ asset('storage/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
-                                    class="img-fluid me-4" 
+                                    class="img-fluid me-4"
                                     style="width: 300px; height: 300px; object-fit: cover; border-radius: 20px;">
                                 @else
-                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" 
+                                    <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3"
                                         style="width: 300px; height: 300px; border-radius: 20px; flex-shrink: 0;">
                                         {{ $makanan->nama_product }}
                                     </div>
@@ -44,8 +44,14 @@ $title = 'Detail Produk Saya';
                                     </div>
                                     <div>
                                         <label class="mt-4" style="text-align: left;">Deskripsi</label>
+                                        <input type="text" class="form-control" size="1000" name="harga"
+                                            value="{{ $makanan->category?->nama_kategori ?? 'Tidak Ada' }}" required disabled>
+                                    </div>
+                                    <div>
+                                        <label class="mt-4" style="text-align: left;">Deskripsi</label>
                                         <textarea type="text" class="form-control" size="1000" name="deskripsi" required disabled>{{ $makanan->deskripsi }}</textarea>
                                     </div>
+
                                     <div>
                                         <label class="mt-4" for="is_avaialable">Tersedia?</label>
                                         <select name="is_available" class="form-select" aria-label="Pilih kategori" required

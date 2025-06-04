@@ -45,7 +45,7 @@ $title = 'Buat Produk';
                     </div>
                     <div>
                         <label class="mt-4 text-start" for="is_avaialable">Tersedia?</label>
-                        <select name="is_available" class="form-select" aria-label="Pilih kategori" required>
+                        <select name="is_available" class="form-select" aria-label="Pilih Ketersediaan" required>
                             <option selected disabled>Pilih Ketersediaan</option>
                             <option value="1">Tersedia</option>
                             <option value="0">Tidak Tersedia</option>

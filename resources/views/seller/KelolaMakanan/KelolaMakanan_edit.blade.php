@@ -22,10 +22,10 @@ $title = 'Edit Produk Saya';
                     <div class="d-flex align-items-center">
                         @if ($makanan->img)
                             <img src="{{ asset('storage/' . $makanan->img) }}" alt="{{ $makanan->nama_product }}"
-                                class="img-fluid me-4" 
+                                class="img-fluid me-4"
                                 style="width: 300px; height: 300px; object-fit: cover; border-radius: 20px;">
                             @else
-                                <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3" 
+                                <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold px-3"
                                     style="width: 300px; height: 300px; border-radius: 20px; flex-shrink: 0;">
                                     {{ $makanan->nama_product }}
                                 </div>
@@ -43,6 +43,17 @@ $title = 'Edit Produk Saya';
                             <div>
                                 <label class="mt-3" style="text-align: left;">Deskripsi</label>
                                 <textarea type="text" class="form-control" size="1000" name="deskripsi" required>{{ $makanan->deskripsi }}</textarea>
+                            </div>
+                            <div>
+                                <label class="mt-4 text-start">Kategori</label>
+                                <select name="category_id" class="form-select" aria-label="Pilih kategori" required>
+                                    <option disabled >{{ old('category_id', $makanan->id_kategori) ? '' : 'Pilih Kategori' }}</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ old('category_id', $makanan->id_kategori) == $category->id ? 'selected' : '' }}>
+                                            {{ $category->nama_kategori }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div>
                                 <label class="mt-3" for="is_avaialable">Tersedia?</label>
