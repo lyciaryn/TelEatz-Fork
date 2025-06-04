@@ -47,9 +47,10 @@ $title = 'Edit Produk Saya';
                             <div>
                                 <label class="mt-4 text-start">Kategori</label>
                                 <select name="category_id" class="form-select" aria-label="Pilih kategori" required>
-                                    <option disabled >{{ old('category_id', $makanan->id_kategori) ? '' : 'Pilih Kategori' }}</option>
+                                    <option disabled {{ old('category_id', $makanan->id_kategori) ? '' : 'selected' }}>Pilih Kategori</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" {{ old('category_id', $makanan->id_kategori) == $category->id ? 'selected' : '' }}>
+                                        <option value="{{ $category->id }}"
+                                            {{ old('category_id', $makanan->id_kategori) == $category->id ? 'selected' : '' }}>
                                             {{ $category->nama_kategori }}
                                         </option>
                                     @endforeach

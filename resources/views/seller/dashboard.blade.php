@@ -122,14 +122,6 @@
                     </div>
                     <!-- Total Pemasukan -->
                     <div class="col-md-12 mb-5">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title text-center pb-3">Total Pemasukan Selama Berdagang</h5>
-                                <h5 class="text-center">Rp. {{ number_format(150000, 0, ',', '.') }}</h5>
-                            </div>
-                        </div>
-
-
                         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                         <script>
