@@ -21,7 +21,7 @@
                 <div class="card shadow-sm">
                     {{-- Gambar --}}
                     @if ($product->img)
-                        <img src="{{ \Illuminate\Support\Facades\Storage::url($product->img) }}" class="card-img-top" alt="{{ $product->nama }}"
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($product->img ?? '') }}" class="card-img-top" alt="{{ $product->nama }}"
                             style="height: 400px; object-fit: cover;">
                     @else
                         <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white text-uppercase fw-bold"

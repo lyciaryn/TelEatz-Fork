@@ -77,7 +77,7 @@
                             <div class="col-md-4 mb-4">
                                 <div class="card h-100 d-flex flex-column">
                                     @if($item->img)
-                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($item->img) }}" class="card-img-top" alt="{{ $item->nama }}" style="height: 135px; object-fit: cover;">
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($item->img ?? '') }}" class="card-img-top" alt="{{ $item->nama }}" style="height: 135px; object-fit: cover;">
                                     @else
                                         <div class="card-img-top d-flex align-items-center justify-content-center bg-success text-white text-uppercase fw-bold text-center px-2"
                                             style="height: 135px; word-wrap: break-word; white-space: normal;">

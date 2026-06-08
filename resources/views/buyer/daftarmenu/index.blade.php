@@ -89,7 +89,7 @@
                             <div class="col-6 col-md-3">
                                 <div class="card border border-1 border-light rounded-3 shadow-sm">
                                     @if ($product->img)
-                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($product->img) }}" class="card-img-top"
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($product->img ?? '') }}" class="card-img-top"
                                             alt="{{ Str::limit($product->nama_product, 4) }}" style="height: 135px; object-fit: cover;">
                                     @else
                                         <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white text-uppercase fw-bold text-center px-2"
