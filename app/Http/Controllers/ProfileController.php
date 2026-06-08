@@ -66,7 +66,7 @@ class ProfileController extends Controller
                 $filename = time() . '.' . $file->getClientOriginalExtension();
 
                 // Simpan di storage/app/public/images
-                $path = $file->storeAs('images', $filename, 'public');
+                $path = $file->storeAs('images', $filename);
 
                 // Simpan path relatifnya (misal: "images/123456789.jpg")
                 $profile->img = $path;

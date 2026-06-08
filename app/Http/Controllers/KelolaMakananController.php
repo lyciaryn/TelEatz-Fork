@@ -60,16 +60,15 @@ class KelolaMakananController extends Controller
             $makanan->created_at = now();
             $makanan->updated_at = now();
 
-            if ($request->hasFile('img')) {
-                $file = $request->file('img');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
 
-                // Simpan ke storage/app/public/images
-                $path = $file->storeAs('images', $filename, 'public');
+            // Simpan ke disk default dari .env
+            $path = $file->storeAs('images', $filename);
 
-                // Simpan path untuk digunakan saat tampilkan gambar
-                $makanan->img = $path;
-            }
+            $makanan->img = $path;
+        }
 
             $makanan->save();
 
@@ -131,7 +130,7 @@ class KelolaMakananController extends Controller
                 $filename = time() . '.' . $file->getClientOriginalExtension();
 
                 // Simpan ke storage/app/public/images
-                $path = $file->storeAs('images', $filename, 'public');
+                $path = $file->storeAs('images', $filename);
 
                 // Simpan path untuk digunakan saat tampilkan gambar
                 $makanan->img = $path;

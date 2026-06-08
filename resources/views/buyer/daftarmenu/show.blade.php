@@ -21,7 +21,7 @@
                 <div class="card shadow-sm">
                     {{-- Gambar --}}
                     @if ($product->img)
-                        <img src="{{ asset('storage/' . $product->img) }}" class="card-img-top" alt="{{ $product->nama }}"
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($product->img) }}" class="card-img-top" alt="{{ $product->nama }}"
                             style="height: 400px; object-fit: cover;">
                     @else
                         <div class="card-img-top d-flex align-items-center justify-content-center bg-secondary text-white text-uppercase fw-bold"
@@ -74,7 +74,7 @@
                                 {{-- Foto Profil --}}
                                 @if ($review->buyer && $review->buyer->profile_picture)
                                     <img class="rounded-circle img-thumbnail shadow-sm"
-                                        src="{{ asset('storage/profile_pictures/' . $review->buyer->profile_picture) }}"
+                                        src="{{ \Illuminate\Support\Facades\Storage::url('profile_pictures/' . $review->buyer->profile_picture) }}"
                                         alt="Profil {{ $review->buyer->name }}"
                                         style="width: 50px; height: 50px; object-fit: cover; aspect-ratio: 1 / 1;">
                                 @else

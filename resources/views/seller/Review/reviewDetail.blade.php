@@ -35,7 +35,7 @@
                         {{-- ========== ITEM PERTAMA ========== --}}
                         <div class="d-flex flex-wrap justify-content-between align-items-center py-2 ps-3 gap-2">
                             @if ($product->img)
-                                <img src="{{ asset('storage/' . $product->img) }}" class="rounded"
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($product->img) }}" class="rounded"
                                     style="width: 80px; height: 80px; margin-right: 10px; object-fit: cover;">
                             @else
                             <div class="rounded bg-light d-flex align-items-center justify-content-center text-muted"
@@ -77,7 +77,7 @@
                                             {{-- Foto Profil --}}
                                             @if ($review->buyer && $review->buyer->profile_picture)
                                                 <img class="rounded-circle img-thumbnail shadow-sm"
-                                                    src="{{ asset('storage/profile_pictures/' . $review->buyer->profile_picture) }}"
+                                                    src="{{ \Illuminate\Support\Facades\Storage::url('profile_pictures/' . $review->buyer->profile_picture) }}"
                                                     alt="Profil {{ $review->buyer->name }}"
                                                     style="width: 50px; height: 50px; object-fit: cover; aspect-ratio: 1 / 1;">
                                             @else

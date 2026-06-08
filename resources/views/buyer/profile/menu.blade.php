@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="card-body d-flex flex-column align-items-center justify-content-center">
                                     @if ($profile->img)
-                                        <img src="{{ asset('storage/' . $profile->img) }}"
+                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($profile->img) }}"
                                             class="rounded-circle border border-white shadow mb-3" width="100"
                                             height="100">
                                     @else

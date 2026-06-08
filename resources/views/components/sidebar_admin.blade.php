@@ -4,7 +4,7 @@
 
             @if (Auth::check() && Auth::user()->profile_picture)
                 <img class="rounded-circle img-thumbnail shadow-lg"
-                    src="{{ asset('storage/profile_pictures/' . Auth::user()->profile_picture) }}" alt="Profil"
+                    src="{{ \Illuminate\Support\Facades\Storage::url('profile_pictures/' . Auth::user()->profile_picture) }}" alt="Profil"
                     width="50">
             @else
                 <div class="rounded-circle img-thumbnail shadow-lg"
